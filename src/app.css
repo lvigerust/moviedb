@@ -1,0 +1,25 @@
+@font-face {
+	font-family: 'Inter';
+	src: url('/fonts/Inter-VariableFont_slnt,wght.ttf');
+}
+@font-face {
+	font-family: 'Lexend';
+	src: url('/fonts/Lexend-VariableFont_wght.ttf');
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+	@apply scroll-smooth antialiased h-full;
+	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Custom DaisyUI components */
+
+@layer components {
+	.navbar {
+	}
+}
