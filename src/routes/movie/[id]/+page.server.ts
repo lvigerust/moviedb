@@ -6,7 +6,7 @@ export const load = async ({ fetch, params }) => {
 			`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US`
 		)
 		const movieDetailsData: MovieDetails = await movieDetailsRes.json()
-		movieDetailsData.media_type = 'Movie'
+		movieDetailsData.media_type = 'movie'
 		return movieDetailsData
 	}
 

@@ -13,8 +13,10 @@
 	]
 </script>
 
-<nav class="navbar font-semibold text-sm px-4 lg:px-8">
-	<a href="/" class="navbar-start">Stinkmeaner</a>
+<nav class="navbar px-4 text-sm font-semibold lg:px-8">
+	<div class="navbar-start">
+		<a href="/">Stinkmeaner</a>
+	</div>
 
 	<ul class="navbar-center gap-x-6">
 		{#each menuItems as { href, label }}
@@ -22,6 +24,6 @@
 		{/each}
 	</ul>
 	<div class="navbar-end">
-		<button class="btn btn-ghost btn-circle btn-sm"> <Search /> </button>
+		<button class="btn btn-circle btn-ghost btn-sm p-1"> <Search /> </button>
 	</div>
 </nav>
