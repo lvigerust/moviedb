@@ -13,7 +13,9 @@ export const load = async ({ fetch, params }) => {
 	const pageTitle = async () => {
 		const data = await getMovieDetails(params.id)
 
-		return `${data.title} (${new Date(data.release_date).getFullYear()})`
+		const year = `${new Date(data.release_date).getFullYear()}`
+
+		return `${data.title} (${year})`
 	}
 
 	return {

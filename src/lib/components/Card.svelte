@@ -12,7 +12,7 @@
 
 <a
 	href={`/${mediaType}/${data.id}-${slugify(data.title || data.name)}`}
-	title={data.title}
+	title={data.title || data.name}
 	class="cursor-pointer overflow-hidden rounded-md shadow outline outline-transparent transition-all duration-300 hover:scale-105 hover:outline-slate-700"
 >
 	<img
