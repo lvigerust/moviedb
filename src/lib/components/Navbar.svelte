@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/stores'
 	import { Search } from '$icons'
 
 	const menuItems: { href: string; label: string }[] = [
@@ -13,14 +14,22 @@
 	]
 </script>
 
-<nav class="navbar px-4 text-sm font-semibold lg:px-8">
+<nav class="navbar px-4 text-sm font-semibold text-slate-400 lg:px-8">
 	<div class="navbar-start">
-		<a href="/">Stinkmeaner</a>
+		<a
+			class="font-Display hover:text-slate-300"
+			class:text-slate-300={$page.url.pathname === '/'}
+			href="/">Stinkmeaner</a
+		>
 	</div>
 
 	<ul class="navbar-center gap-x-6">
 		{#each menuItems as { href, label }}
-			<li><a {href}>{label}</a></li>
+			<li>
+				<a class="hover:text-slate-300" class:text-slate-300={$page.url.pathname === href} {href}
+					>{label}</a
+				>
+			</li>
 		{/each}
 	</ul>
 	<div class="navbar-end">

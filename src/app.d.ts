@@ -26,7 +26,12 @@ declare global {
 	}
 
 	interface MovieDetails extends Movie {
-		belongs_to_collection: null | object
+		belongs_to_collection: null | {
+			backdrop_path: string
+			id: number
+			name: string
+			poster_path: string
+		}
 		budget: number
 		genres: object[]
 		homepage: string | null
@@ -39,6 +44,35 @@ declare global {
 		status: string
 		tagline: string | null
 		media_type: string
+	}
+
+	interface Credits {
+		cast: {
+			adult: boolean
+			gender: number
+			id: number
+			known_for_department: string
+			name: string
+			original_name: string
+			popularity: number
+			profile_path: string
+			cast_id: number
+			character: string
+			credit_id: string
+			order: number
+		}[]
+		crew: object[]
+		id: number
+	}
+
+	interface Collection {
+		backdrop_path: string
+		id: number
+		media_type: string
+		name: string
+		overview: string
+		parts: MovieDetails[]
+		poster_path: string
 	}
 
 	interface Show {
