@@ -1,5 +1,6 @@
 import { TMDB_API_KEY } from '$env/static/private'
 import { movieList } from '$lib/stinkmeanersPicks.js'
+import type { MovieDetails } from '$types'
 
 export const load = async ({ fetch }) => {
 	const getPicks = async () => {

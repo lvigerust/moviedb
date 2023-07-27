@@ -10,6 +10,6 @@
 
 <Navbar />
 
-<main class="flex flex-col justify-center px-4 pb-12 pt-4 lg:px-8">
+<main class="flex flex-col justify-center overflow-hidden px-4 pb-12 pt-4 lg:px-8">
 	<slot />
 </main>

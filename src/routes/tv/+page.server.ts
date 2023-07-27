@@ -1,4 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
+import type { Show } from '$types'
 
 export const load = async ({ fetch }) => {
 	const getPopularShows = async () => {

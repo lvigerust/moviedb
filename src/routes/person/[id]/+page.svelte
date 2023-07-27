@@ -1,7 +1,22 @@
 <script lang="ts">
+	import { Card } from '$components'
+	import { dynamicSort } from '$functions'
+
 	export let data
 
-	const { person } = data
+	const { person, personMovieCredits } = data
+
+	console.log(person)
+
+	const topMovies = personMovieCredits.cast.sort(dynamicSort('-popularity')).slice(0, 7)
+
+	let lines = ''
+
+	function removeLines() {
+		if (lines) {
+			lines = ''
+		} else lines = 'line-clamp-none'
+	}
 </script>
 
 <div class="w-full text-center">
@@ -14,6 +29,22 @@
 		<h1 class="text-2xl font-semibold tracking-tight">{person.name}</h1>
 	</div>
 	<div class="mx-auto mt-8 max-w-5xl">
-		<p class="tracking-tight">{person.biography}</p>
+		<p class="line-clamp-4 {lines} whitespace-break-spaces tracking-tight transition-all">
+			{person.biography}
+		</p>
+
+		<button class="btn btn-primary btn-sm mt-4 normal-case" on:click={removeLines}
+			>{lines === '' ? 'Read more' : 'Close'}</button
+		>
 	</div>
+</div>
+
+<div class="divider" />
+
+<h1 class="mb-6 text-center text-3xl font-semibold tracking-tight">Known For</h1>
+
+<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12">
+	{#each topMovies as movie}
+		<Card data={movie} />
+	{/each}
 </div>

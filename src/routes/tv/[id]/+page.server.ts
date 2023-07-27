@@ -1,4 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
+import type { ShowDetails } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getShowDetails = async (id: string) => {
