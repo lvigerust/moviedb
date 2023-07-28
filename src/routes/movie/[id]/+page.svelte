@@ -50,7 +50,7 @@
 
 <h2 class="mb-6 text-center text-3xl font-semibold tracking-tight">Cast</h2>
 
-<div class="grid grid-flow-col place-content-around">
+<div class="grid grid-flow-col place-content-evenly gap-4 px-2">
 	{#each movieCredits.cast.slice(0, 6) as cast}
 		<a href={`/person/${cast.id}-${slugify(cast.name)}`} class="flex items-center gap-2">
 			<div class="avatar">

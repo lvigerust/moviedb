@@ -1,1 +1,1 @@
-export { default as Search } from './Search.svelte'
+export { default as MagnifyingGlass } from './MagnifyingGlass.svelte'

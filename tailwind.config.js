@@ -8,7 +8,7 @@ export default {
 				Display: ['Lexend', 'ui-sans-serif', 'system-ui', '-apple-system']
 			},
 			maxWidth: {
-				'8xl': '80rem'
+				'8xl': '88rem'
 			}
 		}
 	},

@@ -13,7 +13,7 @@
 
 html,
 body {
-	@apply scroll-smooth antialiased h-full;
+	@apply h-full scroll-smooth antialiased;
 	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
