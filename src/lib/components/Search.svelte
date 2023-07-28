@@ -9,8 +9,6 @@
 	let searchQuery: string
 
 	const submitSearch = async () => {
-		console.log('search')
-
 		if (searchQuery !== undefined || '') {
 			goto('/search/' + searchQuery)
 			$open = false
