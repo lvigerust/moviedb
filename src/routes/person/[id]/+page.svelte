@@ -6,8 +6,6 @@
 
 	const { person, personMovieCredits } = data
 
-	console.log(person)
-
 	const topMovies = personMovieCredits.cast.sort(dynamicSort('-popularity')).slice(0, 7)
 
 	let lines = ''
@@ -29,7 +27,7 @@
 		<h1 class="text-2xl font-semibold tracking-tight">{person.name}</h1>
 	</div>
 	<div class="mx-auto mt-8 max-w-5xl">
-		<p class="line-clamp-4 {lines} whitespace-break-spaces tracking-tight transition-all">
+		<p class="line-clamp-4 {lines} whitespace-break-spaces tracking-tight">
 			{person.biography}
 		</p>
 

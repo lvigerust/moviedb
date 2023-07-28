@@ -1,5 +1,7 @@
 <script lang="ts">
-	export let data: Movie
+	import type { Movie, Show } from '$types'
+
+	export let data: Movie | Show
 </script>
 
 <svelte:head>

@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { slugify } from '$functions'
+	import type { Movie, Show } from '$types'
 
 	export let data: Movie | Show
 
-	let mediaType: string
-
+	let media_type: string
 	if (data.title) {
-		mediaType = 'movie'
-	} else mediaType = 'tv'
+		media_type = 'movie'
+	} else media_type = 'tv'
 </script>
 
 <a
-	href={`/${mediaType}/${data.id}-${slugify(data.title || data.name)}`}
+	href={`/${media_type}/${data.id}-${slugify(data.title || data.name)}`}
 	title={data.title || data.name}
 	class="cursor-pointer overflow-hidden rounded-md shadow outline outline-transparent transition-all duration-300 hover:scale-105 hover:outline-slate-700"
 >

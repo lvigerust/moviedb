@@ -12,6 +12,7 @@ export interface Show {
 	vote_count: number
 	name: string
 	original_name: string
+	media_type: string
 }
 
 export interface ShowDetails extends Show {
@@ -35,5 +36,4 @@ export interface ShowDetails extends Show {
 	status: string
 	tagline: string
 	type: string
-	media_type: string
 }

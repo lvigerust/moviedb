@@ -1,5 +1,5 @@
 export * from './credits'
-export * from './images'
+export * from './media'
 export * from './movie'
 export * from './show'
 export * from './person'

@@ -1,4 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
+import type { Collection } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieCollection = async (id: string) => {

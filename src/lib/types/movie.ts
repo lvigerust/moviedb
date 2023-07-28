@@ -1,4 +1,4 @@
-import type { Image } from './images'
+import type { Image } from './media'
 
 export interface Movie {
 	poster_path: string | null
@@ -15,6 +15,7 @@ export interface Movie {
 	vote_count: number
 	video: boolean
 	vote_average: number
+	media_type: string
 }
 
 export interface MovieDetails extends Movie {
@@ -41,7 +42,6 @@ export interface MovieDetails extends Movie {
 	spoken_languages: object[]
 	status: string
 	tagline: string | null
-	media_type: string
 }
 
 export interface Collection {
