@@ -6,12 +6,6 @@
 	export let data
 
 	const { movieDetails, movieCredits, streamed } = data
-
-	function filteredVideos(videoArray: Videos, targetProperty1: boolean, targetProperty2: string) {
-		return videoArray.results.findLast(
-			(obj) => obj.official === targetProperty1 && obj.type === targetProperty2
-		)
-	}
 </script>
 
 <Meta data={movieDetails} />
