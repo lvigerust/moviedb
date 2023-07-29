@@ -30,6 +30,6 @@
 			</main>
 			<Breadcrumbs />
 		</div>
-		<Footer />
+		<!-- <Footer /> -->
 	</div>
 </div>

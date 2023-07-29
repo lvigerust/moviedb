@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide'
-	import type { MovieDetails } from '$types'
+	import type { MovieDetails, Movie } from '$types'
 	import '@splidejs/svelte-splide/css'
 
-	export let slides: MovieDetails[]
+	export let slides: MovieDetails[] | Movie[]
 
 	let options = {
 		pagination: false,

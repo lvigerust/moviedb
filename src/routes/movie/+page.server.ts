@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { Movie } from '$types'
+import type { Genre, Movie } from '$types'
 
 export const load = async ({ fetch }) => {
 	const getPopularMovies = async () => {
@@ -11,8 +11,17 @@ export const load = async ({ fetch }) => {
 		return popularMovies
 	}
 
+	const getMovieGenres = async () => {
+		const movieGenresRes = await fetch(
+			`https://api.themoviedb.org/3/genre/movie/list?api_key=${TMDB_API_KEY}`
+		)
+		const movieGenresData = await movieGenresRes.json()
+		return movieGenresData.genres as Genre[]
+	}
+
 	return {
 		popularMovies: getPopularMovies(),
+		genres: getMovieGenres(),
 		pageTitle: 'Movies'
 	}
 }
