@@ -5,7 +5,7 @@
 	$: route = $page.route.id
 </script>
 
-<div class="breadcrumbs my-2 flex h-12 justify-center py-2 text-sm">
+<div class="breadcrumbs flex justify-center py-8 text-sm">
 	<ul>
 		<li><a href="/">Home</a></li>
 

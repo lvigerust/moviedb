@@ -2,19 +2,29 @@
 	import { page } from '$app/stores'
 	import { Navbar } from '$components'
 	import Breadcrumbs from '$components/Breadcrumbs.svelte'
+	import { fly } from 'svelte/transition'
 	import '../app.css'
+
+	export let data
+
+	$: ({ url } = data)
 </script>
 
 <svelte:head>
 	<title>{$page.data.pageTitle ?? 'Home'} — Stinkmeaner Database</title>
 </svelte:head>
 
-<div class="mx-auto flex h-full max-w-8xl flex-col">
-	<Navbar />
+<div class="overflow-hidden">
+	<div class="mx-auto max-w-8xl">
+		<Navbar />
 
-	<main class="flex h-full flex-col px-4 pb-12 lg:px-8">
-		<slot />
-	</main>
-
-	<Breadcrumbs />
+		<main class="px-4 pb-20">
+			{#key url}
+				<div in:fly={{ x: 500, delay: 400 }} out:fly={{ x: -500 }}>
+					<slot />
+				</div>
+			{/key}
+		</main>
+		<Breadcrumbs />
+	</div>
 </div>

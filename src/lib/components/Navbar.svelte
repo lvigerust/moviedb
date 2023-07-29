@@ -14,10 +14,7 @@
 	]
 </script>
 
-<nav
-	class="navbar px-4 text-sm font-semibold text-slate-400 lg:px-8"
-	class:text-neutral-50={$page.error}
->
+<nav class="navbar px-4 text-sm font-semibold text-slate-400" class:text-white={$page.error}>
 	<div class="navbar-start">
 		<a
 			class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"
