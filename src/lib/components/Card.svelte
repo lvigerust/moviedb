@@ -13,11 +13,14 @@
 <a
 	href={`/${media_type}/${data.id}-${slugify(data.title || data.name)}`}
 	title={data.title || data.name}
-	class="cursor-pointer overflow-hidden rounded-md shadow outline outline-transparent transition-all duration-300 hover:scale-105 hover:outline-slate-700"
 >
-	<img
-		class="h-full w-full object-cover"
-		src={'https://image.tmdb.org/t/p/w500/' + data.poster_path}
-		alt={data.title || data.name}
-	/>
+	<div
+		class="h-full overflow-hidden rounded-md shadow-lg shadow-black/30 outline outline-transparent transition-all duration-300 hover:scale-105 sm:hover:outline-slate-500/25 xl:rounded-lg"
+	>
+		<img
+			class="h-full w-full object-cover"
+			src={'https://image.tmdb.org/t/p/w500/' + data.poster_path}
+			alt={data.title || data.name}
+		/>
+	</div>
 </a>

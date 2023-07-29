@@ -5,9 +5,11 @@
 	$: route = $page.route.id
 </script>
 
-<div class="breadcrumbs flex justify-center py-8 text-sm">
+<div class="breadcrumbs flex justify-center py-8 text-sm font-medium text-slate-400">
 	<ul>
-		<li><a href="/">Home</a></li>
+		{#if $page.url.pathname !== '/'}
+			<li><a href="/">Home</a></li>
+		{/if}
 
 		{#if route?.includes('movie')}
 			<li><a href="/movie">Movies</a></li>

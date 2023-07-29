@@ -11,7 +11,7 @@
 		padding: '16rem',
 		gap: '2rem',
 		type: 'loop',
-		start: 1
+		start: 0
 	}
 </script>
 
@@ -24,7 +24,7 @@
 	<SplideTrack class="overflow-visible">
 		{#each slides as slide}
 			<SplideSlide
-				class="mb-8 overflow-hidden rounded-xl shadow-xl shadow-black/20 outline outline-transparent transition-all duration-200 sm:hover:scale-[101.5%] sm:hover:outline-slate-500/25"
+				class="mb-8 mt-2 overflow-hidden rounded-xl shadow-xl shadow-black/20 outline outline-transparent transition-all duration-200 sm:hover:scale-[101.5%] sm:hover:outline-slate-500/25"
 			>
 				<a href={`/movie/${slide.id}`}>
 					<div class="relative">
@@ -37,9 +37,9 @@
 						<div
 							class="absolute bottom-0 flex h-1/2 w-full items-end justify-between bg-gradient-to-t from-black/60 px-12 pb-8"
 						>
-							<button class="btn btn-ghost rounded-full normal-case text-slate-200 bg-blend-darken"
-								>{slide.tagline}</button
-							>
+							<div class="btn btn-ghost rounded-full normal-case text-slate-200 bg-blend-darken">
+								{slide.tagline}
+							</div>
 							{#if slide.images && slide.images.logos}
 								<img
 									class="mb-8 mr-8 h-fit max-h-32 max-w-[40%] object-contain"

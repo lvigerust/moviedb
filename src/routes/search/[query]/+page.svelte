@@ -9,12 +9,12 @@
 	} = data
 
 	const staggerSpeed = 50
-	let showsDelay = staggerSpeed * movies.length
-	let moviesDelay = 0
+	let showsDelay = 300 + staggerSpeed * movies.length
+	let moviesDelay = 300
 
 	if (!moviesFirst) {
-		showsDelay = 0
-		moviesDelay = staggerSpeed * shows.length
+		showsDelay = 300
+		moviesDelay = 300 + staggerSpeed * shows.length
 	}
 </script>
 
@@ -35,7 +35,7 @@
 	{#if movies.length && shows.length}
 		<div
 			in:fade|global={{
-				delay: moviesFirst ? movies.length * staggerSpeed : shows.length * staggerSpeed + 400
+				delay: moviesFirst ? movies.length * staggerSpeed + 700 : shows.length * staggerSpeed + 700
 			}}
 			class="divider mt-8"
 		/>

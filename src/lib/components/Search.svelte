@@ -38,11 +38,11 @@
 			in:fade={{ duration: 200 }}
 			out:fade={{ duration: 150 }}
 			melt={$overlay}
-			class="fixed inset-0 bg-slate-900/50 opacity-100 backdrop-blur transition-opacity"
+			class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur"
 		/>
 		<div
 			in:fade={{ duration: 200, delay: 150 }}
-			out:fade={{ duration: 100 }}
+			out:fade={{ duration: 150 }}
 			class="fixed left-[50%] top-[27.5%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] px-4"
 			melt={$content}
 		>
@@ -52,7 +52,7 @@
 						bind:value={searchQuery}
 						type="text"
 						autocomplete="off"
-						placeholder="Search for movies, TV shows and people..."
+						placeholder="Search for movies, TV shows or people..."
 						class="block w-full appearance-none bg-transparent py-4 pl-7 pr-12 text-base text-slate-900 placeholder:text-slate-600 focus:outline-none sm:text-sm sm:leading-6"
 					/>
 				</form>

@@ -11,15 +11,23 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+	@apply scroll-pt-16;
+}
+
 html,
 body {
 	@apply h-full scroll-smooth antialiased;
 	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
-/* Custom DaisyUI components */
+:root {
+	--navbar-height: 4rem;
+}
 
+/* Customized DaisyUI components */
 @layer components {
 	.navbar {
+		@apply min-h-[var(--navbar-height)] py-0;
 	}
 }
