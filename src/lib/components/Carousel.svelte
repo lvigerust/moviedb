@@ -3,10 +3,6 @@
 	import type { MovieDetails } from '$types'
 	import '@splidejs/svelte-splide/css'
 
-	function startIndex(min: number, max: number) {
-		return Math.floor(Math.random() * (max - min + 1) + min)
-	}
-
 	export let slides: MovieDetails[]
 
 	let options = {
@@ -15,7 +11,7 @@
 		padding: '16rem',
 		gap: '2rem',
 		type: 'loop',
-		start: startIndex(0, slides.length)
+		start: 1
 	}
 </script>
 
@@ -41,7 +37,7 @@
 						<div
 							class="absolute bottom-0 flex h-1/2 w-full items-end justify-between bg-gradient-to-t from-black/60 px-12 pb-8"
 						>
-							<button class="btn btn-ghost rounded-full normal-case text-slate-100 bg-blend-darken"
+							<button class="btn btn-ghost rounded-full normal-case text-slate-200 bg-blend-darken"
 								>{slide.tagline}</button
 							>
 							{#if slide.images && slide.images.logos}
