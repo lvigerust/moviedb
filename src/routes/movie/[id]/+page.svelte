@@ -7,7 +7,6 @@
 	import Section from './Section.svelte'
 	import { StatIcon } from '$icons'
 	import { tweened } from 'svelte/motion'
-	import { cubicIn, cubicOut } from 'svelte/easing'
 
 	export let data
 
@@ -22,12 +21,12 @@
 
 	const budget = tweened(0, {
 		duration: 800,
-		easing: cubicIn
+		delay: 200
 	})
 
 	const revenue = tweened(0, {
 		duration: 800,
-		easing: cubicOut
+		delay: 200
 	})
 
 	onMount(() => {
@@ -156,7 +155,7 @@
 </section>
 
 <Section id="stats">
-	<div class="stats w-full justify-center shadow">
+	<div class="stats w-full justify-center">
 		<div class="stat">
 			<div class="stat-figure text-primary">
 				<StatIcon />
