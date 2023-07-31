@@ -17,7 +17,7 @@ html {
 
 html,
 body {
-	@apply h-full scroll-smooth antialiased;
+	@apply h-full scroll-smooth text-slate-400 antialiased;
 	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
 
@@ -29,5 +29,9 @@ body {
 @layer components {
 	.navbar {
 		@apply min-h-[var(--navbar-height)] py-0;
+	}
+
+	.stat-title {
+		@apply text-slate-400;
 	}
 }

@@ -1,4 +1,5 @@
 import type { MovieDetails } from './movie'
+import type { ShowDetails } from './show'
 
 enum Gender {
 	'Not set / not specified',
@@ -8,8 +9,8 @@ enum Gender {
 }
 
 export interface CombinedCredits {
-	cast: MovieDetails[]
-	crew: MovieDetails[]
+	cast: (MovieDetails | ShowDetails)[]
+	crew: (MovieDetails | ShowDetails)[]
 	id: number
 }
 

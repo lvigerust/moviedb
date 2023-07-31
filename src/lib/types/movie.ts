@@ -19,12 +19,12 @@ export interface Movie {
 }
 
 export interface MovieDetails extends Movie {
-	belongs_to_collection: null | {
+	belongs_to_collection: {
 		backdrop_path: string
 		id: number
 		name: string
 		poster_path: string
-	}
+	} | null
 	images: {
 		id: number
 		backdrops: Image[] | null
@@ -32,16 +32,31 @@ export interface MovieDetails extends Movie {
 		posters: Image[] | null
 	}
 	budget: number
-	genres: object[]
+	genres: { id: number; name: string }[]
 	homepage: string | null
 	imdb_id: string | null
-	production_companies: object[]
-	production_countries: object[]
+	production_companies: { id: number; logo_path: string; name: string; origin_country: string }[]
+	production_countries: { iso_3166_1: string; name: string }[]
 	revenue: number
 	runtime: number | null
-	spoken_languages: object[]
+	spoken_languages: { english_name: string; iso_639_1: string; name: string }[]
 	status: string
 	tagline: string | null
+}
+
+export type WatchProvider = {
+	logo_path: string
+	provider_id: number
+	provider_name: string
+	display_priority: number
+}
+
+export type WatchProviders = {
+	id: number
+	results: Record<
+		'NO',
+		{ link: string; rent: WatchProvider[]; flatrate: WatchProvider[]; buy: WatchProvider[] } | null
+	>
 }
 
 export interface Collection {

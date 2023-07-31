@@ -35,10 +35,7 @@
 	class:-translate-y-full={offscreen}
 	bind:clientHeight
 >
-	<nav
-		class="navbar mx-auto max-w-8xl px-4 text-sm font-semibold text-slate-400"
-		class:text-white={$page.error}
-	>
+	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-semibold" class:text-white={$page.error}>
 		<div class="navbar-start">
 			<a
 				class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"

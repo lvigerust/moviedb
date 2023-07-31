@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { MovieDetails, Credits, Movie, Videos } from '$types'
+import type { MovieDetails, Credits, Movie, WatchProviders } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieDetails = async (id: string) => {
@@ -19,14 +19,15 @@ export const load = async ({ fetch, params }) => {
 		return movieCreditsData
 	}
 
-	const getVideos = async (id: string) => {
-		const videosRes = await fetch(
-			`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${TMDB_API_KEY}`
+	const getWatchProviders = async (id: string) => {
+		const watchProvidersRes = await fetch(
+			`https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${TMDB_API_KEY}`
 		)
-		const videosData: Videos = await videosRes.json()
-		return videosData
+		const watchProvidersData: WatchProviders = await watchProvidersRes.json()
+		return watchProvidersData
 	}
 
+	/* Streamed promises */
 	const getRecommendations = async (id: string) => {
 		const recommendationsRes = await fetch(
 			`https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${TMDB_API_KEY}`
@@ -41,6 +42,7 @@ export const load = async ({ fetch, params }) => {
 		return await externalIDsRes.json()
 	}
 
+	/* Meta Information */
 	const pageTitle = async () => {
 		const data = await getMovieDetails(params.id)
 
@@ -52,11 +54,11 @@ export const load = async ({ fetch, params }) => {
 	return {
 		movieDetails: getMovieDetails(params.id),
 		movieCredits: getMovieCredits(params.id),
+		watchProviders: getWatchProviders(params.id),
 		pageTitle: pageTitle(),
 		streamed: {
 			recommendations: getRecommendations(params.id),
-			external_ids: getExternalIDs(params.id),
-			videos: getVideos(params.id)
+			external_ids: getExternalIDs(params.id)
 		}
 	}
 }

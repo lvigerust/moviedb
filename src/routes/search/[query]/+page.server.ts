@@ -1,22 +1,22 @@
 import { TMDB_API_KEY } from '$env/static/private'
 import { dynamicSort } from '$functions'
-import type { SearchResults } from '$types'
+import type { APIResponse } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getSearchResults = async (query: string) => {
 		const searchRes = await fetch(
 			`https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&language=en-US&query=${query}`
 		)
-		const searchData: SearchResults = await searchRes.json()
+		const searchData: APIResponse = await searchRes.json()
 
-		function handleSearchResults(searchResults: SearchResults) {
-			let movies = searchResults.results.filter(function (arr) {
+		function handleSearchResults(apiData: APIResponse) {
+			let movies = apiData.results.filter(function (arr) {
 				return arr.media_type == 'movie'
 			})
-			let shows = searchResults.results.filter(function (arr) {
+			let shows = apiData.results.filter(function (arr) {
 				return arr.media_type == 'tv'
 			})
-			const people = searchResults.results.filter(function (arr) {
+			const people = apiData.results.filter(function (arr) {
 				return arr.media_type == 'person'
 			})
 

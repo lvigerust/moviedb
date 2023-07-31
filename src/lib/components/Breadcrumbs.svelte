@@ -5,7 +5,7 @@
 	$: route = $page.route.id
 </script>
 
-<div class="breadcrumbs flex justify-center py-8 text-sm font-medium text-slate-400">
+<div class="breadcrumbs flex justify-center py-8 text-sm font-medium">
 	<ul>
 		{#if $page.url.pathname !== '/'}
 			<li><a href="/">Home</a></li>
@@ -15,6 +15,16 @@
 			<li><a href="/movie">Movies</a></li>
 
 			{#if $page.data.movieDetails}
+				{#if $page.data.movieDetails.belongs_to_collection}
+					<li>
+						<a
+							href={`/collection/${$page.data.movieDetails.belongs_to_collection.id}-${slugify(
+								$page.data.movieDetails.belongs_to_collection.name
+							)}`}>{$page.data.movieDetails.belongs_to_collection.name}</a
+						>
+					</li>
+				{/if}
+
 				<li>
 					<a href={`/movie/${$page.data.movieDetails.id}-${slugify($page.data.movieDetails.title)}`}
 						>{$page.data.movieDetails.title}</a
