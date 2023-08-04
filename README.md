@@ -1,38 +1,17 @@
-# create-svelte
+# Stinkmeaner Database
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+> Personal project to gain new knowledge in used technologies and learn best practices.
 
-## Creating a project
+Built with:
 
-If you're seeing this, you've probably already done this step. Congrats!
+- [SvelteKit](https://github.com/sveltejs/kit "SvelteKit's Github")
+- [Tailwind CSS utility framework](https://github.com/tailwindlabs/tailwindcss "Tailwind's Github")
+- [daisyUI - Tailwind CSS component library](https://github.com/saadeghi/daisyui "daisyUI's Github")
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+Powered by:
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+- [The Movie Database API](https://www.themoviedb.org/)
 
-## Developing
+Deployed on [Vercel](https://vercel.com/)
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## **_Under development!_**
