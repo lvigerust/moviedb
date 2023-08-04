@@ -37,7 +37,7 @@
 		})
 
 		// Stagger recommended movies
-		inView('#recommendations', ({ target }) => {
+		inView('#recommendationsAnimation', ({ target }) => {
 			animate(
 				target.querySelectorAll('#listContainer > li'),
 				{ x: [150, 0], opacity: [0, 1] },
@@ -46,6 +46,19 @@
 			animate(
 				target.querySelectorAll('#recommendations-title'),
 				{ x: [150, 0], opacity: [0, 1] },
+				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
+			)
+		})
+
+		inView('#similarAnimation', ({ target }) => {
+			animate(
+				target.querySelectorAll('#listContainer > li'),
+				{ y: [150, 0], opacity: [0, 1] },
+				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
+			)
+			animate(
+				target.querySelectorAll('#similarmovies-title'),
+				{ y: [150, 0], opacity: [0, 1] },
 				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
 			)
 		})
@@ -202,12 +215,30 @@
 	</Section>
 {/if}
 
-<div id="recommendations">
+<div id="recommendationsAnimation">
 	{#await streamed.recommendations then recommendations}
 		{#if recommendations.length}
 			<Section title="Recommendations">
 				<ul id="listContainer" class="grid grid-cols-8 gap-x-5">
 					{#each recommendations.slice(0, 8) as movie}
+						{#if movie.poster_path}
+							<li>
+								<Card data={movie} />
+							</li>
+						{/if}
+					{/each}
+				</ul>
+			</Section>
+		{/if}
+	{/await}
+</div>
+
+<div id="similarAnimation">
+	{#await streamed.similar then similar}
+		{#if similar.length}
+			<Section title="Similar Movies">
+				<ul id="listContainer" class="grid grid-cols-8 gap-x-5">
+					{#each similar.slice(0, 8) as movie}
 						{#if movie.poster_path}
 							<li>
 								<Card data={movie} />

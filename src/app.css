@@ -11,15 +11,21 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-	@apply scroll-pt-16;
-}
-
 html,
 body {
-	@apply h-full scroll-smooth text-slate-400 antialiased;
+	@apply h-full;
+}
+
+html {
+	@apply scroll-pt-16 scroll-smooth bg-slate-900 text-slate-400;
 	font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
+
+body {
+	@apply antialiased;
+}
+
+/* Global CSS variables */
 
 :root {
 	--navbar-height: 4rem;

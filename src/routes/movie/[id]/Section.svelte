@@ -3,7 +3,7 @@
 	export let id: string | undefined = undefined
 
 	$: if (title !== '') {
-		id = title.toLowerCase()
+		id = title.replace(' ', '').toLowerCase()
 	}
 </script>
 

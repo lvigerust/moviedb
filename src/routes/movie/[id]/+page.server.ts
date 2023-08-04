@@ -35,6 +35,13 @@ export const load = async ({ fetch, params }) => {
 		return (await recommendationsRes.json()).results as Movie[]
 	}
 
+	const getSimilar = async (id: string) => {
+		const similarRes = await fetch(
+			`https://api.themoviedb.org/3/movie/${id}/similar?api_key=${TMDB_API_KEY}`
+		)
+		return (await similarRes.json()).results as Movie[]
+	}
+
 	const getExternalIDs = async (id: string) => {
 		const externalIDsRes = await fetch(
 			`https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${TMDB_API_KEY}`
@@ -58,6 +65,7 @@ export const load = async ({ fetch, params }) => {
 		pageTitle: pageTitle(),
 		streamed: {
 			recommendations: getRecommendations(params.id),
+			similar: getSimilar(params.id),
 			external_ids: getExternalIDs(params.id)
 		}
 	}
