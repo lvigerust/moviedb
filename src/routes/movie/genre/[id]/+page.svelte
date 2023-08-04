@@ -4,8 +4,6 @@
 	export let data
 
 	const { moviesByGenre } = data
-
-	console.log(moviesByGenre)
 </script>
 
 <h2 class="mb-3 text-lg font-semibold tracking-tighter">"genre" Movies</h2>
