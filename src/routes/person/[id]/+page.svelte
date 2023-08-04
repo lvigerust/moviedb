@@ -1,12 +1,43 @@
 <script lang="ts">
 	import { Card } from '$components'
 	import { dynamicSort } from '$functions'
+	import type { Movie, Show } from '$types'
 
 	export let data
 
 	const { person, personMovieCredits } = data
 
-	const topMovies = personMovieCredits.cast.sort(dynamicSort('-popularity')).slice(0, 7)
+	let topMovies: (Movie | Show)[]
+
+	function removeDuplicatesByProperty<T extends Movie | Show>(
+		creditArray: T[],
+		propertyKey: keyof T
+	): T[] {
+		const uniqueMap = new Map() // or use: const uniqueMap: { [key: string]: boolean } = {};
+
+		return creditArray.reduce((uniqueArray: T[], item: T) => {
+			const propertyValue = item[propertyKey]
+			if (!uniqueMap.has(propertyValue)) {
+				uniqueMap.set(propertyValue, true)
+				uniqueArray.push(item)
+			}
+			return uniqueArray
+		}, [])
+	}
+
+	$: if (person.known_for_department === 'Directing') {
+		const allMovies = personMovieCredits.crew
+
+		topMovies = removeDuplicatesByProperty(allMovies, 'id')
+			.sort(dynamicSort('-popularity'))
+			.slice(0, 14)
+	} else {
+		const allMovies = personMovieCredits.cast
+
+		topMovies = removeDuplicatesByProperty(allMovies, 'id')
+			.sort(dynamicSort('-popularity'))
+			.slice(0, 14)
+	}
 
 	let lines = ''
 
