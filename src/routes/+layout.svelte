@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { Breadcrumbs, Navbar, Footer } from '$components'
+	import { Breadcrumbs, Navbar } from '$components'
 	import { fly } from 'svelte/transition'
 	import '../app.css'
 
@@ -17,7 +17,7 @@
 	<Navbar />
 	<div class="overflow-hidden">
 		<div class="mx-auto max-w-8xl">
-			<main class="px-4 pb-20">
+			<main class="px-4">
 				{#key url}
 					<div
 						class="transition-layer"
@@ -25,10 +25,10 @@
 						out:fly={{ x: -500, duration: 300 }}
 					>
 						<slot />
+						<Breadcrumbs />
 					</div>
 				{/key}
 			</main>
-			<Breadcrumbs />
 		</div>
 		<!-- <Footer /> -->
 	</div>

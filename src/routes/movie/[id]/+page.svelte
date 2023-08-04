@@ -13,8 +13,8 @@
 	const { movieDetails, movieCredits, streamed, watchProviders } = data
 
 	const crew = {
-		director: findPersonByJob(movieCredits, 'Director')?.name,
-		writer: findPersonByJob(movieCredits, 'Writer')?.name,
+		director: findPersonByJob(movieCredits, 'Director'),
+		writer: findPersonByJob(movieCredits, 'Writer'),
 		samePerson:
 			findPersonByJob(movieCredits, 'Director')?.id === findPersonByJob(movieCredits, 'Writer')?.id
 	}
@@ -108,22 +108,34 @@
 <p class="my-2 max-w-4xl text-sm">{movieDetails.overview}</p>
 
 <div class="my-12 flex gap-8">
-	{#if crew.samePerson}
+	{#if crew.samePerson && crew.director}
 		<div>
-			<p class="font-medium tracking-tight text-slate-300">{crew.director}</p>
+			<a
+				href={`/person/${crew.director.id}-${slugify(crew.director.name)}`}
+				class="font-medium tracking-tight text-slate-300 transition-colors hover:text-slate-200"
+				>{crew.director?.name}</a
+			>
 			<p class="text-sm">Director, Writer</p>
 		</div>
 	{:else}
 		{#if crew.director}
 			<div>
-				<p class="font-medium tracking-tight text-slate-300">{crew.director}</p>
+				<a
+					href={`/person/${crew.director.id}-${slugify(crew.director.name)}`}
+					class="font-medium tracking-tight text-slate-300 transition-colors hover:text-slate-200"
+					>{crew.director.name}</a
+				>
 				<p class="text-sm">Director</p>
 			</div>
 		{/if}
 
 		{#if crew.writer}
 			<div>
-				<p class="font-medium tracking-tight text-slate-300">{crew.writer}</p>
+				<a
+					href={`/person/${crew.writer.id}-${slugify(crew.writer.name)}`}
+					class="font-medium tracking-tight text-slate-300 transition-colors hover:text-slate-200"
+					>{crew.writer.name}</a
+				>
 				<p class="text-sm">Writer</p>
 			</div>
 		{/if}

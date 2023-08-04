@@ -24,7 +24,13 @@
 				<img src={`https://images.tmdb.org/t/p/w185/${person.profile_path}`} alt={person.name} />
 			</div>
 		</div>
-		<h1 class="text-2xl font-semibold tracking-tight">{person.name} - {person.also_known_as[0]}</h1>
+		<div>
+			<h1 class="text-2xl font-semibold tracking-tight">
+				{person.name}
+			</h1>
+
+			<h3 class="text-lg tracking-tight text-slate-400/80">{person.also_known_as[0]}</h3>
+		</div>
 	</div>
 	<div class="mx-auto mt-8 max-w-5xl">
 		<p class="line-clamp-4 {lines} whitespace-break-spaces tracking-tight">

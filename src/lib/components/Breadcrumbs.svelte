@@ -6,7 +6,7 @@
 </script>
 
 {#if !$page.error}
-	<div class="breadcrumbs flex justify-center py-8 text-sm font-medium">
+	<div class="breadcrumbs flex justify-center py-8 pt-20 text-sm font-medium">
 		<ul>
 			{#if $page.url.pathname !== '/'}
 				<li><a href="/">Home</a></li>
@@ -44,6 +44,18 @@
 						>
 					</li>
 				{/if}
+			{:else if route?.includes('person')}
+				<li><a href={'#person'}>People</a></li>
+
+				<li>
+					<a href={`/person/${$page.data.person.id}-${slugify($page.data.person.name)}`}
+						>{$page.data.person.name}</a
+					>
+				</li>
+			{:else if route?.includes('search')}
+				<li><a href={'#search'}>Search</a></li>
+
+				<li><a href={'#search'}>{$page.data.pageTitle}</a></li>
 			{/if}
 		</ul>
 	</div>
