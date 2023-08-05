@@ -1,57 +1,17 @@
 <script lang="ts">
 	import { Card } from '$components'
-	import { dynamicSort } from '$functions'
-	import type { Movie, Show } from '$types'
+	import { formatDate } from '$utils'
+	import { fly } from 'svelte/transition'
 
 	export let data
 
-	const { person, personMovieCredits } = data
-
-	let topMovies: (Movie | Show)[]
-
-	function removeDuplicatesByProperty<T extends Movie | Show>(
-		creditArray: T[],
-		propertyKey: keyof T
-	): T[] {
-		const uniqueMap = new Map() // or use: const uniqueMap: { [key: string]: boolean } = {};
-
-		return creditArray.reduce((uniqueArray: T[], item: T) => {
-			const propertyValue = item[propertyKey]
-			if (!uniqueMap.has(propertyValue)) {
-				uniqueMap.set(propertyValue, true)
-				uniqueArray.push(item)
-			}
-			return uniqueArray
-		}, [])
-	}
-
-	$: if (person.known_for_department === 'Directing') {
-		const allMovies = personMovieCredits.crew
-
-		topMovies = removeDuplicatesByProperty(allMovies, 'id')
-			.sort(dynamicSort('-popularity'))
-			.slice(0, 14)
-	} else {
-		const allMovies = personMovieCredits.cast
-
-		topMovies = removeDuplicatesByProperty(allMovies, 'id')
-			.sort(dynamicSort('-popularity'))
-			.slice(0, 14)
-	}
-
-	let lines = ''
-
-	function removeLines() {
-		if (lines) {
-			lines = ''
-		} else lines = 'line-clamp-none'
-	}
+	const { person, streamed } = data
 </script>
 
-<div class="w-full text-center">
-	<div class="flex items-center justify-center gap-4">
+<div class="w-full">
+	<div class="flex items-center gap-4">
 		<div class="avatar">
-			<div class="w-28 rounded-full">
+			<div class="w-32 rounded-full">
 				<img src={`https://images.tmdb.org/t/p/w185/${person.profile_path}`} alt={person.name} />
 			</div>
 		</div>
@@ -60,26 +20,28 @@
 				{person.name}
 			</h1>
 
-			<h3 class="text-lg tracking-tight text-slate-400/80">{person.also_known_as[0]}</h3>
+			<h3 class="text-sm">Birthday: {formatDate(person.birthday)}</h3>
 		</div>
 	</div>
-	<div class="mx-auto mt-8 max-w-5xl">
-		<p class="line-clamp-4 {lines} whitespace-break-spaces tracking-tight">
-			{person.biography}
-		</p>
 
-		<button class="btn btn-primary btn-sm mt-4 normal-case" on:click={removeLines}
-			>{lines === '' ? 'Read more' : 'Close'}</button
-		>
-	</div>
+	<h2 class="text-xl font-bold">Biography</h2>
+	<p class="text-sm">{person.biography}</p>
 </div>
 
 <div class="divider" />
 
 <h1 class="mb-6 text-center text-3xl font-semibold tracking-tight">Known For</h1>
 
-<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12">
-	{#each topMovies as movie}
-		<Card data={movie} />
-	{/each}
-</div>
+{#await streamed.topMovies}
+	<div class="flex w-full justify-center">
+		<span class="loading loading-ring loading-lg" />
+	</div>
+{:then topMovies}
+	<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12">
+		{#each topMovies as movie, index}
+			<div in:fly|global={{ y: 100, opacity: 0, delay: 500 + index * 40 }}>
+				<Card data={movie} />
+			</div>
+		{/each}
+	</div>
+{/await}

@@ -1,5 +1,7 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { CombinedCredits, PersonDetails } from '$types'
+import { dynamicSort } from '$functions'
+import type { CombinedCredits, Movie, PersonDetails, Show } from '$types'
+import { removeDuplicatesByProperty } from '$utils'
 
 export const load = async ({ fetch, params }) => {
 	const getPersonDetails = async (id: string) => {
@@ -20,8 +22,29 @@ export const load = async ({ fetch, params }) => {
 		return personMovieCreditsData
 	}
 
+	const getTopMovies = async (): Promise<(Movie | Show)[]> => {
+		const person = await getPersonDetails(params.id)
+
+		if (person.known_for_department === 'Directing') {
+			const allMovies = (await getPersonMovieCredits(params.id)).crew
+
+			return removeDuplicatesByProperty(allMovies, 'id')
+				.sort(dynamicSort('-popularity'))
+				.slice(0, 14)
+		} else {
+			const allMovies = (await getPersonMovieCredits(params.id)).cast
+
+			return removeDuplicatesByProperty(allMovies, 'id')
+				.sort(dynamicSort('-popularity'))
+				.slice(0, 14)
+		}
+	}
+
 	return {
 		person: getPersonDetails(params.id),
-		personMovieCredits: getPersonMovieCredits(params.id)
+		personMovieCredits: getPersonMovieCredits(params.id),
+		streamed: {
+			topMovies: getTopMovies()
+		}
 	}
 }

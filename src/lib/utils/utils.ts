@@ -1,4 +1,4 @@
-import type { Credits } from '$types'
+import type { Credits, Movie, Show } from '$types'
 
 export function formatDate(
 	date: string,
@@ -35,4 +35,20 @@ export function formatNumber(
 
 export function findPersonByJob(credits: Credits, job: string) {
 	return credits.crew.find((person) => person.job === job)
+}
+
+export function removeDuplicatesByProperty<T extends Movie | Show>(
+	creditArray: T[],
+	propertyKey: keyof T
+): T[] {
+	const uniqueMap = new Map() // or use: const uniqueMap: { [key: string]: boolean } = {};
+
+	return creditArray.reduce((uniqueArray: T[], item: T) => {
+		const propertyValue = item[propertyKey]
+		if (!uniqueMap.has(propertyValue)) {
+			uniqueMap.set(propertyValue, true)
+			uniqueArray.push(item)
+		}
+		return uniqueArray
+	}, [])
 }

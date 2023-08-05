@@ -18,8 +18,9 @@
 		>
 	</h1>
 	<h2 class="mt-4 text-xl font-medium leading-6">
-		Millions of <a href="/movie">movies</a>, <a href="/tv">TV Shows</a> and people to discover.
-		Explore
+		Millions of <a class="hover:text-blue-300" href="/movie">movies</a>,
+		<a class="hover:text-blue-300" href="/tv">TV Shows</a>
+		and people to discover. Explore
 		<span class="italic">now</span>.
 	</h2>
 </div>
