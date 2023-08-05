@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { Search } from '$components'
+	import { fly } from 'svelte/transition'
 
 	const menuItems: { href: string; label: string }[] = [
 		{
@@ -36,7 +37,7 @@
 	bind:clientHeight
 >
 	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-semibold" class:text-white={$page.error}>
-		<div class="navbar-start">
+		<div in:fly={{ y: -50, duration: 800, opacity: 0 }} class="navbar-start">
 			<a
 				class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"
 				class:text-slate-300={$page.url.pathname === '/'}
@@ -44,8 +45,8 @@
 			>
 		</div>
 
-		<ul class="navbar-center gap-x-6">
-			{#each menuItems as { href, label }}
+		<ul in:fly={{ y: -50, duration: 800, opacity: 0, delay: 100 }} class="navbar-center gap-x-6">
+			{#each menuItems as { href, label }, index}
 				<li>
 					<a
 						class="{$page.error ? 'hover:slate-300' : 'hover:text-slate-300'} "
@@ -55,7 +56,7 @@
 				</li>
 			{/each}
 		</ul>
-		<div class="navbar-end">
+		<div in:fly={{ y: -50, duration: 800, opacity: 0, delay: 200 }} class="navbar-end">
 			<Search />
 		</div>
 	</nav>

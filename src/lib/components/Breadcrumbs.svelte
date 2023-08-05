@@ -3,14 +3,18 @@
 	import { slugify } from '$functions'
 
 	$: route = $page.route.id
+
+	let visible = true
+
+	$: if ($page.error || route === '/') {
+		visible = false
+	} else visible = true
 </script>
 
-{#if !$page.error}
+{#if visible}
 	<div class="breadcrumbs flex justify-center py-8 pt-20 text-sm font-medium">
 		<ul>
-			{#if $page.url.pathname !== '/'}
-				<li><a href="/">Home</a></li>
-			{/if}
+			<li><a href="/">Home</a></li>
 
 			{#if route?.includes('movie')}
 				<li><a href="/movie">Movies</a></li>
