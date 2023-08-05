@@ -2,8 +2,9 @@
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide'
 	import type { MovieDetails, Movie } from '$types'
 	import '@splidejs/svelte-splide/css'
+	import { slugify } from '$functions'
 
-	export let slides: MovieDetails[] | Movie[]
+	export let slides: MovieDetails[] 
 
 	let options = {
 		pagination: false,
@@ -26,7 +27,7 @@
 			<SplideSlide
 				class="mb-8 mt-2 overflow-hidden rounded-xl shadow-xl shadow-black/20 outline outline-transparent transition-all duration-200 sm:hover:scale-[101.5%] sm:hover:outline-slate-500/25"
 			>
-				<a href={`/movie/${slide.id}`}>
+				<a href={`/movie/${slide.id}-${slugify(slide.title)}`}>
 					<div class="relative">
 						<img
 							class="max-h-[480px] w-full object-cover"
