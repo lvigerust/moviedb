@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card } from '$components'
+	import { Card, Meta } from '$components'
 	import { formatDate } from '$utils'
 	import { fly } from 'svelte/transition'
 
@@ -7,6 +7,8 @@
 
 	const { person, streamed } = data
 </script>
+
+<Meta data={person} />
 
 <div class="w-full pt-8">
 	<div class="flex items-center justify-center gap-4">

@@ -40,7 +40,7 @@
 				animate:flip={{ duration: 500 }}
 				in:fly|global={{ duration: 600, x: '100%', delay, easing: backOut }}
 				out:fly={{ duration: 600, x: '100%', easing: backIn }}
-				class="w-[350px] cursor-pointer rounded-xl border border-slate-400/10 bg-slate-500/20 py-4 pl-6 pr-8 shadow-md backdrop-blur"
+				class="w-[350px] rounded-xl border border-slate-400/10 bg-slate-500/20 py-4 pl-6 pr-8 shadow-md backdrop-blur"
 			>
 				<div use:melt={$description(id)}>
 					<p class="flex items-center gap-3 text-sm font-medium leading-7 text-slate-300/80">
