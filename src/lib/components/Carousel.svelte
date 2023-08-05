@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide'
-	import type { MovieDetails, Movie } from '$types'
+	import type { MovieDetails } from '$types'
 	import '@splidejs/svelte-splide/css'
 	import { slugify } from '$functions'
 
-	export let slides: MovieDetails[] 
+	export let slides: MovieDetails[]
 
 	let options = {
 		pagination: false,
@@ -39,7 +39,7 @@
 							class="absolute bottom-0 flex h-1/2 w-full items-end justify-between bg-gradient-to-t from-black/60 px-12 pb-8"
 						>
 							<div class="btn btn-ghost rounded-full normal-case text-slate-200 bg-blend-darken">
-								{slide.tagline}
+								{slide.tagline || slide.title}
 							</div>
 							{#if slide.images && slide.images.logos}
 								<img
