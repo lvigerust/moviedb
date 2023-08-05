@@ -10,7 +10,7 @@
 
 <Carousel slides={movies} />
 
-<div class="mt-4">
+<div class="mt-8">
 	<h1 class="max-w-4xl font-Display text-5xl font-medium tracking-tight text-slate-200 sm:text-7xl">
 		Welcome to <span class="whitespace-nowrap">
 			<span class="whitespace-nowrap text-blue-700">Stinkmeaner's</span>

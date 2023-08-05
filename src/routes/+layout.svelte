@@ -1,30 +1,46 @@
 <script lang="ts">
-	import { page } from '$app/stores'
-	import { Breadcrumbs, Navbar } from '$components'
-	import { fade, fly } from 'svelte/transition'
 	import '../app.css'
+	import { page } from '$app/stores'
 	import { afterNavigate } from '$app/navigation'
-	import { backIn, backOut, cubicIn, cubicInOut, cubicOut } from 'svelte/easing'
+	import { fade, fly } from 'svelte/transition'
+	import { cubicIn } from 'svelte/easing'
+	import { Breadcrumbs, Navbar, Toaster, addToast } from '$components'
+	import { onMount } from 'svelte'
 
 	export let data
 
-	$: ({ url } = data)
+	$: ({ url, visited } = data)
 
 	let visible = false
-
 	let duration: number
-
 	afterNavigate(({ from }) => {
-		// only animate if the navigation came from outside the page
 		duration = from === null ? 1000 : 0
-		// toggle visbility in any case
 		visible = true
 	})
+
+	onMount(() => {
+		if (!visited) {
+			createToast()
+		}
+	})
+
+	function createToast() {
+		addToast({
+			data: {
+				title: 'Tip of the day',
+				description: '<span class="text-xl select-none">💡</span> Use ⌘ + . to open search',
+				color: ''
+			},
+			closeDelay: 10000
+		})
+	}
 </script>
 
 <svelte:head>
 	<title>{$page.data.pageTitle ?? 'Home'} — Stinkmeaner Database</title>
 </svelte:head>
+
+<Toaster />
 
 {#if visible}
 	<div class="flex flex-col">

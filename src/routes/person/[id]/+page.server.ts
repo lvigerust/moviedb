@@ -40,7 +40,15 @@ export const load = async ({ fetch, params }) => {
 		}
 	}
 
+	/* Meta Information */
+	const pageTitle = async () => {
+		const data = await getPersonDetails(params.id)
+
+		return `${data.name}`
+	}
+
 	return {
+		pageTitle: pageTitle(),
 		person: getPersonDetails(params.id),
 		personMovieCredits: getPersonMovieCredits(params.id),
 		streamed: {

@@ -43,6 +43,7 @@
 				{ x: [150, 0], opacity: [0, 1] },
 				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
 			)
+
 			animate(
 				target.querySelectorAll('#recommendations-title'),
 				{ x: [150, 0], opacity: [0, 1] },
@@ -50,6 +51,7 @@
 			)
 		})
 
+		// Stagger similar movies
 		inView('#similarAnimation', ({ target }) => {
 			animate(
 				target.querySelectorAll('#listContainer > li'),

@@ -8,8 +8,8 @@
 	const { person, streamed } = data
 </script>
 
-<div class="w-full">
-	<div class="flex items-center gap-4">
+<div class="w-full pt-8">
+	<div class="flex items-center justify-center gap-4">
 		<div class="avatar">
 			<div class="w-32 rounded-full">
 				<img src={`https://images.tmdb.org/t/p/w185/${person.profile_path}`} alt={person.name} />
@@ -19,14 +19,42 @@
 			<h1 class="text-2xl font-semibold tracking-tight">
 				{person.name}
 			</h1>
-
-			<h3 class="text-sm">Birthday: {formatDate(person.birthday)}</h3>
 		</div>
 	</div>
-
-	<h2 class="text-xl font-bold">Biography</h2>
-	<p class="text-sm">{person.biography}</p>
 </div>
+
+<div class="flex bg-neutral p-8">
+	<div class="border-r border-r-slate-600 pr-8">
+		<hgroup>
+			<h3 class="font-semibold leading-7">Known for</h3>
+			<p class="text-sm tracking-wide">{person.known_for_department}</p>
+		</hgroup>
+
+		<hgroup class="mt-4">
+			<h3 class="font-semibold leading-7">Gender</h3>
+			<p class="text-sm tracking-wide">
+				{#if person.gender === 2}
+					Male
+				{:else}
+					Female
+				{/if}
+			</p>
+		</hgroup>
+
+		<hgroup class="mt-4">
+			<h3 class="font-semibold leading-7">Birthday</h3>
+			<p class="text-sm tracking-wide">{formatDate(person.birthday)}</p>
+		</hgroup>
+
+		<hgroup class="mt-4">
+			<h3 class="font-semibold leading-7">Place of Birth</h3>
+			<p class="text-sm tracking-wide">{person.place_of_birth}</p>
+		</hgroup>
+	</div>
+</div>
+
+<h2 class="text-xl font-bold">Biography</h2>
+<p class="text-sm">{person.biography}</p>
 
 <div class="divider" />
 

@@ -9,7 +9,7 @@
 
 <Carousel slides={popularMovies} />
 
-<div class="flex flex-wrap justify-center gap-3 pb-6 pt-5">
+<div class="flex flex-wrap justify-center gap-3 pb-5 pt-4">
 	{#each genres.slice(0, 8) as genre}
 		<a
 			href={`/movie/genre/${genre.id}`}

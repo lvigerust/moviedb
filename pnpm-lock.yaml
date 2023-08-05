@@ -1,9 +1,13 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@melt-ui/svelte':
-    specifier: ^0.27.1
-    version: 0.27.1(svelte@4.0.5)
+    specifier: ^0.33.0
+    version: 0.33.0(svelte@4.0.5)
   '@splidejs/svelte-splide':
     specifier: ^0.2.9
     version: 0.2.9
@@ -14,7 +18,7 @@ dependencies:
 devDependencies:
   '@melt-ui/pp':
     specifier: ^0.0.7
-    version: 0.0.7(@melt-ui/svelte@0.27.1)(svelte@4.0.5)
+    version: 0.0.7(@melt-ui/svelte@0.33.0)(svelte@4.0.5)
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.1.0(@sveltejs/kit@1.22.3)
@@ -392,18 +396,18 @@ packages:
       '@jridgewell/resolve-uri': 3.1.0
       '@jridgewell/sourcemap-codec': 1.4.14
 
-  /@melt-ui/pp@0.0.7(@melt-ui/svelte@0.27.1)(svelte@4.0.5):
+  /@melt-ui/pp@0.0.7(@melt-ui/svelte@0.33.0)(svelte@4.0.5):
     resolution: {integrity: sha512-O7gRJ1OXmLjZBR7jB1SV2O4WORn1jk+k06gxej3EXPYAJGcPg+EfKNw54G0/VhhMup1ZrwMsleUgoCOzus/JUw==}
     peerDependencies:
       '@melt-ui/svelte': '>= 0.22.0'
       svelte: ^3.55.0 || ^4.0.0
     dependencies:
-      '@melt-ui/svelte': 0.27.1(svelte@4.0.5)
+      '@melt-ui/svelte': 0.33.0(svelte@4.0.5)
       svelte: 4.0.5
     dev: true
 
-  /@melt-ui/svelte@0.27.1(svelte@4.0.5):
-    resolution: {integrity: sha512-4irfD/HmpYQpWzneBXPBBSjcF85mVrZjQBRbXby/YkjZyY1GSC/W0koiNUTSKAg3FjBImwUexfbHO9rZUrB4kw==}
+  /@melt-ui/svelte@0.33.0(svelte@4.0.5):
+    resolution: {integrity: sha512-so72cHV+wBexU8h2/qEeM+SH7t9NbZuPin49/OwYxH9OJS+0pGFnzYvTkpIV7CbV4tfx2jBwvmd6Zc3xF9nLhg==}
     peerDependencies:
       svelte: '>=3 <5'
     dependencies:
@@ -2473,7 +2477,3 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
     dev: true
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false

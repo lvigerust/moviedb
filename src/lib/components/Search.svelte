@@ -1,10 +1,13 @@
 <script lang="ts">
-	import { createDialog } from '@melt-ui/svelte'
+	import { createDialog, melt } from '@melt-ui/svelte'
 	import { MagnifyingGlass } from '$icons'
 	import { goto } from '$app/navigation'
 	import { fade } from 'svelte/transition'
 
-	const { trigger, portal, overlay, content, open } = createDialog()
+	const {
+		elements: { trigger, overlay, content, portalled },
+		states: { open }
+	} = createDialog()
 
 	let searchQuery: string
 
@@ -26,25 +29,25 @@
 <svelte:window on:keydown={onKeyDown} />
 
 <button
-	melt={$trigger}
+	use:melt={$trigger}
 	class="btn btn-circle btn-ghost btn-sm p-1 hover:text-slate-300 focus:bg-slate-500/10 focus:outline-slate-500/40"
 >
 	<MagnifyingGlass />
 </button>
 
-<div use:portal>
+<div use:melt={$portalled}>
 	{#if $open}
 		<div
 			in:fade={{ duration: 200 }}
 			out:fade={{ duration: 150 }}
-			melt={$overlay}
+			use:melt={$overlay}
 			class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur"
 		/>
 		<div
 			in:fade={{ duration: 200, delay: 150 }}
 			out:fade={{ duration: 150 }}
 			class="fixed left-[50%] top-[27.5%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] px-4"
-			melt={$content}
+			use:melt={$content}
 		>
 			<div class="overflow-hidden rounded-full bg-slate-100 shadow-lg">
 				<form on:submit|preventDefault={submitSearch} class="relative">

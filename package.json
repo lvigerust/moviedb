@@ -36,7 +36,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@melt-ui/svelte": "^0.27.1",
+		"@melt-ui/svelte": "^0.33.0",
 		"@splidejs/svelte-splide": "^0.2.9",
 		"motion": "^10.16.2"
 	}
