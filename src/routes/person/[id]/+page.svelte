@@ -25,8 +25,8 @@
 	</div>
 </div>
 
-<div class="flex bg-neutral p-8">
-	<div class="border-r border-r-slate-600 pr-8">
+<div class="grid grid-flow-col justify-center p-8">
+	<div class="">
 		<hgroup>
 			<h3 class="font-semibold leading-7">Known for</h3>
 			<p class="text-sm tracking-wide">{person.known_for_department}</p>
@@ -53,10 +53,14 @@
 			<p class="text-sm tracking-wide">{person.place_of_birth}</p>
 		</hgroup>
 	</div>
-</div>
 
-<h2 class="text-xl font-bold">Biography</h2>
-<p class="text-sm">{person.biography}</p>
+	<div class="divider divider-horizontal" />
+
+	<div class="line-clamp-5">
+		<h2 class=" mb-3 text-xl font-bold tracking-tight">Biography</h2>
+		<p class="max-w-2xl text-sm">{person.biography}</p>
+	</div>
+</div>
 
 <div class="divider" />
 

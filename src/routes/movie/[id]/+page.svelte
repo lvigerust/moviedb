@@ -4,7 +4,6 @@
 	import { formatNumber, formatDate, formatRuntime, findPersonByJob } from '$utils'
 	import { onMount } from 'svelte'
 	import { animate, inView, stagger } from 'motion'
-	import Section from './Section.svelte'
 	import { StatIcon } from '$icons'
 	import { tweened } from 'svelte/motion'
 
@@ -37,29 +36,18 @@
 		})
 
 		// Stagger recommended movies
-		inView('#recommendationsAnimation', ({ target }) => {
+		inView('#recommendations', ({ target }) => {
 			animate(
-				target.querySelectorAll('#listContainer > li'),
-				{ x: [150, 0], opacity: [0, 1] },
-				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
-			)
-
-			animate(
-				target.querySelectorAll('#recommendations-title'),
+				target.querySelectorAll('#listContainer > li, h2'),
 				{ x: [150, 0], opacity: [0, 1] },
 				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
 			)
 		})
 
 		// Stagger similar movies
-		inView('#similarAnimation', ({ target }) => {
+		inView('#similar', ({ target }) => {
 			animate(
-				target.querySelectorAll('#listContainer > li'),
-				{ y: [150, 0], opacity: [0, 1] },
-				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
-			)
-			animate(
-				target.querySelectorAll('#similarmovies-title'),
+				target.querySelectorAll('#listContainer > li, h2'),
 				{ y: [150, 0], opacity: [0, 1] },
 				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
 			)
@@ -158,7 +146,7 @@
 
 <div class="divider" />
 
-<section class="mb-6">
+<section id="cast" class="mb-6">
 	<div class="mb-6 flex items-center justify-between">
 		<a class="text-2xl font-semibold tracking-tight text-slate-300" href={'#'}>Top Billed Cast</a>
 		<a class="text-sm hover:underline" href={'#'}>Full Cast & Crew</a>
@@ -181,7 +169,8 @@
 	</div>
 </section>
 
-<Section id="stats">
+<section id="stats">
+	<div class="divider" />
 	<div class="stats w-full justify-center">
 		<div class="stat">
 			<div class="stat-figure text-primary">
@@ -209,58 +198,57 @@
 			<div class="stat-value text-accent">{movieDetails.status}</div>
 			<div class="stat-desc">{formatDate(movieDetails.release_date)}</div>
 		</div>
-	</div></Section
->
+	</div>
+</section>
 
 {#if movieDetails.belongs_to_collection}
-	<Section>
-		<div class="relative h-72 w-full overflow-hidden rounded-lg">
-			<a
-				href={`/collection/${movieDetails.belongs_to_collection.id}-${slugify(
-					movieDetails.belongs_to_collection.name
-				)}`}
-				><img
-					class="h-full w-full object-cover"
-					src={`https://image.tmdb.org/t/p/original/${movieDetails.belongs_to_collection.backdrop_path}`}
-					alt={movieDetails.belongs_to_collection.name}
-				/></a
-			>
-		</div>
-	</Section>
+	<div class="divider" />
+	<section id="collection" class="relative h-72 w-full overflow-hidden rounded-lg">
+		<a
+			href={`/collection/${movieDetails.belongs_to_collection.id}-${slugify(
+				movieDetails.belongs_to_collection.name
+			)}`}
+			><img
+				class="h-full w-full object-cover"
+				src={`https://image.tmdb.org/t/p/original/${movieDetails.belongs_to_collection.backdrop_path}`}
+				alt={movieDetails.belongs_to_collection.name}
+			/></a
+		>
+	</section>
 {/if}
 
-<div id="recommendationsAnimation">
+<section id="recommendations" class="mb-6">
 	{#await streamed.recommendations then recommendations}
-		{#if recommendations.length}
-			<Section title="Recommendations">
-				<ul id="listContainer" class="grid grid-cols-8 gap-x-5">
-					{#each recommendations.slice(0, 8) as movie}
-						{#if movie.poster_path}
-							<li>
-								<Card data={movie} />
-							</li>
-						{/if}
-					{/each}
-				</ul>
-			</Section>
-		{/if}
-	{/await}
-</div>
+		<div class="divider" />
 
-<div id="similarAnimation">
-	{#await streamed.similar then similar}
-		{#if similar.length}
-			<Section title="Similar Movies">
-				<ul id="listContainer" class="grid grid-cols-8 gap-x-5">
-					{#each similar.slice(0, 8) as movie}
-						{#if movie.poster_path}
-							<li>
-								<Card data={movie} />
-							</li>
-						{/if}
-					{/each}
-				</ul>
-			</Section>
-		{/if}
+		<h2 id="" class="mb-6 text-2xl font-semibold tracking-tight text-slate-300">
+			{recommendations.length ? 'Recommendations' : ''}
+		</h2>
+		<ul id="listContainer" class="grid grid-cols-8 gap-x-5">
+			{#each recommendations.slice(0, 8) as movie}
+				{#if movie.poster_path}
+					<li>
+						<Card data={movie} />
+					</li>
+				{/if}
+			{/each}
+		</ul>
 	{/await}
-</div>
+</section>
+
+<section id="similar" class="mb-6">
+	{#await streamed.similar then similar}
+		<h2 id="" class="mb-6 text-2xl font-semibold tracking-tight text-slate-300">
+			{similar.length ? 'Similar Movies' : ''}
+		</h2>
+		<ul id="listContainer" class="grid grid-cols-8 gap-x-5">
+			{#each similar.slice(0, 8) as movie}
+				{#if movie.poster_path}
+					<li>
+						<Card data={movie} />
+					</li>
+				{/if}
+			{/each}
+		</ul>
+	{/await}
+</section>

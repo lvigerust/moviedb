@@ -14,17 +14,20 @@
 
 	onMount(() => {
 		// Stagger recommended movies
-		inView('.test', ({ target }) => {
-			animate(
-				target.querySelectorAll('ul > li'),
-				{ y: [15, 0], opacity: [0, 1] },
-				{ delay: stagger(0.1, { start: 0.25 }), duration: 0.5, easing: 'ease' }
-			)
-		})
+
+		if (route !== '/') {
+			inView('.animation-layer', ({ target }) => {
+				animate(
+					target.querySelectorAll('ul > li'),
+					{ y: [15, 0], opacity: [0, 1] },
+					{ delay: stagger(0.1, { start: 0.25 }), duration: 0.5, easing: 'ease' }
+				)
+			})
+		}
 	})
 </script>
 
-<div class="test">
+<div class="animation-layer">
 	{#if visible}
 		<div class="breadcrumbs flex justify-center py-8 pt-20 text-sm font-medium">
 			<ul>
