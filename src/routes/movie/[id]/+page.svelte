@@ -1,7 +1,13 @@
 <script lang="ts">
 	import { Card, Meta } from '$components'
 	import { slugify } from '$functions'
-	import { formatNumber, formatDate, formatRuntime, findPersonByJob } from '$utils'
+	import {
+		formatNumber,
+		formatDate,
+		formatRuntime,
+		findPersonByJob,
+		calculatePercentage
+	} from '$utils'
 	import { onMount } from 'svelte'
 	import { animate, inView, stagger } from 'motion'
 	import { StatIcon } from '$icons'
@@ -171,24 +177,33 @@
 
 <section id="stats">
 	<div class="divider" />
-	<div class="stats w-full justify-center">
-		<div class="stat">
-			<div class="stat-figure text-primary">
-				<StatIcon />
-			</div>
-			<div class="stat-title">Budget</div>
-			<div class="stat-value text-primary">{formatNumber($budget)}</div>
-			<div class="stat-desc">21% more than last month</div>
-		</div>
 
-		<div class="stat">
-			<div class="stat-figure text-secondary">
-				<StatIcon icon="banknotes" />
+	<div class="stats w-full justify-center">
+		{#if movieDetails.budget}
+			<div class="stat">
+				<div class="stat-figure text-primary">
+					<StatIcon />
+				</div>
+				<div class="stat-title">Budget</div>
+				<div class="stat-value text-primary">{formatNumber($budget)}</div>
 			</div>
-			<div class="stat-title">Revenue</div>
-			<div class="stat-value text-secondary">{formatNumber($revenue)}</div>
-			<div class="stat-desc">21% more than last month</div>
-		</div>
+		{/if}
+
+		{#if movieDetails.revenue}
+			<div class="stat">
+				<div class="stat-figure text-secondary">
+					<StatIcon icon="banknotes" />
+				</div>
+				<div class="stat-title">Revenue</div>
+				<div class="stat-value text-secondary">{formatNumber($revenue)}</div>
+				<div class="stat-desc">
+					{calculatePercentage(movieDetails.revenue, movieDetails.budget).toFixed(0)}% {movieDetails.revenue >
+					movieDetails.budget
+						? 'increase'
+						: 'decrease'} from budget
+				</div>
+			</div>
+		{/if}
 
 		<div class="stat">
 			<div class="stat-figure text-accent">

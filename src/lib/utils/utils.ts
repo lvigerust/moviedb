@@ -52,3 +52,13 @@ export function removeDuplicatesByProperty<T extends Movie | Show>(
 		return uniqueArray
 	}, [])
 }
+
+export function calculatePercentage(newNumber: number, originalNumber: number) {
+	const increase = newNumber - originalNumber
+	const percentageIncrease = (increase / originalNumber) * 100
+
+	if (percentageIncrease <= 0) {
+		const decrease = originalNumber - newNumber
+		return (decrease / originalNumber) * 100
+	} else return percentageIncrease
+}
