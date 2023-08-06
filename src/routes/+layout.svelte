@@ -4,7 +4,7 @@
 	import { afterNavigate } from '$app/navigation'
 	import { fade, fly } from 'svelte/transition'
 	import { cubicIn } from 'svelte/easing'
-	import { Breadcrumbs, Navbar, Toaster, addToast } from '$components'
+	import { Breadcrumbs, Footer, Navbar, Toaster, addToast } from '$components'
 	import { onMount } from 'svelte'
 
 	export let data
@@ -37,7 +37,7 @@
 </script>
 
 <svelte:head>
-	<title>{$page.data.pageTitle ?? 'Home'} — Stinkmeaner Database</title>
+	<title>{$page.data.pageTitle ?? 'Home'} — Filmguide</title>
 </svelte:head>
 
 <Toaster />

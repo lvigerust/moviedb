@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>{$page.error?.message} — Stinkmeaner Database</title>
+	<title>{$page.error?.message} — Filmguide</title>
 </svelte:head>
 
 <div

@@ -1,4 +1,4 @@
-# Stinkmeaner Database
+# filmguide.tips
 
 > Personal project to gain new knowledge in used technologies and learn best practices.
 

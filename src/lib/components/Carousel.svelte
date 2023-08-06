@@ -20,7 +20,7 @@
 	hasTrack={false}
 	{options}
 	class="ml-[calc(-50vw+50%)] w-screen"
-	aria-label="Stinkmeaner's Top Picks"
+	aria-label="Filmguide's Top Picks"
 >
 	<SplideTrack class="overflow-visible">
 		{#each slides as slide}

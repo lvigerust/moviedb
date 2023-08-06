@@ -41,7 +41,7 @@
 			<a
 				class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"
 				class:text-slate-300={$page.url.pathname === '/'}
-				href="/">Stinkmeaner</a
+				href="/">Filmguide</a
 			>
 		</div>
 
