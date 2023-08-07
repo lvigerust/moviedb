@@ -4,7 +4,7 @@
 	import { afterNavigate } from '$app/navigation'
 	import { fade, fly } from 'svelte/transition'
 	import { cubicIn } from 'svelte/easing'
-	import { Breadcrumbs, Footer, Navbar, Toaster, addToast } from '$components'
+	import { Breadcrumbs, Navbar, Toaster, addToast } from '$components'
 	import { onMount } from 'svelte'
 
 	export let data
@@ -28,10 +28,10 @@
 		addToast({
 			data: {
 				title: 'Tip of the day',
-				description: '<span class="text-xl select-none">💡</span> Use ⌘ + . to open search',
+				description: 'Use ⌘ + . to open search',
 				color: ''
 			},
-			closeDelay: 10000
+			closeDelay: 100000
 		})
 	}
 </script>
@@ -49,7 +49,7 @@
 		<div in:fade={{ duration, delay: 500, easing: cubicIn }} class="overflow-hidden">
 			<div class="mx-auto max-w-8xl">
 				<main class="px-4">
-					{#key url}
+					{#key url && url.split('/')[1]}
 						<div
 							class="transition-layer"
 							in:fly={{ x: 500, duration: 300, delay: 300 }}
@@ -61,7 +61,6 @@
 					{/key}
 				</main>
 			</div>
-			<!-- <Footer /> -->
 		</div>
 	</div>
 {/if}

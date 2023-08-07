@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { slugify } from '$functions'
-	import { animate, inView, stagger } from 'motion'
 	import { onMount } from 'svelte'
 
 	$: route = $page.route.id

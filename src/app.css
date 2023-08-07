@@ -37,7 +37,8 @@ body {
 		@apply min-h-[var(--navbar-height)] py-0;
 	}
 
-	.stat-title {
+	.stat-title,
+	.stat-desc {
 		@apply text-slate-400;
 	}
 }

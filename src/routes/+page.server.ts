@@ -1,6 +1,7 @@
 import { TMDB_API_KEY } from '$env/static/private'
 import { movies } from '$lib/watchlist.js'
 import type { MovieDetails } from '$types'
+import { redirect } from '@sveltejs/kit'
 
 export const load = async ({ fetch }) => {
 	const getWatchlist = async () => {
@@ -29,5 +30,21 @@ export const load = async ({ fetch }) => {
 
 	return {
 		watchlist: getWatchlist()
+	}
+}
+
+export const actions = {
+	setTheme: async ({ url, cookies }) => {
+		const theme = url.searchParams.get('theme')
+		const redirectTo = url.searchParams.get('redirectTo')
+
+		if (theme) {
+			cookies.set('colortheme', theme, {
+				path: '/',
+				maxAge: 60 * 60 * 24 * 365
+			})
+		}
+
+		throw redirect(303, redirectTo ?? '/')
 	}
 }

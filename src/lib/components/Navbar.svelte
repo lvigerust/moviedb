@@ -32,11 +32,11 @@
 <svelte:window bind:scrollY={currentY} />
 
 <div
-	class="sticky top-0 z-50 bg-base-100/50 text-slate-400 backdrop-blur transition-transform ease-in"
+	class="sticky top-0 z-50 bg-base-100/50 backdrop-blur transition-transform ease-in"
 	class:-translate-y-full={offscreen}
 	bind:clientHeight
 >
-	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-semibold" class:text-white={$page.error}>
+	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-medium" class:text-white={$page.error}>
 		<div in:fly={{ y: -50, duration: 800, opacity: 0 }} class="navbar-start">
 			<a
 				class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"

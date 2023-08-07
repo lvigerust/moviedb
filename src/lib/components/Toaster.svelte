@@ -17,6 +17,7 @@
 
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation'
+	import { Check, LightBulb } from '$icons'
 
 	import { createToaster, melt } from '@melt-ui/svelte'
 	import { flip } from 'svelte/animate'
@@ -27,7 +28,7 @@
 	let delay: number
 
 	afterNavigate(({ from }) => {
-		delay = from === null ? 2000 : 0
+		delay = from === null ? 0 : 0
 		visible = true
 	})
 </script>
@@ -40,13 +41,17 @@
 				animate:flip={{ duration: 500 }}
 				in:fly|global={{ duration: 600, x: '100%', delay, easing: backOut }}
 				out:fly={{ duration: 600, x: '100%', easing: backIn }}
-				class="w-[350px] rounded-xl border border-slate-400/10 bg-slate-500/20 py-4 pl-6 pr-8 shadow-md backdrop-blur"
+				class="flex w-[350px] items-center rounded-xl border border-slate-400/10 bg-slate-500/20 px-6 py-4 text-slate-400 shadow-md backdrop-blur"
 			>
-				<div use:melt={$description(id)}>
-					<p class="flex items-center gap-3 text-sm font-medium leading-7 text-slate-300/80">
-						{@html data.description}
-					</p>
-				</div>
+				<p use:melt={$description(id)} class="text-sm">
+					{data.description}
+				</p>
+				<button
+					use:melt={$close(id)}
+					class="ml-auto grid place-items-center rounded-full text-slate-400/75 transition-all hover:text-slate-300"
+				>
+					<Check />
+				</button>
 			</div>
 		{/each}
 	</div>
