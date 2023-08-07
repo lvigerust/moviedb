@@ -31,7 +31,7 @@
 				description: 'Use ⌘ + . to open search',
 				color: ''
 			},
-			closeDelay: 100000
+			closeDelay: 10000
 		})
 	}
 </script>

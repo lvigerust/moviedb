@@ -28,7 +28,7 @@
 	let delay: number
 
 	afterNavigate(({ from }) => {
-		delay = from === null ? 0 : 0
+		delay = from === null ? 2000 : 0
 		visible = true
 	})
 </script>
@@ -48,7 +48,7 @@
 				</p>
 				<button
 					use:melt={$close(id)}
-					class="ml-auto grid place-items-center rounded-full text-slate-400/75 transition-all hover:text-slate-300"
+					class="ml-auto grid place-items-center rounded-full text-slate-400/75 transition-all hover:text-green-300"
 				>
 					<Check />
 				</button>
