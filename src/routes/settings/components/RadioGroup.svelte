@@ -36,7 +36,9 @@
 	{#each optionsArr as { theme, value }}
 		<div class="flex items-center gap-3">
 			<button
+				use:melt={$item(value)}
 				formaction="/?/setTheme&theme={theme}&redirectTo={$page.url.pathname}"
+				type="submit"
 				class="grid h-4 w-4 cursor-pointer place-items-center rounded-full bg-neutral shadow-sm transition-colors duration-200 hover:bg-slate-700"
 				id={value}
 				aria-labelledby="{value}-label"
