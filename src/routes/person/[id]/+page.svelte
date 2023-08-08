@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Meta } from '$components'
+	import { Card, Meta, Skeleton } from '$components'
 	import { formatDate } from '$utils'
 	import { fly } from 'svelte/transition'
 
@@ -67,9 +67,7 @@
 <h1 class="mb-6 text-center text-3xl font-semibold tracking-tight">Known For</h1>
 
 {#await streamed.topMovies}
-	<div class="flex w-full justify-center">
-		<span class="loading loading-ring loading-lg" />
-	</div>
+	<Skeleton />
 {:then topMovies}
 	<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12">
 		{#each topMovies as movie, index}

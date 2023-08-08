@@ -3,7 +3,7 @@
 </script>
 
 <section>
-	<hgroup class="mb-8">
+	<hgroup>
 		<h2>General settings</h2>
 		<p>Customize your user experience.</p>
 	</hgroup>
