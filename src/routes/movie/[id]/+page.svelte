@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card, Meta } from '$components'
+	import { Card, Meta, WatchProvider } from '$components'
 	import { slugify } from '$functions'
 	import {
 		formatNumber,
@@ -67,6 +67,14 @@
 	<div class="relative h-full w-full">
 		<div class="absolute z-30 h-full w-full bg-gradient-to-t from-base-100" />
 
+		{#if movieDetails.images.logos}
+			<img
+				class="absolute bottom-12 right-20 max-w-sm"
+				src={'https://image.tmdb.org/t/p/original/' + movieDetails.images.logos[0].file_path}
+				alt={`${movieDetails.title} logo`}
+			/>
+		{/if}
+
 		<img
 			class="h-[450px] w-full object-cover"
 			src={'https://image.tmdb.org/t/p/original/' + movieDetails.backdrop_path}
@@ -75,27 +83,37 @@
 	</div>
 </div>
 
-<h1 class="text-4xl font-bold text-slate-200">
-	{movieDetails.title}
-	<span class="font-normal text-slate-300"
-		>({new Date(movieDetails.release_date).getFullYear()})</span
-	>
-</h1>
+<div class="flex items-center justify-between">
+	<div>
+		<h1 class="text-4xl font-bold text-slate-200">
+			{movieDetails.title}
+			<span class="font-normal text-slate-300"
+				>({new Date(movieDetails.release_date).getFullYear()})</span
+			>
+		</h1>
 
-<div class="mt-2 flex">
-	<p class="">{formatDate(movieDetails.release_date)}</p>
-	<span class="mx-4 select-none font-bold">•</span>
-	{#if movieDetails.runtime}
-		<p>{formatRuntime(movieDetails.runtime)}</p>
-		<span class="mx-4 select-none font-bold">•</span>
-	{/if}
-	{#each movieDetails.genres.slice(0, 5) as genre, index}
-		<a href={`/movie/genre/${genre.id}`}>{genre.name}</a>
+		<div class="mt-2 flex">
+			<p class="">{formatDate(movieDetails.release_date)}</p>
+			<span class="mx-4 select-none font-bold">•</span>
+			{#if movieDetails.runtime}
+				<p>{formatRuntime(movieDetails.runtime)}</p>
+				<span class="mx-4 select-none font-bold">•</span>
+			{/if}
+			{#each movieDetails.genres.slice(0, 5) as genre, index}
+				<a href={`/movie/genre/${genre.id}`}>{genre.name}</a>
 
-		{#if index < 5 - 1 && index < movieDetails.genres.length - 1}
-			<p>,&nbsp;</p>
+				{#if index < 5 - 1 && index < movieDetails.genres.length - 1}
+					<p>,&nbsp;</p>
+				{/if}
+			{/each}
+		</div>
+	</div>
+
+	<div class="mr-4">
+		{#if watchProviders.results.NO}
+			<WatchProvider {watchProviders} />
 		{/if}
-	{/each}
+	</div>
 </div>
 
 <h2 class="my-10 italic">{movieDetails.tagline}</h2>
@@ -103,7 +121,7 @@
 <h3 class="text-xl font-semibold tracking-tight text-slate-300">Overview</h3>
 <p class="my-2 max-w-4xl text-sm">{movieDetails.overview}</p>
 
-<div class="my-12 flex gap-8">
+<div class="mb-10 mt-12 flex gap-8">
 	{#if crew.samePerson && crew.director}
 		<div>
 			<a
@@ -137,18 +155,6 @@
 		{/if}
 	{/if}
 </div>
-
-<!-- <div class="mt-8 text-sm font-medium">
-	{#await streamed.external_ids then external_ids}
-		<a href={`https://www.imdb.com/title/${external_ids.imdb_id}/`} target="_blank">See on IMDB</a>
-	{/await}
-
-	<div>
-		{#if watchProviders.results.NO}
-			<WatchProvider {watchProviders} />
-		{/if}
-	</div>
-</div> -->
 
 <div class="divider" />
 
