@@ -28,6 +28,7 @@
 <div class="divider" />
 
 <div class="mt-8 flex gap-20">
+	<aside>
 	<ul class="w-72">
 		{#each menuItems as { title, href }}
 			<li
@@ -39,7 +40,7 @@
 			</li>
 		{/each}
 	</ul>
-
+	</aside>
 	{#key url}
 		<div
 			in:fade={{ delay: 150, duration: 150 }}

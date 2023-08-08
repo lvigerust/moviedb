@@ -4,7 +4,7 @@
 
 	const {
 		elements: { root, input },
-		helpers: { isChecked, isIndeterminate }
+		helpers: { isChecked }
 	} = createCheckbox({
 		defaultChecked: 'indeterminate'
 	})
@@ -24,7 +24,7 @@
 			<input use:melt={$input} />
 		</button>
 		<label class="cursor-pointer pl-[15px] text-[15px] leading-none" for="checkbox"
-			>Show Tip of The Day</label
+			>Show Tip of the day</label
 		>
 	</div>
 </form>

@@ -49,6 +49,7 @@
 		<div in:fade={{ duration, delay: 500, easing: cubicIn }} class="overflow-hidden">
 			<div class="mx-auto max-w-8xl">
 				<main class="px-4">
+					<!-- Fix  -->
 					{#key url && url.split('/')[1]}
 						<div
 							class="transition-layer"
