@@ -1,27 +1,21 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { Genre, Movie } from '$types'
+import type { ApiResponse, Movie } from '$types'
 
 export const load = async ({ fetch }) => {
 	const getPopularMovies = async () => {
 		const popularMoviesRes = await fetch(
-			`https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_API_KEY}`
+			`https://api.themoviedb.org/3/trending/movie/day?api_key=${TMDB_API_KEY}`
 		)
-		const popularMoviesData = await popularMoviesRes.json()
-		const popularMovies: Movie[] = popularMoviesData.results
-		return popularMovies
-	}
 
-	const getMovieGenres = async () => {
-		const movieGenresRes = await fetch(
-			`https://api.themoviedb.org/3/genre/movie/list?api_key=${TMDB_API_KEY}`
-		)
-		const movieGenresData = await movieGenresRes.json()
-		return movieGenresData.genres as Genre[]
+		if (popularMoviesRes.ok) {
+			const popularMoviesData: ApiResponse<Movie> = await popularMoviesRes.json()
+			return popularMoviesData
+		} else throw new Error("Couldn't get popular movies, please try again later.")
 	}
 
 	return {
 		popularMovies: getPopularMovies(),
-		genres: getMovieGenres(),
-		pageTitle: 'Movies'
+		pageTitle: 'Movies',
+		streamed: {}
 	}
 }

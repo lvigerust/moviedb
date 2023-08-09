@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { MovieDetails, Credits, Movie, WatchProviders } from '$types'
+import { MediaType, type Movie, type MovieDetails } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieDetails = async (id: string) => {
@@ -7,7 +7,7 @@ export const load = async ({ fetch, params }) => {
 			`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&append_to_response=images`
 		)
 		const movieDetailsData: MovieDetails = await movieDetailsRes.json()
-		movieDetailsData.media_type = 'movie'
+		movieDetailsData.media_type = MediaType.Movie
 		return movieDetailsData
 	}
 
@@ -15,7 +15,7 @@ export const load = async ({ fetch, params }) => {
 		const movieCreditsRes = await fetch(
 			`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${TMDB_API_KEY}`
 		)
-		const movieCreditsData: Credits = await movieCreditsRes.json()
+		const movieCreditsData = await movieCreditsRes.json()
 		return movieCreditsData
 	}
 
@@ -23,7 +23,7 @@ export const load = async ({ fetch, params }) => {
 		const watchProvidersRes = await fetch(
 			`https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${TMDB_API_KEY}`
 		)
-		const watchProvidersData: WatchProviders = await watchProvidersRes.json()
+		const watchProvidersData = await watchProvidersRes.json()
 		return watchProvidersData
 	}
 

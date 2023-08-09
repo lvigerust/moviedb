@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { slugify } from '$functions'
-	import type { Movie, Show } from '$types'
+	import type { Media } from '$types'
 
-	export let data: Movie | Show
+	export let data: Media
 
 	let media_type: string
 	if (data.title) {

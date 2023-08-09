@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { Collection } from '$types'
+import { MediaType, type Collection } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieCollection = async (id: string) => {
@@ -7,7 +7,7 @@ export const load = async ({ fetch, params }) => {
 			`https://api.themoviedb.org/3/collection/${id}?api_key=${TMDB_API_KEY}&language=en-US`
 		)
 		const movieCollectionData: Collection = await movieCollectionDetails.json()
-		movieCollectionData.media_type = 'movie'
+		movieCollectionData.media_type = MediaType.Movie
 		return movieCollectionData
 	}
 

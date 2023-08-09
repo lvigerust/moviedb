@@ -1,12 +1,10 @@
 <script lang="ts">
-	import type { WatchProvider, WatchProviders } from '$types'
-
-	export let watchProviders: WatchProviders
+	export let watchProviders
 
 	const href = watchProviders.results.NO?.link
 	const providers = watchProviders.results.NO
 
-	let provider: WatchProvider
+	let provider: any
 	let message: string
 
 	if (providers?.flatrate) {

@@ -75,16 +75,3 @@
 		</div>
 	</div>
 {/if}
-
-<!-- 	beforeNavigate(({ to, from }) => {
-		const fromPath = from?.url.pathname.split('/')[1]
-		const toPath = to?.url.pathname.split('/')[1]
-
-		if (toPath !== url) {
-			if (toPath !== fromPath || fromPath !== 'settings') {
-				animate = !animate
-			}
-		}
-
-		console.log(animate)
-	}) -->

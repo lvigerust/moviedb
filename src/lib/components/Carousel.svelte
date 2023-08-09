@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide'
-	import type { MovieDetails } from '$types'
 	import '@splidejs/svelte-splide/css'
 	import { slugify } from '$functions'
+	import type { MovieDetails } from '$types'
 
 	export let slides: MovieDetails[]
 

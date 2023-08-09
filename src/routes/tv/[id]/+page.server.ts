@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { ShowDetails } from '$types'
+import { MediaType, type ShowDetails } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getShowDetails = async (id: string) => {
@@ -7,7 +7,7 @@ export const load = async ({ fetch, params }) => {
 			`https://api.themoviedb.org/3/tv/${id}?api_key=${TMDB_API_KEY}&language=en-US`
 		)
 		const showDetailsData: ShowDetails = await showDetailsRes.json()
-		showDetailsData.media_type = 'tv'
+		showDetailsData.media_type = MediaType.TV
 		return showDetailsData
 	}
 
