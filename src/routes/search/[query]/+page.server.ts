@@ -34,8 +34,7 @@ export const load = async ({ fetch, params }) => {
 			const movies_popularity = movies.slice(0, 2).reduce((n, { popularity }) => n + popularity, 0)
 			const shows_popularity = shows.slice(0, 2).reduce((n, { popularity }) => n + popularity, 0)
 
-			let moviesFirst = true
-			moviesFirst = shows_popularity > movies_popularity
+			const moviesFirst = shows_popularity < movies_popularity
 
 			return { movies, shows, moviesFirst }
 		}

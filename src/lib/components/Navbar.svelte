@@ -36,7 +36,7 @@
 	class:-translate-y-full={offscreen}
 	bind:clientHeight
 >
-	<nav class="navbar mx-auto max-w-8xl px-4 text-sm" class:text-white={$page.error}>
+	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-medium" class:text-white={$page.error}>
 		<div in:fly={{ y: -50, duration: 800, opacity: 0 }} class="navbar-start">
 			<a
 				class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"
@@ -46,7 +46,7 @@
 		</div>
 
 		<ul in:fly={{ y: -50, duration: 800, opacity: 0, delay: 100 }} class="navbar-center gap-x-6">
-			{#each menuItems as { href, label }, index}
+			{#each menuItems as { href, label }}
 				<li>
 					<a
 						class="{$page.error ? 'hover:slate-300' : 'hover:text-slate-300'} "

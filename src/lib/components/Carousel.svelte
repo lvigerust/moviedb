@@ -3,6 +3,8 @@
 	import '@splidejs/svelte-splide/css'
 	import { slugify } from '$functions'
 	import type { MovieDetails } from '$types'
+	import { fly } from 'svelte/transition'
+	import { quadOut } from 'svelte/easing'
 
 	export let slides: MovieDetails[]
 
@@ -23,14 +25,15 @@
 	aria-label="Filmguide's Top Picks"
 >
 	<SplideTrack class="overflow-visible">
-		{#each slides as slide}
+		{#each slides as slide, index}
 			<SplideSlide
+				id={index}
 				class="mb-8 mt-2 overflow-hidden rounded-xl shadow-xl shadow-black/20 outline outline-transparent transition-all duration-200 sm:hover:scale-[101.5%] sm:hover:outline-slate-500/25"
 			>
 				<a href={`/movie/${slide.id}-${slugify(slide.title)}`}>
 					<div class="relative">
 						<img
-							class="max-h-[480px] w-full object-cover"
+							class="max-h-[420px] w-full object-cover"
 							src={'https://image.tmdb.org/t/p/original/' + slide.backdrop_path}
 							alt={slide.title}
 						/>
@@ -41,9 +44,17 @@
 							<div class="btn btn-ghost rounded-full normal-case text-slate-200 bg-blend-darken">
 								{slide.tagline || slide.title}
 							</div>
-							{#if slide.images && slide.images.logos}
+
+							{#if slide.images && slide.images.logos[0]}
 								<img
-									class="mb-8 mr-8 h-fit max-h-32 max-w-[40%] object-contain"
+									in:fly|global={{
+										x: 50,
+										opacity: 0,
+										duration: 3000,
+										delay: 300,
+										easing: quadOut
+									}}
+									class="mb-4 mr-8 h-fit max-h-32 max-w-[40%] object-contain"
 									src={'https://image.tmdb.org/t/p/w500/' + slide.images.logos[0].file_path}
 									alt=""
 								/>

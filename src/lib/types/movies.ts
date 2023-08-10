@@ -15,7 +15,7 @@ export interface Movie extends Media {
 }
 
 export interface MovieDetails extends Movie {
-	belongs_to_collection: Collection
+	belongs_to_collection?: Collection
 	budget: number
 	genres: { id: number; name: string }[]
 	homepage: string
@@ -27,7 +27,7 @@ export interface MovieDetails extends Movie {
 	status: string
 	spoken_languages: SpokenLanguage[]
 	tagline: string
-	images: Images
+	images?: Images
 }
 
 export interface Collection {
@@ -49,7 +49,7 @@ interface Part {
 	original_title: string
 	overview: string
 	poster_path: string
-	media_type: string
+	media_type: MediaType
 	genre_ids: number[]
 	popularity: number
 	release_date: string
