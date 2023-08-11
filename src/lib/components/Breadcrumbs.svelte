@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { slugify } from '$utils'
-	import { fade } from 'svelte/transition'
+	import { animate, inView } from 'motion'
+	import { onMount } from 'svelte'
 
 	$: route = $page.route.id
 
@@ -13,10 +14,7 @@
 </script>
 
 {#if visible}
-	<div
-		in:fade={{ delay: 350 }}
-		class="breadcrumbs flex justify-center py-8 pt-20 text-sm font-medium"
-	>
+	<div class="breadcrumbs flex justify-center py-8 pt-20 text-sm font-medium">
 		<ul>
 			<li><a href="/">Home</a></li>
 

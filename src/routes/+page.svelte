@@ -22,4 +22,15 @@
 		and people to discover. Explore
 		<span class="italic">now</span>.
 	</h2>
+
+	<!-- Make this look good -->
+
+	<!-- <div class="mt-8 flex gap-3">
+		<button class="btn rounded-lg bg-blue-600 normal-case">Movies</button>
+		<button class="btn btn-neutral btn-outline rounded-lg normal-case">TV Shows</button>
+
+		<div class="divider divider-horizontal mx-3 w-0" />
+
+		<Search navButton={false} />
+	</div> -->
 </div>

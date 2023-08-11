@@ -2,8 +2,6 @@
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide'
 	import '@splidejs/svelte-splide/css'
 	import type { Movie, MovieDetails } from '$types'
-	import { fly } from 'svelte/transition'
-	import { quadOut } from 'svelte/easing'
 	import { slugify } from '$utils'
 
 	export let slides: (Movie | MovieDetails)[]
@@ -16,7 +14,7 @@
 	}
 	function slideLogo(slide: Movie | MovieDetails) {
 		if ('images' in slide) {
-			return slide.images?.logos[0]
+			return slide.images?.logos[0].file_path
 		}
 		return undefined
 	}
@@ -60,13 +58,6 @@
 
 							{#if slideLogo(slide)}
 								<img
-									in:fly|global={{
-										x: 50,
-										opacity: 0,
-										duration: 3000,
-										delay: 300,
-										easing: quadOut
-									}}
 									class="mb-4 mr-8 h-fit max-h-32 max-w-[40%] object-contain"
 									src={'https://image.tmdb.org/t/p/w500/' + slideLogo(slide)}
 									alt=""

@@ -9,8 +9,6 @@
 		states: { open }
 	} = createDialog()
 
-	let searchQuery: string
-
 	const submitSearch = async () => {
 		if (searchQuery !== undefined || '') {
 			goto('/search/' + searchQuery)
@@ -24,16 +22,34 @@
 			$open = true
 		}
 	}
+
+	export let navButton = true
+	let searchQuery: string
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
 
-<button
-	use:melt={$trigger}
-	class="btn btn-circle btn-ghost btn-sm p-1 hover:text-slate-300 focus:bg-slate-500/10 focus:outline-slate-500/40"
->
-	<MagnifyingGlass />
-</button>
+{#if navButton}
+	<button
+		use:melt={$trigger}
+		class="btn btn-circle btn-ghost btn-sm p-1 hover:text-slate-300 focus:bg-slate-500/10 focus:outline-slate-500/40"
+	>
+		<MagnifyingGlass />
+	</button>
+{:else}
+	<button
+		use:melt={$trigger}
+		class="flex h-12 w-72 items-center justify-between space-x-3 rounded-lg px-4 text-left shadow-sm ring-1"
+	>
+		<div class="h-5 w-5">
+			<MagnifyingGlass />
+		</div>
+		<span class="flex-auto">Quick search...</span>
+		<kbd class="ml-auto font-sans font-semibold text-slate-400">
+			<abbr title="Command" class=" no-underline">⌘</abbr> K
+		</kbd>
+	</button>
+{/if}
 
 <div use:melt={$portalled}>
 	{#if $open}

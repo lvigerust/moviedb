@@ -9,7 +9,7 @@
 		slugify
 	} from '$utils'
 	import { onMount } from 'svelte'
-	import { animate, inView, stagger } from 'motion'
+	import { inView, stagger, timeline, type TimelineDefinition } from 'motion'
 	import { StatIcon } from '$icons'
 	import { tweened } from 'svelte/motion'
 
@@ -34,29 +34,29 @@
 		delay: 200
 	})
 
+	let sequence: TimelineDefinition
+
 	onMount(() => {
+		sequence = [
+			[
+				'#recommendations > ul > li, #recommendations > h2 ',
+				{ y: [75, 0], opacity: [0, 1] },
+				{ delay: stagger(0.05), duration: 0.8, easing: 'ease' }
+			],
+			[
+				'#similar > ul > li, #similar > h2',
+				{ y: [75, 0], opacity: [0, 1] },
+				{ delay: stagger(0.05), duration: 0.8, at: '-.4', easing: 'ease' }
+			]
+		]
 		// Tween stat numbers
 		inView('#stats', () => {
 			budget.set(movieDetails.budget)
 			revenue.set(movieDetails.revenue)
 		})
 
-		// Stagger recommended movies
-		inView('#recommendations', ({ target }) => {
-			animate(
-				target.querySelectorAll('#listContainer > li, h2'),
-				{ x: [150, 0], opacity: [0, 1] },
-				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
-			)
-		})
-
-		// Stagger similar movies
-		inView('#similar', ({ target }) => {
-			animate(
-				target.querySelectorAll('#listContainer > li, h2'),
-				{ y: [150, 0], opacity: [0, 1] },
-				{ delay: stagger(0.05), duration: 0.9, easing: 'ease' }
-			)
+		inView('#recommendations', () => {
+			timeline(sequence)
 		})
 	})
 </script>
