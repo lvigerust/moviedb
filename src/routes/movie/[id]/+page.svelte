@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { Card, Meta, WatchProvider } from '$components'
-	import { slugify } from '$functions'
 	import {
 		formatNumber,
 		formatDate,
 		formatRuntime,
 		findPersonByJob,
-		calculatePercentage
+		calculatePercentage,
+		slugify
 	} from '$utils'
 	import { onMount } from 'svelte'
 	import { animate, inView, stagger } from 'motion'
@@ -67,7 +67,7 @@
 	<div class="relative h-full w-full">
 		<div class="absolute z-30 h-full w-full bg-gradient-to-t from-base-100" />
 
-		{#if movieDetails.images.logos}
+		{#if movieDetails.images && movieDetails.images.logos[0]}
 			<img
 				class="absolute bottom-12 right-20 max-w-sm"
 				src={'https://image.tmdb.org/t/p/original/' + movieDetails.images.logos[0].file_path}
@@ -125,7 +125,7 @@
 	{#if crew.samePerson && crew.director}
 		<div>
 			<a
-				href={`/person/${crew.director.id}-${slugify(crew.director.name)}`}
+				href={`/person/${crew.director.id}-${slugify(crew.director.name ?? '')}`}
 				class="font-medium tracking-tight text-slate-300 transition-colors hover:text-slate-200"
 				>{crew.director?.name}</a
 			>
@@ -135,7 +135,7 @@
 		{#if crew.director}
 			<div>
 				<a
-					href={`/person/${crew.director.id}-${slugify(crew.director.name)}`}
+					href={`/person/${crew.director.id}-${slugify(crew.director.name ?? '')}`}
 					class="font-medium tracking-tight text-slate-300 transition-colors hover:text-slate-200"
 					>{crew.director.name}</a
 				>
@@ -146,7 +146,7 @@
 		{#if crew.writer}
 			<div>
 				<a
-					href={`/person/${crew.writer.id}-${slugify(crew.writer.name)}`}
+					href={`/person/${crew.writer.id}-${slugify(crew.writer.name ?? '')}`}
 					class="font-medium tracking-tight text-slate-300 transition-colors hover:text-slate-200"
 					>{crew.writer.name}</a
 				>

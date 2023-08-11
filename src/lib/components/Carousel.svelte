@@ -1,12 +1,25 @@
 <script lang="ts">
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide'
 	import '@splidejs/svelte-splide/css'
-	import { slugify } from '$functions'
-	import type { MovieDetails } from '$types'
+	import type { Movie, MovieDetails } from '$types'
 	import { fly } from 'svelte/transition'
 	import { quadOut } from 'svelte/easing'
+	import { slugify } from '$utils'
 
-	export let slides: MovieDetails[]
+	export let slides: (Movie | MovieDetails)[]
+
+	function slideCTA(slide: Movie | MovieDetails) {
+		if ('tagline' in slide) {
+			return slide.tagline
+		}
+		return slide.title
+	}
+	function slideLogo(slide: Movie | MovieDetails) {
+		if ('images' in slide) {
+			return slide.images?.logos[0]
+		}
+		return undefined
+	}
 
 	let options = {
 		pagination: false,
@@ -42,10 +55,10 @@
 							class="absolute bottom-0 flex h-1/2 w-full items-end justify-between bg-gradient-to-t from-black/60 px-12 pb-8"
 						>
 							<div class="btn btn-ghost rounded-full normal-case text-slate-200 bg-blend-darken">
-								{slide.tagline || slide.title}
+								{slideCTA(slide)}
 							</div>
 
-							{#if slide.images && slide.images.logos[0]}
+							{#if slideLogo(slide)}
 								<img
 									in:fly|global={{
 										x: 50,
@@ -55,7 +68,7 @@
 										easing: quadOut
 									}}
 									class="mb-4 mr-8 h-fit max-h-32 max-w-[40%] object-contain"
-									src={'https://image.tmdb.org/t/p/w500/' + slide.images.logos[0].file_path}
+									src={'https://image.tmdb.org/t/p/w500/' + slideLogo(slide)}
 									alt=""
 								/>
 							{/if}

@@ -12,7 +12,7 @@ export interface Media {
 	original_language: OriginalLanguage
 	overview: string
 	popularity: number
-	poster_path: string
+	poster_path?: string
 	media_type: MediaType
 	genre_ids: number[]
 	vote_average: number

@@ -1,5 +1,6 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import type { ApiResponse, Movie, MovieDetails } from '$types'
+import { MediaType, type ApiResponse, type Movie } from '$types'
+import { dynamicSort } from '$utils'
 
 export const load = async ({ fetch }) => {
 	const getTrendingMovies = async () => {
@@ -9,7 +10,12 @@ export const load = async ({ fetch }) => {
 
 		if (trendingMoviesRes.ok) {
 			const trendingsMoviesData: ApiResponse<Movie> = await trendingMoviesRes.json()
-			return trendingsMoviesData
+			trendingsMoviesData.results.map((movie) => {
+				movie.media_type = MediaType.Movie
+			})
+
+			const sortedByPopularity = trendingsMoviesData.results.sort(dynamicSort('-popularity'))
+			return sortedByPopularity
 		} else throw new Error("Couldn't get trending movies, please try again later.")
 	}
 
@@ -20,33 +26,16 @@ export const load = async ({ fetch }) => {
 
 		if (popularMoviesRes.ok) {
 			const popularMoviesData: ApiResponse<Movie> = await popularMoviesRes.json()
+			popularMoviesData.results.map((movie) => {
+				movie.media_type = MediaType.Movie
+			})
 			return popularMoviesData
 		} else throw new Error("Couldn't get popular movies, please try again later.")
-	}
-
-	const getTrendingMoviesDetails = async () => {
-		const trendingMovies = (await getPopularMovies()).results
-
-		const trendingMoviesDetails: MovieDetails[] = []
-
-		for (const movie of trendingMovies) {
-			const movieDetailsRes = await fetch(
-				`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&append_to_response=images`
-			)
-
-			if (movieDetailsRes.ok) {
-				trendingMoviesDetails.push(await movieDetailsRes.json())
-			} else throw new Error(`Couldn't get details for ${movie.title}, please try again later.`)
-		}
-		return trendingMoviesDetails
 	}
 
 	return {
 		trendingMovies: getTrendingMovies(),
 		popularMovies: getPopularMovies(),
-		pageTitle: 'Movies',
-		streamed: {
-			trendingMoviesDetails: getTrendingMoviesDetails()
-		}
+		pageTitle: 'Movies'
 	}
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores'
-	import { slugify } from '$functions'
-	import { onMount } from 'svelte'
+	import { slugify } from '$utils'
+	import { fade } from 'svelte/transition'
 
 	$: route = $page.route.id
 
@@ -10,19 +10,12 @@
 	$: if ($page.error || route === '/') {
 		visible = false
 	} else visible = true
-
-	let opacity = 'opacity-0'
-
-	onMount(() => {
-		if (route !== '/') {
-			opacity = 'opacity-100'
-		}
-	})
 </script>
 
 {#if visible}
 	<div
-		class="breadcrumbs flex justify-center py-8 pt-20 {opacity} text-sm font-medium transition-opacity duration-1000"
+		in:fade={{ delay: 350 }}
+		class="breadcrumbs flex justify-center py-8 pt-20 text-sm font-medium"
 	>
 		<ul>
 			<li><a href="/">Home</a></li>

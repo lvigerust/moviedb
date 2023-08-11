@@ -5,16 +5,11 @@
 
 	const {
 		trendingMovies,
-		popularMovies: { results },
-		streamed
+		popularMovies: { results }
 	} = data
 </script>
 
-{#await streamed.trendingMoviesDetails}
-	<Carousel slides={trendingMovies.results} />
-{:then trendingMoviesDetails}
-	<Carousel slides={trendingMoviesDetails} />
-{/await}
+<Carousel slides={trendingMovies} />
 
 <!-- <div class="flex flex-wrap justify-center gap-3 pb-5 pt-4">
 	{#each genres.slice(0, 8) as genre}

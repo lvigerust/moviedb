@@ -1,7 +1,6 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import { dynamicSort } from '$functions'
 import { type CombinedCredits, type Person, type Credit, MediaType } from '$types'
-import { removeDuplicatesByProperty } from '$utils'
+import { dynamicSort, removeDuplicatesByProperty } from '$utils'
 
 export const load = async ({ fetch, params }) => {
 	const getPerson = async (id: string) => {

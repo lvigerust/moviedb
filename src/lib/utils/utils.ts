@@ -62,3 +62,26 @@ export function calculatePercentage(newNumber: number, originalNumber: number) {
 		return (decrease / originalNumber) * 100
 	} else return percentageIncrease
 }
+
+export function dynamicSort(property: string) {
+	let sortOrder = 1
+
+	if (property[0] === '-') {
+		sortOrder = -1
+		property = property.substring(1)
+	}
+
+	return function (a: any, b: any) {
+		const result = a[property] < b[property] ? -1 : a[property] > b[property] ? 1 : 0
+		return result * sortOrder
+	}
+}
+
+export function slugify(title: string): string {
+	return title
+		.toLowerCase() // Convert the title to lowercase
+		.replace(/ /g, '-') // Replace spaces with hyphens
+		.replace(/[^\w-]+/g, '') // Remove non-alphanumeric characters except hyphens
+		.replace(/--+/g, '-') // Replace consecutive hyphens with a single hyphen
+		.replace(/^-+|-+$/g, '') // Remove leading and trailing hyphens
+}

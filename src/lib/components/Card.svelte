@@ -1,18 +1,25 @@
 <script lang="ts">
-	import { slugify } from '$functions'
-	import type { Media } from '$types'
+	import type { Credit, Movie, Show } from '$types'
+	import { slugify } from '$utils'
 
-	export let data: Media
+	export let data: Movie | Show | Credit
 
-	let media_type: string
-	if (data.title) {
-		media_type = 'movie'
-	} else media_type = 'tv'
+	function cardTitle(data: Movie | Show | Credit) {
+		if ('name' in data) {
+			return data.name
+		}
+
+		if ('department' in data) {
+			return data.title || data.name
+		}
+
+		return data.title
+	}
 </script>
 
 <a
-	href={`/${media_type}/${data.id}-${slugify(data.title || data.name)}`}
-	title={data.title || data.name}
+	href={`/${data.media_type}/${data.id}-${slugify(cardTitle(data) ?? '')}`}
+	title={cardTitle(data)}
 >
 	<div
 		class="h-full overflow-hidden rounded-md shadow-lg shadow-black/30 outline outline-transparent transition-all duration-300 hover:scale-105 sm:hover:outline-slate-500/25 xl:rounded-lg"
@@ -20,7 +27,7 @@
 		<img
 			class="h-full w-full object-cover"
 			src={'https://image.tmdb.org/t/p/w500/' + data.poster_path}
-			alt={data.title || data.name}
+			alt={cardTitle(data)}
 		/>
 	</div>
 </a>

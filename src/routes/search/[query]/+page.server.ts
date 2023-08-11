@@ -1,6 +1,6 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import { dynamicSort } from '$functions'
 import type { ApiResponse, Movie, Show } from '$types'
+import { dynamicSort } from '$utils'
 
 export const load = async ({ fetch, params }) => {
 	const getSearchResults = async (query: string) => {
