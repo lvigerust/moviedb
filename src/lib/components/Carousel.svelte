@@ -1,22 +1,24 @@
 <script lang="ts">
 	import { Splide, SplideSlide, SplideTrack } from '@splidejs/svelte-splide'
 	import '@splidejs/svelte-splide/css'
-	import type { Movie, MovieDetails } from '$types'
+	import type { Movie, MovieDetails, Show } from '$types'
 	import { slugify } from '$utils'
 
-	export let slides: (Movie | MovieDetails)[]
+	export let slides: (Movie | MovieDetails | Show)[]
 
-	function slideCTA(slide: Movie | MovieDetails) {
-		if ('tagline' in slide) {
-			return slide.tagline
-		}
-		return slide.title
+	function title(slide: Movie | MovieDetails | Show) {
+		if ('title' in slide) {
+			return slide.title
+		} else return slide.name
 	}
-	function slideLogo(slide: Movie | MovieDetails) {
-		if ('images' in slide) {
-			return slide.images?.logos[0].file_path
-		}
-		return undefined
+
+	function slideCTA(slide: Movie | MovieDetails | Show) {
+		if ('title' in slide) {
+			if ('tagline' in slide) {
+				return slide.tagline
+			}
+			return slide.title
+		} else return slide.name
 	}
 
 	let options = {
@@ -41,12 +43,12 @@
 				id={index}
 				class="mb-8 mt-2 overflow-hidden rounded-xl shadow-xl shadow-black/20 outline outline-transparent transition-all duration-200 sm:hover:scale-[101.5%] sm:hover:outline-slate-500/25"
 			>
-				<a href={`/movie/${slide.id}-${slugify(slide.title)}`}>
+				<a href={`/${slide.media_type}/${slide.id}-${slugify(title(slide))}`}>
 					<div class="relative">
 						<img
 							class="max-h-[420px] w-full object-cover"
 							src={'https://image.tmdb.org/t/p/original/' + slide.backdrop_path}
-							alt={slide.title}
+							alt={title(slide)}
 						/>
 
 						<div
@@ -56,13 +58,13 @@
 								{slideCTA(slide)}
 							</div>
 
-							{#if slideLogo(slide)}
+							<!-- {#if slideLogo(slide)}
 								<img
 									class="mb-4 mr-8 h-fit max-h-32 max-w-[40%] object-contain"
 									src={'https://image.tmdb.org/t/p/w500/' + slideLogo(slide)}
 									alt=""
 								/>
-							{/if}
+							{/if} -->
 						</div>
 					</div>
 				</a>

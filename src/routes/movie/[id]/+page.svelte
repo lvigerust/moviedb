@@ -15,7 +15,11 @@
 
 	export let data
 
-	const { movieDetails, movieCredits, streamed, watchProviders } = data
+	const {
+		movieDetails,
+		movieCredits,
+		streamed: { watchProviders, recommendations, similar, external_ids }
+	} = data
 
 	const crew = {
 		director: findPersonByJob(movieCredits, 'Director'),
@@ -109,10 +113,10 @@
 		</div>
 	</div>
 
-	<div class="mr-4">
-		{#if watchProviders.results.NO}
+	<div class="-mb-4 mr-4">
+		{#await watchProviders then watchProviders}
 			<WatchProvider {watchProviders} />
-		{/if}
+		{/await}
 	</div>
 </div>
 
@@ -239,7 +243,7 @@
 {/if}
 
 <section id="recommendations" class="mb-6">
-	{#await streamed.recommendations then recommendations}
+	{#await recommendations then recommendations}
 		<div class="divider" />
 
 		<h2 id="" class="mb-6 text-2xl font-semibold tracking-tight text-slate-300">
@@ -258,7 +262,7 @@
 </section>
 
 <section id="similar" class="mb-6">
-	{#await streamed.similar then similar}
+	{#await similar then similar}
 		<h2 id="" class="mb-6 text-2xl font-semibold tracking-tight text-slate-300">
 			{similar.length ? 'Similar Movies' : ''}
 		</h2>

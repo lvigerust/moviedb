@@ -1,22 +1,21 @@
 <script lang="ts">
-	export let watchProviders
+	import type { ProviderOptions, WatchProvider } from '../../routes/tv/[id]/+page.server'
 
-	const href = watchProviders.results.NO?.link
-	const providers = watchProviders.results.NO
-
-	let provider: any
+	export let watchProviders: ProviderOptions
+	const href = watchProviders.link
 	let message: string
 
-	if (providers?.flatrate) {
-		provider = providers.flatrate[0]
-		message = 'Stream on'
-	} else if (providers?.buy) {
-		provider = providers.buy[0]
-		message = 'Buy on'
-	} else if (providers?.rent) {
-		provider = providers.rent[0]
-		message = 'Rent on'
+	function getProvider(watchProviders: ProviderOptions) {
+		if (watchProviders.flatrate) {
+			message = 'Stream'
+			return watchProviders.flatrate[0]
+		} else if (watchProviders.buy) {
+			message = 'Buy'
+			return watchProviders.buy[0]
+		}
 	}
+
+	const provider: WatchProvider | undefined = getProvider(watchProviders)
 </script>
 
 <a {href} target="_blank" rel="noreferrer">
@@ -25,13 +24,13 @@
 			<div class="logo">
 				<img
 					class="h-10 w-10 rounded-md"
-					src={'http://image.tmdb.org/t/p/w500/' + provider.logo_path}
-					alt={provider.provider_name}
+					src={'http://image.tmdb.org/t/p/w500/' + provider?.logo_path}
+					alt={provider?.provider_name}
 				/>
 			</div>
-			<div class=" text-start text-xs">
-				<p class=" font-light">{message}</p>
-				<p class="font-bold">{provider.provider_name}</p>
+			<div class="text-start text-xs">
+				<p>{message}</p>
+				<p class="font-bold">{provider?.provider_name}</p>
 			</div>
 		</div>
 		<p class="text-center text-[8px] tracking-wide">Provided by JustWatch</p>

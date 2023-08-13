@@ -32,7 +32,7 @@
 <svelte:window bind:scrollY={currentY} />
 
 <div
-	class="sticky top-0 z-50 bg-base-100/50 backdrop-blur transition-transform ease-in"
+	class="sticky top-0 z-50 bg-base-100/50 text-slate-400 backdrop-blur transition-transform ease-in"
 	class:-translate-y-full={offscreen}
 	bind:clientHeight
 >

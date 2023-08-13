@@ -1,5 +1,6 @@
 import { TMDB_API_KEY } from '$env/static/private'
 import { MediaType, type Movie, type MovieDetails } from '$types'
+import type { ProviderOptions } from '../../tv/[id]/+page.server.js'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieDetails = async (id: string) => {
@@ -23,8 +24,9 @@ export const load = async ({ fetch, params }) => {
 		const watchProvidersRes = await fetch(
 			`https://api.themoviedb.org/3/movie/${id}/watch/providers?api_key=${TMDB_API_KEY}`
 		)
-		const watchProvidersData = await watchProvidersRes.json()
-		return watchProvidersData
+		if (watchProvidersRes.ok) {
+			return (await watchProvidersRes.json()).results.NO as ProviderOptions
+		} else throw new Error("Couldn't get watch providers, please try again.")
 	}
 
 	/* Streamed promises */
@@ -61,9 +63,9 @@ export const load = async ({ fetch, params }) => {
 	return {
 		movieDetails: getMovieDetails(params.id),
 		movieCredits: getMovieCredits(params.id),
-		watchProviders: getWatchProviders(params.id),
 		pageTitle: pageTitle(),
 		streamed: {
+			watchProviders: getWatchProviders(params.id),
 			recommendations: getRecommendations(params.id),
 			similar: getSimilar(params.id),
 			external_ids: getExternalIDs(params.id)

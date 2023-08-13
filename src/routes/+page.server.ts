@@ -11,6 +11,7 @@ export const load = async ({ fetch }) => {
 					`https://api.themoviedb.org/3/movie/${movie}?api_key=${TMDB_API_KEY}&append_to_response=images&include_image_language=en,null`
 				)
 				const data = await res.json()
+				data.media_type = 'movie'
 				return data
 			})
 		)

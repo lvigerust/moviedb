@@ -40,7 +40,14 @@ enum Department {
 	Directing = 'Directing',
 	Production = 'Production',
 	Sound = 'Sound',
-	Writing = 'Writing'
+	Writing = 'Writing',
+
+	Acting = 'Acting',
+	Art = 'Art',
+	Camera = 'Camera',
+	CostumeMakeUp = 'Costume & Make-Up',
+	Editing = 'Editing',
+	VisualEffects = 'Visual Effects'
 }
 
 enum OriginCountry {
@@ -66,4 +73,38 @@ export interface Person {
 	popularity: number
 	profile_path: string
 	media_type: MediaType
+}
+
+export interface Credits {
+	cast: Cast[]
+	crew: Cast[]
+	id: number
+}
+
+interface Job {
+	credit_id: string
+	job: string
+	episode_count: number
+}
+
+interface Role {
+	credit_id: string
+	character: string
+	episode_count: number
+}
+
+export interface Cast {
+	adult: boolean
+	gender: number
+	id: number
+	known_for_department: Department
+	name: string
+	original_name: string
+	popularity: number
+	profile_path: null | string
+	roles?: Role[]
+	total_episode_count: number
+	order?: number
+	jobs?: Job[]
+	department?: Department
 }

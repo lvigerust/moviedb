@@ -7,6 +7,22 @@ export interface Show extends Media {
 	origin_country: string[]
 }
 
+export interface Episode {
+	id: number
+	name: string
+	overview: string
+	vote_average: number
+	vote_count: number
+	air_date: string
+	episode_number: number
+	episode_type: string
+	production_code: string
+	runtime: number
+	season_number: number
+	show_id: number
+	still_path: string
+}
+
 export interface ShowDetails extends Show {
 	created_by: CreatedBy[]
 	episode_run_time: number[]
@@ -15,7 +31,7 @@ export interface ShowDetails extends Show {
 	last_air_date: string
 	last_episode_to_air: Episode
 	homepage: string
-	next_episode_to_air: Episode
+	next_episode_to_air?: Episode
 	networks: Network[]
 	number_of_episodes: number
 	number_of_seasons: number
@@ -52,20 +68,4 @@ interface Season {
 	poster_path: string
 	season_number: number
 	vote_average: number
-}
-
-interface Episode {
-	id: number
-	name: string
-	overview: string
-	vote_average: number
-	vote_count: number
-	air_date: string
-	episode_number: number
-	episode_type: string
-	production_code: string
-	runtime: number
-	season_number: number
-	show_id: number
-	still_path: string
 }
