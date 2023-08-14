@@ -8,7 +8,7 @@ export const load = async ({ fetch, params }) => {
 			method: 'GET',
 			headers: {
 				accept: 'application/json',
-				Authorization: TMDB_ACCESS_TOKEN
+				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
 			}
 		}
 
