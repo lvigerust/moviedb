@@ -115,7 +115,9 @@
 
 	<div class="-mb-4 mr-4">
 		{#await watchProviders then watchProviders}
-			<WatchProvider {watchProviders} />
+			{#if watchProviders}
+				<WatchProvider {watchProviders} />
+			{/if}
 		{/await}
 	</div>
 </div>

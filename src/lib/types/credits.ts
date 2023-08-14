@@ -59,17 +59,17 @@ enum OriginCountry {
 
 export interface Person {
 	adult: boolean
-	also_known_as: string[]
-	biography: string
-	birthday: string
+	also_known_as?: string[]
+	biography?: string
+	birthday?: string
 	deathday: null
 	gender: number
-	homepage: null
+	homepage?: null
 	id: number
 	imdb_id: string
 	known_for_department: Department
 	name: string
-	place_of_birth: string
+	place_of_birth?: string
 	popularity: number
 	profile_path: string
 	media_type: MediaType

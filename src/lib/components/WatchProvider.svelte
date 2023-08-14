@@ -29,7 +29,7 @@
 				/>
 			</div>
 			<div class="text-start text-xs">
-				<p>{message}</p>
+				<p>{message} on</p>
 				<p class="font-bold">{provider?.provider_name}</p>
 			</div>
 		</div>
