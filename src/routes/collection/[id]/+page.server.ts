@@ -1,3 +1,4 @@
+import { TMDB_ACCESS_TOKEN } from '$env/static/private'
 import { MediaType, type Collection } from '$types'
 
 export const load = async ({ fetch, params }) => {
@@ -7,8 +8,7 @@ export const load = async ({ fetch, params }) => {
 			method: 'GET',
 			headers: {
 				accept: 'application/json',
-				Authorization:
-					'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0MjNkYTE4ZDg5ZjAwOGNmODMwODQ0MjU5ODgzYjRjNiIsInN1YiI6IjVkNWRlNjE3MTg4NjRiMDAxNGZiNTNiZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.voV_m9XA3hLNGWxQIbg3k4K3-fhWv9AavLCP5gmuzSg'
+				Authorization: TMDB_ACCESS_TOKEN
 			}
 		}
 
