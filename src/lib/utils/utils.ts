@@ -1,4 +1,4 @@
-import type { CombinedCredits, Credit } from '$types'
+import type { Credit, CreditMedia, Credits, Movie, Show } from '$types'
 
 export function formatDate(
 	date: string,
@@ -33,11 +33,11 @@ export function formatNumber(
 	}).format(number)
 }
 
-export function findPersonByJob(combinedCredits: CombinedCredits, job: string) {
-	return combinedCredits.crew.find((person: Credit) => person.job === job)
+export function findPersonByJob(credits: Credits, job: string) {
+	return credits.crew.find((person: Credit) => person.job === job)
 }
 
-export function removeDuplicatesByProperty<T extends Credit>(
+export function removeDuplicatesByProperty<T extends CreditMedia>(
 	creditArray: T[],
 	propertyKey: keyof T
 ): T[] {

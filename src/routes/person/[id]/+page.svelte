@@ -43,10 +43,12 @@
 			</p>
 		</hgroup>
 
-		<hgroup class="mt-4">
-			<h3 class="font-semibold leading-7">Birthday</h3>
-			<p class="text-sm tracking-wide">{formatDate(person.birthday)}</p>
-		</hgroup>
+		{#if person.biography}
+			<hgroup class="mt-4">
+				<h3 class="font-semibold leading-7">Birthday</h3>
+				<p class="text-sm tracking-wide">{formatDate(person.birthday ?? '')}</p>
+			</hgroup>
+		{/if}
 
 		<hgroup class="mt-4">
 			<h3 class="font-semibold leading-7">Place of Birth</h3>
@@ -64,7 +66,7 @@
 
 <div class="divider" />
 
-<h1 class="mb-6 text-center text-3xl font-semibold tracking-tight">Known For</h1>
+<h1 class="mb-6 text-3xl font-semibold tracking-tight">Known For</h1>
 
 {#await streamed.topMovies}
 	<Skeleton />

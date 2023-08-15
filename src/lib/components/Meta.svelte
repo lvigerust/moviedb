@@ -1,21 +1,23 @@
 <script lang="ts">
-	import type { Movie, Person, Show } from '$types'
+	import type { Movie, PersonDetails, Show } from '$types'
 
-	export let data: Movie | Show | Person
+	export let data: Movie | Show | PersonDetails
 
-	function description(data: Movie | Show | Person) {
+	function description(data: Movie | Show | PersonDetails) {
 		if ('overview' in data) {
 			return data.overview
 		} else return data.biography
 	}
 
-	function poster(data: Movie | Show | Person) {
-		if ('profile_path' in data) {
+	function poster(data: Movie | Show | PersonDetails) {
+		if ('poster_path' in data) {
+			return data.poster_path
+		} else if ('profile_path' in data) {
 			return data.profile_path
-		} else return data.poster_path
+		} else return undefined
 	}
 
-	function backdrop(data: Movie | Show | Person) {
+	function backdrop(data: Movie | Show | PersonDetails) {
 		if ('backdrop_path' in data) {
 			return data.backdrop_path
 		} else return undefined

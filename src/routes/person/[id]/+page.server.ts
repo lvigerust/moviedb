@@ -1,5 +1,5 @@
 import { TMDB_API_KEY } from '$env/static/private'
-import { type CombinedCredits, type Person, type Credit, MediaType } from '$types'
+import { type CombinedCredits, MediaType, type PersonDetails, type CreditMedia } from '$types'
 import { dynamicSort, removeDuplicatesByProperty } from '$utils'
 
 export const load = async ({ fetch, params }) => {
@@ -7,7 +7,7 @@ export const load = async ({ fetch, params }) => {
 		const personRes = await fetch(
 			`https://api.themoviedb.org/3/person/${id}?api_key=${TMDB_API_KEY}`
 		)
-		const personData: Person = await personRes.json()
+		const personData: PersonDetails = await personRes.json()
 		personData.media_type = MediaType.Person
 		return personData
 	}
@@ -20,19 +20,19 @@ export const load = async ({ fetch, params }) => {
 		return personMovieCreditsData
 	}
 
-	const getTopMovies = async (): Promise<Credit[]> => {
+	const getTopCredits = async (): Promise<CreditMedia[]> => {
 		const person = await getPerson(params.id)
 
 		if (person.known_for_department === 'Directing') {
-			const allMovies = (await getCombinedCredits(params.id)).crew
+			const topCredits = (await getCombinedCredits(params.id)).crew
 
-			return removeDuplicatesByProperty(allMovies, 'id')
+			return removeDuplicatesByProperty(topCredits, 'id')
 				.sort(dynamicSort('-popularity'))
 				.slice(0, 14)
 		} else {
-			const allMovies = (await getCombinedCredits(params.id)).cast
+			const topCredits = (await getCombinedCredits(params.id)).cast
 
-			return removeDuplicatesByProperty(allMovies, 'id')
+			return removeDuplicatesByProperty(topCredits, 'id')
 				.sort(dynamicSort('-popularity'))
 				.slice(0, 14)
 		}
@@ -50,7 +50,7 @@ export const load = async ({ fetch, params }) => {
 		person: getPerson(params.id),
 		personMovieCredits: getCombinedCredits(params.id),
 		streamed: {
-			topMovies: getTopMovies()
+			topMovies: getTopCredits()
 		}
 	}
 }

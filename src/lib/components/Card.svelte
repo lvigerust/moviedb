@@ -1,10 +1,10 @@
 <script lang="ts">
-	import type { Credit, Movie, Show } from '$types'
+	import type { Credit, CreditMedia, Movie, Show } from '$types'
 	import { slugify } from '$utils'
 
-	export let data: Movie | Show | Credit
+	export let data: Movie | Show | CreditMedia
 
-	function cardTitle(data: Movie | Show | Credit) {
+	function cardTitle(data: Movie | Show | CreditMedia) {
 		if ('name' in data) {
 			return data.name
 		}

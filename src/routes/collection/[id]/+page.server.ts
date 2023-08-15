@@ -1,9 +1,9 @@
-import { TMDB_ACCESS_TOKEN } from '$env/static/private'
+import { TMDB_ACCESS_TOKEN, TMDB_BASE_URL } from '$env/static/private'
 import { MediaType, type Collection } from '$types'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieCollection = async (id: string) => {
-		const url = `https://api.themoviedb.org/3/collection/${id}?language=en-US`
+		const url = `${TMDB_BASE_URL}/collection/${id}?language=en-US`
 		const options = {
 			method: 'GET',
 			headers: {
