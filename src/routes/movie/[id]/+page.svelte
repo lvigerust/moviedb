@@ -12,6 +12,7 @@
 	import { inView, stagger, timeline, type TimelineDefinition } from 'motion'
 	import { StatIcon } from '$icons'
 	import { tweened } from 'svelte/motion'
+	import FasterMetaTest from './FasterMetaTest.svelte'
 
 	export let data
 
@@ -65,7 +66,8 @@
 	})
 </script>
 
-<Meta data={movieDetails} />
+<!-- <Meta data={movieDetails} /> -->
+<FasterMetaTest {movieDetails} />
 
 <div class="ml-[calc(-50vw+50%)] h-fit w-screen">
 	<div class="relative h-full w-full">
