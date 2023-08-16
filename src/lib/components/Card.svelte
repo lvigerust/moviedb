@@ -15,10 +15,18 @@
 
 		return data.title
 	}
+
+	function cardMediaType(data: Movie | Show | CreditMedia) {
+		if ('name' in data) {
+			return 'tv'
+		}
+
+		return 'movie'
+	}
 </script>
 
 <a
-	href={`/${data.media_type}/${data.id}-${slugify(cardTitle(data) ?? '')}`}
+	href={`/${cardMediaType(data)}/${data.id}-${slugify(cardTitle(data) ?? '')}`}
 	title={cardTitle(data)}
 >
 	<div
