@@ -1,6 +1,5 @@
 export const handle = async ({ event, resolve }) => {
-	let theme: string | null = null
-
+	let theme: string | null = 'night'
 	const newTheme = event.url.searchParams.get('theme')
 	const cookieTheme = event.cookies.get('colortheme')
 

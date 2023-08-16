@@ -11,7 +11,7 @@
 	class="h-5 w-5 stroke-[1.5px]"
 >
 	<path
-		in:draw={{ duration: 600 }}
+		transition:draw={{ duration: 600 }}
 		stroke-linecap="round"
 		stroke-linejoin="round"
 		d="M4.5 12.75l6 6 9-13.5"

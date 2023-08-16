@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { Back } from '$icons'
 	import { fade } from 'svelte/transition'
 
 	export let data
@@ -14,12 +13,8 @@
 	]
 </script>
 
-<header class="prose mt-4">
-	<!-- <a href="/" class="btn btn-circle btn-ghost">
-		<Back />
-	</a> -->
-
-	<hgroup class="mt-20">
+<header class="prose mt-20">
+	<hgroup>
 		<h1>Settings</h1>
 		<p>Manage your account settings and preferences.</p>
 	</hgroup>
@@ -29,17 +24,17 @@
 
 <div class="mt-8 flex gap-20">
 	<aside>
-	<ul class="w-72">
-		{#each menuItems as { title, href }}
-			<li
-				class="w-full rounded-md px-4 py-3 transition-all {url === href
-					? 'bg-slate-800 font-semibold text-slate-300/90'
-					: ''} "
-			>
-				<a class="w-full" {href}>{title}</a>
-			</li>
-		{/each}
-	</ul>
+		<ul class="w-72">
+			{#each menuItems as { title, href }}
+				<li
+					class="w-full rounded-md px-4 py-3 transition-all {url === href
+						? 'bg-slate-800 font-semibold text-slate-300/90'
+						: ''} "
+				>
+					<a class="w-full" {href}>{title}</a>
+				</li>
+			{/each}
+		</ul>
 	</aside>
 	{#key url}
 		<div

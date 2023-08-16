@@ -37,7 +37,7 @@
 	class="ml-[calc(-50vw+50%)] w-screen"
 	aria-label="Filmguide's Top Picks"
 >
-	<SplideTrack class="overflow-visible">
+	<SplideTrack>
 		{#each slides as slide, index}
 			<SplideSlide
 				id={index}

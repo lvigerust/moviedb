@@ -4,10 +4,11 @@
 
 	const {
 		elements: { root, input },
-		helpers: { isChecked }
-	} = createCheckbox({
-		defaultChecked: 'indeterminate'
-	})
+		helpers: { isChecked },
+		states: { checked }
+	} = createCheckbox({})
+
+	checked.set(true)
 </script>
 
 <form>
