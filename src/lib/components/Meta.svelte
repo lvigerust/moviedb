@@ -35,7 +35,7 @@
 	<title>{title(data)}</title>
 	<meta property="og:title" content={title(data)} />
 	<meta property="og:type" content="video.movie" />
-	<meta property="og:url" content={$page.data.url} />
+	<meta property="og:url" content={$page.url.href} />
 	<meta property="og:description" content={description(data)} />
 
 	<meta property="og:image" content={poster(data)} />
