@@ -1,9 +1,10 @@
 import { TMDB_ACCESS_TOKEN, TMDB_BASE_URL } from '$env/static/private'
 import { MediaType, type Collection } from '$types'
+import { error } from '@sveltejs/kit'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieCollection = async (id: string) => {
-		const url = `${TMDB_BASE_URL}/collection/${id}?language=en-US`
+		const url = `${TMDB_BASE_URL}/collections/${id}?language=en-US`
 		const options = {
 			method: 'GET',
 			headers: {
@@ -19,7 +20,7 @@ export const load = async ({ fetch, params }) => {
 
 			movieCollectionData.media_type = MediaType.Movie
 			return movieCollectionData
-		} else throw new Error("Couldn't get collection info, please try again.")
+		} else throw error(404, "Couldn't get collection, please try again.")
 	}
 
 	return {
