@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit'
 
 export const load = async ({ fetch, params }) => {
 	const getMovieCollection = async (id: string) => {
-		const url = `${TMDB_BASE_URL}/collections/${id}?language=en-US`
+		const url = `${TMDB_BASE_URL}/collection/${id}?language=en-US`
 		const options = {
 			method: 'GET',
 			headers: {

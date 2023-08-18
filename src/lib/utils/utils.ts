@@ -1,4 +1,14 @@
-import type { Credit, CreditMedia, Credits, Movie, Show } from '$types'
+import type { Credit, CreditMedia, Credits } from '$types'
+
+type Job =
+	| 'Executive Producer'
+	| 'Producer'
+	| 'Costume Design'
+	| 'Director'
+	| 'Screenplay'
+	| 'Editor'
+	| 'Creator'
+	| 'Writer'
 
 export function formatDate(
 	date: string,
@@ -33,7 +43,7 @@ export function formatNumber(
 	}).format(number)
 }
 
-export function findPersonByJob(credits: Credits, job: string) {
+export function findPersonByJob(credits: Credits, job: Job) {
 	return credits.crew.find((person: Credit) => person.job === job)
 }
 
