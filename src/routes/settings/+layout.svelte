@@ -7,7 +7,6 @@
 
 	const menuItems: { title: string; href: string }[] = [
 		{ title: 'General', href: '/settings' },
-		{ title: 'Appearance', href: '/settings/appearance' },
 		{ title: 'Account', href: '/settings/account' },
 		{ title: 'Password', href: '/settings/password' }
 	]
@@ -16,7 +15,7 @@
 <header class="prose mt-20">
 	<hgroup>
 		<h1>Settings</h1>
-		<p>Manage your account settings and preferences.</p>
+		<p>Manage your settings and preferences.</p>
 	</hgroup>
 </header>
 
@@ -37,12 +36,12 @@
 		</ul>
 	</aside>
 	{#key url}
-		<div
+		<section
 			in:fade={{ delay: 150, duration: 150 }}
 			out:fade={{ duration: 150 }}
-			class="transition-layer prose min-h-[30vh] prose-h2:mt-0"
+			class="transition-layer prose min-h-[30vh] prose-h2:mt-0 [&>*:first-child]:mb-12"
 		>
 			<slot />
-		</div>
+		</section>
 	{/key}
 </div>

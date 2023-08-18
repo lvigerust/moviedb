@@ -45,8 +45,13 @@
 					<div class="h-[10px] w-[10px] rounded-full bg-slate-600" />
 				{/if}
 			</button>
-			<label class="cursor-pointer capitalize" for={option} id="{option}-label">
-				{option}
+			<label
+				class="cursor-pointer capitalize"
+				for={option}
+				id="{option}-label"
+				class:font-semibold={$isChecked(option)}
+			>
+				{option === 'night' ? 'dark' : option === 'system' ? 'system preference' : option}
 			</label>
 		</div>
 	{/each}

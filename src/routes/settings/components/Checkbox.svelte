@@ -12,11 +12,10 @@
 </script>
 
 <form>
-	<div class="flex items-center justify-center">
+	<div class="flex items-center gap-6">
 		<button
 			use:melt={$root}
-			class="flex h-6 w-6 appearance-none items-center justify-center
-              rounded-md bg-slate-200 text-slate-700 shadow-lg hover:opacity-90"
+			class="flex h-6 w-6 appearance-none items-center justify-center rounded-md bg-slate-300 text-slate-700 shadow-lg hover:opacity-90"
 			id="checkbox"
 		>
 			{#if $isChecked}
@@ -24,8 +23,6 @@
 			{/if}
 			<input use:melt={$input} />
 		</button>
-		<label class="cursor-pointer pl-[15px] text-[15px] leading-none" for="checkbox"
-			>Show Tip of the day</label
-		>
+		<label class="cursor-pointer leading-none" for="checkbox">Show Tip of the day</label>
 	</div>
 </form>
