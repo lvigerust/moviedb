@@ -6,7 +6,7 @@
 
 	let visible = true
 
-	$: if ($page.error || route === '/') {
+	$: if ($page.error || route === '/' || '/settings') {
 		visible = false
 	} else visible = true
 </script>
