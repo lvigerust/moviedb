@@ -2,7 +2,8 @@
 	import { createDialog, melt } from '@melt-ui/svelte'
 	import { MagnifyingGlass } from '$icons'
 	import { goto } from '$app/navigation'
-	import { fade } from 'svelte/transition'
+	import { fade, scale } from 'svelte/transition'
+	import { backIn, backOut } from 'svelte/easing'
 
 	const {
 		elements: { trigger, overlay, content, portalled },
@@ -60,12 +61,12 @@
 			class="fixed inset-0 z-50 bg-slate-900/50 backdrop-blur"
 		/>
 		<div
-			in:fade={{ duration: 200, delay: 150 }}
-			out:fade={{ duration: 150 }}
+			in:scale={{ duration: 300, delay: 150, start: 0.5 }}
+			out:fade={{ duration: 100 }}
 			class="fixed left-[50%] top-[27.5%] z-50 w-full max-w-lg translate-x-[-50%] translate-y-[-50%] px-4"
 			use:melt={$content}
 		>
-			<div class="overflow-hidden rounded-full bg-slate-100 shadow-lg">
+			<div class="overflow-hidden rounded-full bg-slate-100 ring-2 ring-slate-950/10">
 				<form on:submit|preventDefault={submitSearch} class="relative">
 					<input
 						bind:value={searchQuery}

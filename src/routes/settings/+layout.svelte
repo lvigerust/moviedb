@@ -12,25 +12,13 @@
 	]
 </script>
 
-<header class="prose mt-20">
-	<hgroup>
-		<h1>Settings</h1>
-		<p>Manage your settings and preferences.</p>
-	</hgroup>
-</header>
-
-<div class="divider" />
-
-<div class="mt-8 flex gap-20">
-	<aside>
-		<ul class="w-72">
+<div class="flex w-full gap-20 text-sm">
+	<aside class="flex flex-col gap-8">
+		<a href="/" class="text-lg font-bold">Filmguide</a>
+		<ul>
 			{#each menuItems as { title, href }}
-				<li
-					class="w-full rounded-md px-4 py-3 transition-all {url === href
-						? 'bg-slate-800 font-semibold text-slate-300/90'
-						: ''} "
-				>
-					<a class="w-full" {href}>{title}</a>
+				<li>
+					<a {href}>{title}</a>
 				</li>
 			{/each}
 		</ul>
@@ -39,7 +27,7 @@
 		<section
 			in:fade={{ delay: 150, duration: 150 }}
 			out:fade={{ duration: 150 }}
-			class="transition-layer prose min-h-[30vh] prose-h2:mt-0 [&>*:first-child]:mb-12"
+			class="transition-layer prose h-[calc(100vh-140px)] w-full max-w-none bg-slate-950/20 prose-h2:mt-0 [&>*:first-child]:mb-12"
 		>
 			<slot />
 		</section>

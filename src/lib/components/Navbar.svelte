@@ -34,7 +34,7 @@
 <div
 	class="sticky top-0 z-50 bg-base-100/50 text-slate-400 backdrop-blur transition-transform ease-in"
 	class:-translate-y-full={offscreen}
-	class:hidden={$page.error}
+	class:hidden={$page.error || $page.url.pathname === '/settings'}
 	bind:clientHeight
 >
 	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-medium">
