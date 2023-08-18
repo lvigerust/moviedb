@@ -35,7 +35,7 @@
 		<div class="flex items-center gap-3">
 			<button
 				use:melt={$item(option)}
-				formaction="/?/setTheme&theme={option}"
+				formaction="/settings?/setTheme&theme={option}"
 				type="submit"
 				class="grid h-4 w-4 cursor-pointer place-items-center rounded-full bg-neutral shadow-sm transition-colors duration-200 hover:bg-slate-700"
 				id={option}

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Checkbox from './components/Checkbox.svelte'
+	import RadioGroup from './components/RadioGroup.svelte'
 </script>
 
 <section>
@@ -10,5 +11,12 @@
 
 	<div>
 		<Checkbox />
+	</div>
+
+	<div class="divider" />
+
+	<div class="not-prose flex gap-6">
+		<p>Appearance:</p>
+		<RadioGroup />
 	</div>
 </section>
