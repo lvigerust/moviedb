@@ -2,7 +2,6 @@
 	import { Carousel } from '$components'
 
 	export let data
-
 	const {
 		watchlist: { watchlist }
 	} = data

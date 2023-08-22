@@ -1,8 +1,3 @@
-<script>
-	import { Skeleton } from '$components'
-	import Label from '../components/Label.svelte'
-</script>
-
 <hgroup>
 	<h2>Account settings</h2>
 	<p>Change details around your account.</p>
@@ -20,8 +15,8 @@
 		<input
 			type="text"
 			id="name"
-			class="h-10 w-full rounded-md border border-slate-700 bg-slate-800/20 px-3 py-2 text-sm placeholder:text-slate-500"
-			placeholder="John Doe"
+			class="block w-full rounded-md border-0 bg-slate-800/20 px-3 py-[10px] text-slate-400 outline-none ring-1 ring-inset ring-slate-100/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+			placeholder="Uncle Ruckus"
 		/>
 	</form>
 
@@ -34,10 +29,10 @@
 
 	<form class="mr-4 flex items-center">
 		<input
-			type="text"
-			id="email"
-			class="h-10 w-full rounded-md border border-slate-700 bg-slate-800/20 px-3 py-2 text-sm placeholder:text-slate-500"
-			placeholder="john.doe@example.com"
+			type="email"
+			id="name"
+			class="block w-full rounded-md border-0 bg-slate-800/20 px-3 py-[10px] text-slate-400 outline-none ring-1 ring-inset ring-slate-100/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+			placeholder="ruckus@boondocks.com"
 		/>
 	</form>
 </div>

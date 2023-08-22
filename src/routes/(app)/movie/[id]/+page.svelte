@@ -1,0 +1,32 @@
+<script lang="ts">
+	import { Meta } from '$components'
+	import Details from './Details.svelte'
+	import Cast from './Cast.svelte'
+	import Stats from './Stats.svelte'
+	import Collection from './Collection.svelte'
+	import Recommendations from './Recommendations.svelte'
+
+	export let data
+
+	const {
+		movieDetails,
+
+		streamed: { movieCredits, watchProviders, recommendations, external_ids }
+	} = data
+</script>
+
+<Meta data={movieDetails} />
+
+<Details {movieDetails} {watchProviders} {movieCredits} />
+
+<div class="divider" />
+
+<Cast {movieCredits} />
+
+<div class="divider" />
+
+<Stats {movieDetails} />
+
+<Collection {movieDetails} />
+
+<Recommendations {recommendations} />

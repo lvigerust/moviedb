@@ -22,7 +22,7 @@ html {
 }
 
 body {
-	@apply antialiased;
+	@apply antialiased selection:bg-blue-600 selection:text-white;
 }
 
 /* Global CSS variables */

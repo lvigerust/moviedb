@@ -31,14 +31,14 @@
 
 <svelte:window bind:scrollY={currentY} />
 
-<div
+<header
 	class="sticky top-0 z-50 bg-base-100/50 text-slate-400 backdrop-blur transition-transform ease-in"
 	class:-translate-y-full={offscreen}
 	class:hidden={$page.error || $page.url.pathname.includes('/settings')}
 	bind:clientHeight
 >
-	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-medium">
-		<div in:fly={{ y: -50, duration: 800, opacity: 0 }} class="navbar-start">
+	<nav in:fly={{ y: -50, duration: 800 }} class="navbar mx-auto max-w-8xl px-4 text-sm font-medium">
+		<div class="navbar-start">
 			<a
 				class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"
 				class:text-slate-300={$page.url.pathname === '/'}
@@ -46,7 +46,7 @@
 			>
 		</div>
 
-		<ul in:fly={{ y: -50, duration: 800, opacity: 0, delay: 100 }} class="navbar-center gap-x-6">
+		<ul class="navbar-center gap-x-6">
 			{#each menuItems as { href, label }}
 				<li>
 					<a
@@ -57,8 +57,8 @@
 				</li>
 			{/each}
 		</ul>
-		<div in:fly={{ y: -50, duration: 800, opacity: 0, delay: 200 }} class="navbar-end">
+		<div class="navbar-end">
 			<Search />
 		</div>
 	</nav>
-</div>
+</header>

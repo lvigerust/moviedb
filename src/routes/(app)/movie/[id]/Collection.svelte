@@ -5,7 +5,7 @@
 	export let movieDetails: MovieDetails
 </script>
 
-{#if movieDetails.belongs_to_collection}
+{#if movieDetails.belongs_to_collection && movieDetails.belongs_to_collection.backdrop_path}
 	<div class="divider" />
 	<section id="collection" class="relative h-72 w-full overflow-hidden rounded-lg">
 		<a

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
+	import { afterNavigate } from '$app/navigation'
 	import type { SubmitFunction } from './$types'
 	import Checkbox from './components/Checkbox.svelte'
 
@@ -12,7 +13,11 @@
 		}
 	}
 
-	$: activeTheme = document.documentElement.getAttribute('data-theme')
+	let activeTheme: string | null
+
+	afterNavigate(() => {
+		activeTheme = document.documentElement.getAttribute('data-theme')
+	})
 </script>
 
 <hgroup>
@@ -31,7 +36,7 @@
 		type="submit"
 		class="flex h-full w-full flex-col items-end overflow-hidden rounded-lg border transition-colors {activeTheme ===
 		'auto'
-			? ' border-blue-700/75'
+			? ' border-2 border-indigo-700/75'
 			: 'border-slate-700/50'} bg-slate-800/40"
 	>
 		<div class="h-full w-full object-contain px-12">
@@ -47,7 +52,7 @@
 		type="submit"
 		class="flex h-full w-full flex-col items-end overflow-hidden rounded-lg border transition-colors {activeTheme ===
 		'light'
-			? ' border-blue-700/75'
+			? ' border-2 border-indigo-700/75'
 			: 'border-slate-700/50'} bg-slate-800/40"
 	>
 		<div class="h-full w-full object-contain px-12">
@@ -63,7 +68,7 @@
 		type="submit"
 		class="flex h-full w-full flex-col items-end overflow-hidden rounded-lg border transition-colors {activeTheme ===
 		'night'
-			? ' border-blue-700/75'
+			? ' border-2 border-indigo-700/75'
 			: 'border-slate-700/50'} bg-slate-800/40"
 	>
 		<div class="h-full w-full object-contain px-12">
