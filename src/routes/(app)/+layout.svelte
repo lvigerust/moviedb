@@ -47,4 +47,7 @@
 		{/key}
 	</main>
 </div>
-<Breadcrumbs />
+
+{#if url !== '/'}
+	<Breadcrumbs />
+{/if}
