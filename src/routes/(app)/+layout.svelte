@@ -32,9 +32,9 @@
 
 <Toaster />
 
-<div>
-	<Navbar />
+<Navbar />
 
+<div class="overflow-hidden">
 	<main class="mx-auto max-w-8xl px-4">
 		{#key url}
 			<div

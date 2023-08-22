@@ -27,7 +27,7 @@ body {
 
 /* Global CSS variables */
 :root {
-	--navbar-height: 4rem;
+	--navbar-height: 3.75rem;
 }
 
 /* Customized DaisyUI components */

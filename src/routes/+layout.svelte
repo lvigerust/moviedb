@@ -12,7 +12,7 @@
 	})
 </script>
 
-<div class="flex min-h-screen flex-col justify-between overflow-hidden">
+<div class="flex min-h-screen flex-col justify-between">
 	{#key animate}
 		<div out:fly={{ x: -500, duration: 300 }}>
 			<slot />
