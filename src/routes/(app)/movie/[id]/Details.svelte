@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { WatchProvider } from '$components'
-	import type { Credit, Credits, MovieDetails } from '$types'
+	import type { Credits, MovieDetails, ReleaseDate } from '$types'
 	import { findPersonByJob, formatDate, formatRuntime, slugify } from '$utils'
 	import type { ProviderOptions } from '../../tv/[id]/+page.server'
 
 	export let movieDetails: MovieDetails
 	export let watchProviders: Promise<ProviderOptions>
 	export let movieCredits: Promise<Credits>
+	export let release_dates: Promise<ReleaseDate | null>
 </script>
 
 <section id="details">
@@ -39,12 +40,22 @@
 			</h1>
 
 			<div class="mt-2 flex">
-				<p class="">{formatDate(movieDetails.release_date)}</p>
+				{#await release_dates then release_dates}
+					{#if release_dates}
+						{#if release_dates.release_dates[0].certification}
+							<span
+								class="mr-3 inline-flex items-center rounded bg-slate-600/40 px-2 py-1 text-xs font-medium text-slate-500 ring-1 ring-inset ring-slate-950/50"
+								>{release_dates?.release_dates[0].certification}</span
+							>
+						{/if}
+						<p>{formatDate(release_dates.release_dates[0].release_date)} (NO)</p>
+					{:else}
+						<p class="">{formatDate(movieDetails.release_date)}</p>
+					{/if}
+				{/await}
+
 				<span class="mx-4 select-none font-bold">•</span>
-				{#if movieDetails.runtime}
-					<p>{formatRuntime(movieDetails.runtime)}</p>
-					<span class="mx-4 select-none font-bold">•</span>
-				{/if}
+
 				{#each movieDetails.genres.slice(0, 5) as genre, index}
 					<a href={`/movie/genre/${genre.id}`}>{genre.name}</a>
 
@@ -52,6 +63,10 @@
 						<p>,&nbsp;</p>
 					{/if}
 				{/each}
+				{#if movieDetails.runtime}
+					<span class="mx-4 select-none font-bold">•</span>
+					<p>{formatRuntime(movieDetails.runtime)}</p>
+				{/if}
 			</div>
 		</div>
 

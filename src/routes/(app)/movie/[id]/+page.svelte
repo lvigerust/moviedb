@@ -11,13 +11,13 @@
 	const {
 		movieDetails,
 
-		streamed: { movieCredits, watchProviders, recommendations, external_ids }
+		streamed: { movieCredits, watchProviders, recommendations, release_dates, external_ids }
 	} = data
 </script>
 
 <Meta data={movieDetails} />
 
-<Details {movieDetails} {watchProviders} {movieCredits} />
+<Details {movieDetails} {watchProviders} {movieCredits} {release_dates} />
 
 <div class="divider" />
 

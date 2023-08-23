@@ -59,3 +59,20 @@ export interface SpokenLanguage {
 	iso_639_1: string
 	name: string
 }
+
+export interface ReleaseDatesData {
+	iso_3166_1: string
+	results: ReleaseDate[]
+}
+
+export interface ReleaseDate {
+	iso_3166_1: string
+	release_dates: {
+		certification: string
+		descriptors: []
+		iso_639_1: string
+		note: string
+		release_date: string
+		type: number
+	}[]
+}

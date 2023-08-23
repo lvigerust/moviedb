@@ -26,7 +26,7 @@
 		<h2 id="" class="mb-6 text-2xl font-semibold tracking-tight text-slate-300">
 			{recommendations.length ? 'Recommendations' : ''}
 		</h2>
-		<ul id="listContainer" class="grid grid-cols-8 gap-x-5">
+		<ul id="listContainer" class="grid grid-cols-8 gap-x-5 pb-4">
 			{#each recommendations.slice(0, 8) as movie}
 				{#if movie.poster_path}
 					<li>
