@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { WatchProvider } from '$components'
+	import { Collapsible, Tooltip, WatchProvider } from '$components'
 	import type { Credits, MovieDetails, ReleaseDate } from '$types'
 	import { findPersonByJob, formatDate, formatRuntime, slugify } from '$utils'
 	import type { ProviderOptions } from '../../tv/[id]/+page.server'
@@ -24,7 +24,7 @@
 			{/if}
 
 			<img
-				class="h-[450px] w-full object-cover"
+				class="h-[510px] w-full object-cover"
 				src={'https://image.tmdb.org/t/p/original/' + movieDetails.backdrop_path}
 				alt={movieDetails.title}
 			/>
@@ -39,32 +39,34 @@
 				>
 			</h1>
 
-			<div class="mt-2 flex">
+			<div class="mt-2 flex items-center font-medium text-base-content/80">
 				{#await release_dates then release_dates}
 					{#if release_dates}
 						{#if release_dates.release_dates[0].certification}
-							<span
-								class="mr-3 inline-flex items-center rounded bg-slate-600/40 px-2 py-1 text-xs font-medium text-slate-500 ring-1 ring-inset ring-slate-950/50"
-								>{release_dates?.release_dates[0].certification}</span
-							>
+							<Tooltip>
+								<span
+									class="inline-flex cursor-pointer items-center rounded bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/50"
+									>{release_dates?.release_dates[0].certification}</span
+								>
+							</Tooltip>
 						{/if}
-						<p>{formatDate(release_dates.release_dates[0].release_date)} (NO)</p>
+						<Collapsible {release_dates} {movieDetails} />
 					{:else}
 						<p class="">{formatDate(movieDetails.release_date)}</p>
 					{/if}
 				{/await}
 
-				<span class="mx-4 select-none font-bold">•</span>
+				<span class="mx-3 select-none font-bold">•</span>
 
-				{#each movieDetails.genres.slice(0, 5) as genre, index}
+				{#each movieDetails.genres.slice(0, 4) as genre, index}
 					<a href={`/movie/genre/${genre.id}`}>{genre.name}</a>
 
-					{#if index < 5 - 1 && index < movieDetails.genres.length - 1}
+					{#if index < 4 - 1 && index < movieDetails.genres.length - 1}
 						<p>,&nbsp;</p>
 					{/if}
 				{/each}
 				{#if movieDetails.runtime}
-					<span class="mx-4 select-none font-bold">•</span>
+					<span class="mx-3 select-none font-bold">•</span>
 					<p>{formatRuntime(movieDetails.runtime)}</p>
 				{/if}
 			</div>
