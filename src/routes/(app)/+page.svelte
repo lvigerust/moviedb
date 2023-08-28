@@ -1,9 +1,11 @@
 <script lang="ts">
-	import { Carousel } from '$components'
+	import { Card, Carousel, Search } from '$components'
+	import { formatDate } from '$utils'
 
 	export let data
 	const {
-		watchlist: { watchlist }
+		watchlist: { watchlist },
+		streamed: { upcomingMovies }
 	} = data
 </script>
 
@@ -21,15 +23,30 @@
 		and people to discover. Explore
 		<span class="italic">now</span>.
 	</h2>
-
-	<!-- Make this look good -->
-
-	<!-- <div class="mt-8 flex gap-3">
-		<button class="btn rounded-lg bg-blue-600 normal-case">Movies</button>
-		<button class="btn btn-neutral btn-outline rounded-lg normal-case">TV Shows</button>
-
-		<div class="divider divider-horizontal mx-3 w-0" />
-
-		<Search navButton={false} />
-	</div> -->
 </div>
+
+{#await upcomingMovies}
+	<p>Loading upcoming movies...</p>
+{:then upcomingMovies}
+	<section class="mt-16 w-full pb-12">
+		<h2 class="mb-4 text-xl font-semibold text-slate-300">Upcoming Movies</h2>
+		<div class="flex h-full gap-8">
+			{#each upcomingMovies.results.slice(0, 3) as movie}
+				<div class="grid w-full grid-cols-2 gap-4 rounded-lg bg-neutral/25 p-4 shadow-md">
+					<img
+						class="rounded-md"
+						src={'https://image.tmdb.org/t/p/w1280/' + movie.backdrop_path}
+						alt=""
+					/>
+
+					<div>
+						<hgroup class="space-y-2">
+							<p class="text-sm font-medium text-slate-400/75">{formatDate(movie.release_date)}</p>
+							<h4 class="font-Display font-semibold text-slate-300/75">{movie.title}</h4>
+						</hgroup>
+					</div>
+				</div>
+			{/each}
+		</div>
+	</section>
+{/await}

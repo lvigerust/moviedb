@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Collapsible, Tooltip, WatchProvider } from '$components'
+	import { Collapsible, WatchProvider } from '$components'
 	import type { Credits, MovieDetails, ReleaseDate } from '$types'
 	import { findPersonByJob, formatDate, formatRuntime, slugify } from '$utils'
 	import type { ProviderOptions } from '../../tv/[id]/+page.server'
@@ -11,7 +11,7 @@
 </script>
 
 <section id="details">
-	<div class="ml-[calc(-50vw+50%)] h-fit w-screen">
+	<div class="ml-[calc(-50vw+50%)] w-screen">
 		<div class="relative h-full w-full">
 			<div class="absolute z-30 h-full w-full bg-gradient-to-t from-base-100" />
 
@@ -43,12 +43,10 @@
 				{#await release_dates then release_dates}
 					{#if release_dates}
 						{#if release_dates.release_dates[0].certification}
-							<Tooltip>
-								<span
-									class="inline-flex cursor-pointer items-center rounded bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/50"
-									>{release_dates?.release_dates[0].certification}</span
-								>
-							</Tooltip>
+							<span
+								class="inline-flex items-center rounded bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/70"
+								>{release_dates?.release_dates[0].certification}</span
+							>
 						{/if}
 						<Collapsible {release_dates} {movieDetails} />
 					{:else}
