@@ -12,7 +12,7 @@
 	]
 </script>
 
-<div in:fly|global={{ x: 500, delay: 300 }} class="flex min-h-screen w-full bg-slate-900 text-sm">
+<div class="flex min-h-screen w-full bg-slate-900 text-sm">
 	<aside class="flex w-72 flex-col pl-10 pt-8">
 		<a href="/" class="font-Display text-lg font-bold">Filmguide</a>
 
