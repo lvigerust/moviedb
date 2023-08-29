@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { Meta } from '$components'
+	import { Meta, NewMeta } from '$components'
 	import Details from './Details.svelte'
 	import Cast from './Cast.svelte'
 	import Stats from './Stats.svelte'
 	import Collection from './Collection.svelte'
 	import Recommendations from './Recommendations.svelte'
+	import { page } from '$app/stores'
 
 	export let data
 
@@ -15,7 +16,9 @@
 	} = data
 </script>
 
-<Meta data={movieDetails} />
+<!-- <Meta data={movieDetails} /> -->
+
+<NewMeta />
 
 <Details {movieDetails} {watchProviders} {movieCredits} {release_dates} />
 

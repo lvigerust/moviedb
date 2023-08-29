@@ -71,17 +71,24 @@ export const load = async ({ fetch, params }) => {
 	}
 
 	/* Meta Information */
-	const pageTitle = async () => {
+	const getMetaInformation = async () => {
 		const data = await getMovieDetails(params.id)
 
 		const year = `${new Date(data.release_date).getFullYear()}`
 
-		return `${data.title} (${year})`
+		const image1 = `https://image.tmdb.org/t/p/w342/${data.poster_path}`
+		const image2 = `https://image.tmdb.org/t/p/w780/${data.backdrop_path}`
+
+		return {
+			title: `${data.title} (${year})`,
+			image1,
+			image2
+		}
 	}
 
 	return {
 		movieDetails: getMovieDetails(params.id),
-		pageTitle: pageTitle(),
+		meta: getMetaInformation(),
 		streamed: {
 			movieCredits: getMovieCredits(params.id),
 			release_dates: getReleaseDates(params.id),
