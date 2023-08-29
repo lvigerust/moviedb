@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores'
 	import { fly } from 'svelte/transition'
 	import { Breadcrumbs, Navbar, Toaster, addToast } from '$components'
 	import { onMount } from 'svelte'
+	import { page } from '$app/stores'
 
 	export let data
 
@@ -26,22 +26,13 @@
 	})
 </script>
 
-<svelte:head>
-	<title>{$page.data.pageTitle ?? 'Home'} — Filmguide</title>
-	<meta
-		name="description"
-		content="Use Filmguide to explore a vast collection of movies and TV shows. Find detailed information, ratings, and reviews. Discover where to watch your favorite content across various streaming platforms using the Watch Providers feature."
-	/>
-	<meta
-		name="keywords"
-		content="movie database, TV database, movies, TV shows, TMDb API, watch providers, credits"
-	/>
-	<meta name="author" content="Vigerust Webutvikling" />
-</svelte:head>
-
 <Toaster />
 
 <Navbar />
+
+<svelte:head>
+	<title>{$page.data.meta ? $page.data.meta.title : 'Home'} — Filmguide</title>
+</svelte:head>
 
 <div class="overflow-hidden">
 	<main class="mx-auto max-w-8xl px-4">

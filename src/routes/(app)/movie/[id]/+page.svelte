@@ -5,7 +5,6 @@
 	import Stats from './Stats.svelte'
 	import Collection from './Collection.svelte'
 	import Recommendations from './Recommendations.svelte'
-	import { page } from '$app/stores'
 
 	export let data
 
@@ -15,8 +14,6 @@
 		streamed: { movieCredits, watchProviders, recommendations, release_dates, external_ids }
 	} = data
 </script>
-
-<!-- <Meta data={movieDetails} /> -->
 
 <NewMeta />
 

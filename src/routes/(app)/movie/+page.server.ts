@@ -36,6 +36,6 @@ export const load = async ({ fetch }) => {
 	return {
 		trendingMovies: getTrendingMovies(),
 		popularMovies: getPopularMovies(),
-		pageTitle: 'Movies'
+		meta: { title: 'Movies' }
 	}
 }

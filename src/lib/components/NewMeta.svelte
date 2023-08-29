@@ -3,8 +3,11 @@
 </script>
 
 <svelte:head>
-	<title>{$page.data.meta.title} — Filmguide</title>
-
+	<meta property="og:title" content={$page.data.meta.metaTitle} />
+	<meta property="og:type" content="video.movie" />
+	<meta property="og:url" content={$page.url.href} />
 	<meta property="og:image" content={$page.data.meta.image1} />
 	<meta property="og:image" content={$page.data.meta.image2} />
+	<meta name="description" content={$page.data.meta.description} />
+	<meta property="og:site_name" content="Filmguide" />
 </svelte:head>

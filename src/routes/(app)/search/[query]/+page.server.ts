@@ -43,7 +43,7 @@ export const load = async ({ fetch, params }) => {
 	}
 
 	return {
-		pageTitle: params.query,
+		meta: { title: params.query },
 		searchResults: getSearchResults(params.query)
 	}
 }

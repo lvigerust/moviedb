@@ -75,14 +75,20 @@ export const load = async ({ fetch, params }) => {
 		const data = await getMovieDetails(params.id)
 
 		const year = `${new Date(data.release_date).getFullYear()}`
+		const metaTitle = data.title
+		const title = `${data.title} (${year})`
 
 		const image1 = `https://image.tmdb.org/t/p/w342/${data.poster_path}`
 		const image2 = `https://image.tmdb.org/t/p/w780/${data.backdrop_path}`
 
+		const description = data.overview
+
 		return {
-			title: `${data.title} (${year})`,
+			title,
+			metaTitle,
 			image1,
-			image2
+			image2,
+			description
 		}
 	}
 

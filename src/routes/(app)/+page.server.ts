@@ -40,6 +40,7 @@ export const load = async ({ fetch }) => {
 
 	return {
 		watchlist: getWatchlist(),
+		meta: { title: 'Home' },
 		streamed: {
 			upcomingMovies: getUpcomingMovies()
 		}

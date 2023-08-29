@@ -18,6 +18,6 @@ export const load = async ({ fetch }) => {
 
 	return {
 		popularShows: getPopularShows(),
-		pageTitle: 'TV Shows'
+		meta: { title: 'TV Shows' }
 	}
 }
