@@ -3,7 +3,6 @@
 	import { MagnifyingGlass } from '$icons'
 	import { goto } from '$app/navigation'
 	import { fade, scale } from 'svelte/transition'
-	import { backIn, backOut } from 'svelte/easing'
 
 	const {
 		elements: { trigger, overlay, content, portalled },

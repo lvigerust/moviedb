@@ -17,7 +17,7 @@
 
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation'
-	import { Check, LightBulb } from '$icons'
+	import { Check } from '$icons'
 
 	import { createToaster, melt } from '@melt-ui/svelte'
 	import { flip } from 'svelte/animate'

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Credit, CreditMedia, Movie, Show } from '$types'
+	import type { CreditMedia, Movie, Show } from '$types'
 	import { slugify } from '$utils'
 
 	export let data: Movie | Show | CreditMedia

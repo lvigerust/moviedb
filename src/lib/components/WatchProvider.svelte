@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProviderOptions, WatchProvider } from '../../routes/tv/[id]/+page.server'
+	import type { ProviderOptions, WatchProvider } from '../../routes/(app)/tv/[id]/+page.server'
 
 	export let watchProviders: ProviderOptions
 	const href = watchProviders.link
