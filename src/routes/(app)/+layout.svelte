@@ -28,6 +28,15 @@
 
 <svelte:head>
 	<title>{$page.data.pageTitle ?? 'Home'} — Filmguide</title>
+	<meta
+		name="description"
+		content="Use Filmguide to explore a vast collection of movies and TV shows. Find detailed information, ratings, and reviews. Discover where to watch your favorite content across various streaming platforms using the Watch Providers feature."
+	/>
+	<meta
+		name="keywords"
+		content="movie database, TV database, movies, TV shows, TMDb API, watch providers, credits"
+	/>
+	<meta name="author" content="Vigerust Webutvikling" />
 </svelte:head>
 
 <Toaster />
