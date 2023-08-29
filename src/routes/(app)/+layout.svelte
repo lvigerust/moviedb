@@ -31,7 +31,9 @@
 <Navbar />
 
 <svelte:head>
-	<title>{$page.data.meta ? $page.data.meta.title : 'Home'} — Filmguide</title>
+	{#if $page.data.meta}
+		<title>{$page.data.meta.title ?? 'Home'} — Filmguide</title>
+	{/if}
 </svelte:head>
 
 <div class="overflow-hidden">
