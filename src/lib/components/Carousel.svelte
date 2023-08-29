@@ -21,6 +21,12 @@
 		} else return slide.name
 	}
 
+	function slideLogo(slide: Movie | MovieDetails | Show) {
+		if ('images' in slide) {
+			return slide.images?.logos[0].file_path
+		}
+	}
+
 	let options = {
 		pagination: false,
 		arrows: false,
@@ -49,6 +55,10 @@
 				>
 					<div class="btn btn-ghost rounded-full normal-case text-slate-200">
 						{slideCTA(slide)}
+					</div>
+
+					<div class="mx-8 basis-1/3">
+						<img src={`https://image.tmdb.org/t/p/original/${slideLogo(slide)}`} alt="" />
 					</div>
 				</div>
 			</a>

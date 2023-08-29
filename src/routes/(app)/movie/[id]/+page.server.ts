@@ -12,7 +12,7 @@ import type { ProviderOptions } from '../../tv/[id]/+page.server.js'
 export const load = async ({ fetch, params }) => {
 	const getMovieDetails = async (id: string) => {
 		const movieDetailsRes = await fetch(
-			`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&append_to_response=images`
+			`https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&append_to_response=images&include_image_language=en,null`
 		)
 		const movieDetailsData: MovieDetails = await movieDetailsRes.json()
 		movieDetailsData.media_type = MediaType.Movie

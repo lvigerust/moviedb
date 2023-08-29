@@ -43,7 +43,7 @@ export function formatNumber(
 	}).format(number)
 }
 
-export function findPersonByJob(credits: Credits, job: Job) {
+export function findPersonByJob(credits: Credits, job: Job): Credit | undefined {
 	return credits.crew.find((person: Credit) => person.job === job)
 }
 

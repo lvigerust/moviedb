@@ -90,7 +90,7 @@
 				<div>
 					<a
 						href={`/person/${findPersonByJob(movieCredits, 'Director')?.id}-${slugify(
-							findPersonByJob(movieCredits, 'Director')?.name
+							findPersonByJob(movieCredits, 'Director')?.name ?? ''
 						)}`}
 						class="font-medium tracking-tight text-slate-300 transition-colors hover:text-slate-200"
 						>{findPersonByJob(movieCredits, 'Director')?.name ?? ''}</a
