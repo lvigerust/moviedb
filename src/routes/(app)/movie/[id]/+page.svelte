@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Meta, NewMeta } from '$components'
+	import { Meta } from '$components'
 	import Details from './Details.svelte'
 	import Cast from './Cast.svelte'
 	import Stats from './Stats.svelte'
@@ -15,7 +15,7 @@
 	} = data
 </script>
 
-<NewMeta />
+<Meta />
 
 <Details {movieDetails} {watchProviders} {movieCredits} {release_dates} />
 
