@@ -8,7 +8,7 @@
 	const { person, streamed } = data
 </script>
 
-<Meta data={person} />
+<Meta />
 
 <div class="w-full pt-8">
 	<div class="flex items-center justify-center gap-4">

@@ -10,7 +10,7 @@
 	} = data
 </script>
 
-<Meta data={showDetails} />
+<Meta />
 
 <div class="ml-[calc(-50vw+50%)] h-fit w-screen">
 	<div class="relative h-full w-full">

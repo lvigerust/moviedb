@@ -23,7 +23,29 @@ export const load = async ({ fetch, params }) => {
 		} else throw error(404, "Couldn't get collection, please try again.")
 	}
 
+	/* Meta Information */
+	const getMetaInformation = async () => {
+		const data = await getMovieCollection(params.id)
+
+		const metaTitle = data.name
+		const title = metaTitle
+
+		const image1 = `https://image.tmdb.org/t/p/w342/${data.poster_path}`
+		const image2 = `https://image.tmdb.org/t/p/w780/${data.backdrop_path}`
+
+		const description = data.overview
+
+		return {
+			title,
+			metaTitle,
+			image1,
+			image2,
+			description
+		}
+	}
+
 	return {
-		movieCollection: getMovieCollection(params.id)
+		movieCollection: getMovieCollection(params.id),
+		meta: getMetaInformation()
 	}
 }

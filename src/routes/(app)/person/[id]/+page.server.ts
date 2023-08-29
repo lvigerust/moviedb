@@ -39,14 +39,26 @@ export const load = async ({ fetch, params }) => {
 	}
 
 	/* Meta Information */
-	const pageTitle = async () => {
+	const getMetaInformation = async () => {
 		const data = await getPerson(params.id)
 
-		return `${data.name}`
+		const metaTitle = data.name
+		const title = metaTitle
+
+		const image1 = `https://image.tmdb.org/t/p/w342/${data.profile_path}`
+
+		const description = data.biography
+
+		return {
+			title,
+			metaTitle,
+			image1,
+			description
+		}
 	}
 
 	return {
-		pageTitle: pageTitle(),
+		meta: getMetaInformation(),
 		person: getPerson(params.id),
 		personMovieCredits: getCombinedCredits(params.id),
 		streamed: {

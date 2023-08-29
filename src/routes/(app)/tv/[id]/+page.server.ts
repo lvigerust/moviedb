@@ -45,7 +45,8 @@ export const load = async ({ fetch, params }) => {
 		} else throw new Error("Couldn't get watch providers, please try again.")
 	}
 
-	const pageTitle = async () => {
+	/* Meta Information */
+	const getMetaInformation = async () => {
 		const data = await getShowDetails(params.id)
 
 		let year = `TV Series ${new Date(data.first_air_date).getFullYear()}`
@@ -53,12 +54,26 @@ export const load = async ({ fetch, params }) => {
 			year = year + '-'
 		} else year = year + `-${new Date(data.last_air_date).getFullYear()}`
 
-		return `${data.name} (${year})`
+		const metaTitle = data.name
+		const title = `${data.name} (${year})`
+
+		const image1 = `https://image.tmdb.org/t/p/w342/${data.poster_path}`
+		const image2 = `https://image.tmdb.org/t/p/w780/${data.backdrop_path}`
+
+		const description = data.overview
+
+		return {
+			title,
+			metaTitle,
+			image1,
+			image2,
+			description
+		}
 	}
 
 	return {
 		showDetails: getShowDetails(params.id),
-		pageTitle: pageTitle(),
+		meta: getMetaInformation(),
 		streamed: {
 			watchProviders: getWatchProviders(params.id),
 			credits: getShowCredits(params.id)
