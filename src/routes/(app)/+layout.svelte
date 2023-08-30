@@ -32,13 +32,15 @@
 
 <svelte:head>
 	<title>{($page.data.meta && $page.data.meta.title) ?? 'Home'} — Filmguide</title>
+
 	<meta
 		name="description"
-		content="Use Filmguide to explore a vast collection of movies and TV shows from The Movie Database. Find detailed information, ratings, and reviews. Discover where to watch your favorite content across various streaming platforms using the Watch Providers feature, provided by JustWatch."
+		content={($page.data.meta && $page.data.meta.description) ??
+			'Use Filmguide to explore a vast collection of movies and TV shows from The Movie Database. Find detailed information, ratings, and reviews. Discover where to watch your favorite content across various streaming platforms using the Watch Providers feature, provided by JustWatch.'}
 	/>
 	<meta
 		name="keywords"
-		content="movie database, TV database, movies, TV shows, TMDb API, watch providers, filmguide, tips"
+		content="movie database, TV database, movies, movie, TV shows, TMDb API, watch providers, filmguide, tips"
 	/>
 	<meta name="author" content="Vigerust Webutvikling" />
 </svelte:head>

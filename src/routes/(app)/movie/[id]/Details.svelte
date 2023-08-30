@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Collapsible, WatchProvider } from '$components'
-	import type { Credits, MovieDetails, ReleaseDate } from '$types'
+	import type { Credits, MovieDetails, OMDBData, ReleaseDate } from '$types'
 	import { findPersonByJob, formatDate, formatRuntime, slugify } from '$utils'
 	import type { ProviderOptions } from '../../tv/[id]/+page.server'
 
@@ -8,6 +8,7 @@
 	export let watchProviders: Promise<ProviderOptions>
 	export let movieCredits: Promise<Credits>
 	export let release_dates: Promise<ReleaseDate | null>
+	export let omdb: Promise<OMDBData>
 </script>
 
 <section id="details">
@@ -44,7 +45,7 @@
 					{#if release_dates}
 						{#if release_dates.release_dates[0].certification}
 							<span
-								class="inline-flex items-center rounded bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/70"
+								class="mr-3 inline-flex items-center rounded bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/70"
 								>{release_dates?.release_dates[0].certification}</span
 							>
 						{/if}
@@ -67,6 +68,10 @@
 					<span class="mx-3 select-none font-bold">•</span>
 					<p>{formatRuntime(movieDetails.runtime)}</p>
 				{/if}
+				{#await omdb then omdb}
+					<span class="mx-3 select-none font-bold">•</span>
+					<p>IMDb: {omdb.imdbRating}</p>
+				{/await}
 			</div>
 		</div>
 

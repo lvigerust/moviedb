@@ -1,10 +1,12 @@
-import { TMDB_API_KEY } from '$env/static/private'
+import { OMDB_API_KEY, TMDB_API_KEY } from '$env/static/private'
 import {
 	MediaType,
 	type Credits,
 	type Movie,
 	type MovieDetails,
-	type ReleaseDatesData
+	type ReleaseDatesData,
+	type ExternalIDs,
+	type OMDBData
 } from '$types'
 import { error } from '@sveltejs/kit'
 import type { ProviderOptions } from '../../tv/[id]/+page.server.js'
@@ -67,28 +69,42 @@ export const load = async ({ fetch, params }) => {
 		const externalIDsRes = await fetch(
 			`https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${TMDB_API_KEY}`
 		)
-		return await externalIDsRes.json()
+		return (await externalIDsRes.json()) as ExternalIDs
+	}
+
+	const getOMDB = async () => {
+		const imdbID = (await getExternalIDs(params.id)).imdb_id
+
+		const omdbRes = await fetch(`http://www.omdbapi.com/?i=${imdbID}&apikey=${OMDB_API_KEY}`)
+
+		if (omdbRes.ok) {
+			return (await omdbRes.json()) as OMDBData
+		} else throw new Error("Couldn't get Open Movie Database information, please try again.")
 	}
 
 	/* Meta Information */
 	const getMetaInformation = async () => {
 		const data = await getMovieDetails(params.id)
+		const omdbData = await getOMDB()
 
 		const year = `${new Date(data.release_date).getFullYear()}`
-		const metaTitle = data.title
+
 		const title = `${data.title} (${year})`
+		const metaTitle = data.title
+
+		const description = data.overview
+		const metaDescription = omdbData.Plot
 
 		const image1 = `https://image.tmdb.org/t/p/w342/${data.poster_path}`
 		const image2 = `https://image.tmdb.org/t/p/w780/${data.backdrop_path}`
-
-		const description = data.overview
 
 		return {
 			title,
 			metaTitle,
 			image1,
 			image2,
-			description
+			description,
+			metaDescription
 		}
 	}
 
@@ -100,7 +116,8 @@ export const load = async ({ fetch, params }) => {
 			release_dates: getReleaseDates(params.id),
 			watchProviders: getWatchProviders(params.id),
 			recommendations: getRecommendations(params.id),
-			external_ids: getExternalIDs(params.id)
+			external_ids: getExternalIDs(params.id),
+			omdb: getOMDB()
 		}
 	}
 }

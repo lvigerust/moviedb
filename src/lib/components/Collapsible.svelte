@@ -34,7 +34,7 @@
 </script>
 
 {#if local_release}
-	<div use:melt={$root} class="relative pl-3" use:clickOutside={handleClickOutside}>
+	<div use:melt={$root} class="relative" use:clickOutside={handleClickOutside}>
 		<button use:melt={$trigger}>
 			<p>{formatDate(local_release)} ({release_dates?.iso_3166_1})</p>
 		</button>

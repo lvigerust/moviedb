@@ -8,6 +8,6 @@
 	<meta property="og:url" content={$page.url.href} />
 	<meta property="og:image" content={$page.data.meta.image1} />
 	<meta property="og:image" content={$page.data.meta.image2} />
-	<meta name="description" content={$page.data.meta.description} />
+	<meta property="og:description" content={$page.data.meta.metaDescription} />
 	<meta property="og:site_name" content="Filmguide" />
 </svelte:head>
