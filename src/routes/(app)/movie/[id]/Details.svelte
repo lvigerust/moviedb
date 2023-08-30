@@ -45,7 +45,7 @@
 					{#if release_dates}
 						{#if release_dates.release_dates[0].certification}
 							<span
-								class="mr-3 inline-flex items-center rounded bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/70"
+								class="mr-3 inline-flex items-center rounded-md bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/70"
 								>{release_dates?.release_dates[0].certification}</span
 							>
 						{/if}
@@ -69,8 +69,17 @@
 					<p>{formatRuntime(movieDetails.runtime)}</p>
 				{/if}
 				{#await omdb then omdb}
-					<span class="mx-3 select-none font-bold">•</span>
-					<p>IMDb: {omdb.imdbRating}</p>
+					{#if omdb.imdbRating !== 'N/A'}
+						<span class="mx-3 select-none font-bold">•</span>
+						<a
+							href={`https://www.imdb.com/title/${omdb.imdbID}`}
+							rel="noreferrer"
+							target="_blank"
+							title={`${movieDetails.title} - IMDb`}
+							class="mr-3 inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-500/90 ring-1 ring-inset ring-yellow-500/25"
+							>IMDb: {omdb.imdbRating}</a
+						>
+					{/if}
 				{/await}
 			</div>
 		</div>
