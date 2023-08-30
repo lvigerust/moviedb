@@ -1,8 +1,12 @@
 <script lang="ts">
+	import { Meta } from '$components'
+
 	export let data
 
 	const { movieCollection } = data
 </script>
+
+<Meta />
 
 <h1>{movieCollection.name}</h1>
 
