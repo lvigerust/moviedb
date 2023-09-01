@@ -45,7 +45,7 @@
 					{#if release_dates}
 						{#if release_dates.release_dates[0].certification}
 							<span
-								class="mr-3 inline-flex items-center rounded-md bg-slate-600/50 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-950/70"
+								class="mr-3 inline-flex items-center rounded-md bg-slate-600/30 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-400/20"
 								>{release_dates?.release_dates[0].certification}</span
 							>
 						{/if}

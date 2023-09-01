@@ -84,5 +84,9 @@
 <div class="divider my-12" />
 
 <div>
-	<Checkbox />
+	<Checkbox option="Show Tip of the day" />
+</div>
+<div>
+	<p>Radio button</p>
+	<Checkbox option="Rotten Tomatoes or IMDb Rating" />
 </div>

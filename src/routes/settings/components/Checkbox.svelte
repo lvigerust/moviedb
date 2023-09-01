@@ -9,6 +9,8 @@
 	} = createCheckbox({})
 
 	checked.set(true)
+
+	export let option = '"Setting"'
 </script>
 
 <form>
@@ -23,6 +25,6 @@
 			{/if}
 			<input use:melt={$input} />
 		</button>
-		<label class="cursor-pointer leading-none" for="checkbox">Show Tip of the day</label>
+		<label class="cursor-pointer leading-none" for="checkbox">{option}</label>
 	</div>
 </form>
