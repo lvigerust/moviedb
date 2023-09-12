@@ -2,8 +2,6 @@
 	export let data
 
 	$: ({ requestToken } = data)
-
-	$: console.log(requestToken)
 </script>
 
 <main class="grid h-full grid-cols-2">

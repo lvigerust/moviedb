@@ -10,30 +10,27 @@ type RequestTokenData = {
 
 export const load = async ({ fetch, cookies }) => {
 	const requestToken = async () => {
-		const activeRequestToken = cookies.get('requestToken')
+		const url = 'https://api.themoviedb.org/4/auth/request_token'
+		const options = {
+			method: 'POST',
+			headers: {
+				accept: 'application/json',
+				'content-type': 'application/json',
+				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
+			},
+			body: JSON.stringify({ redirect_to: 'http://localhost:5173/account' })
+		}
 
-		if (!activeRequestToken) {
-			const url = 'https://api.themoviedb.org/4/auth/request_token'
-			const options = {
-				method: 'POST',
-				headers: {
-					accept: 'application/json',
-					'content-type': 'application/json',
-					Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-				},
-				body: JSON.stringify({ redirect_to: 'http://localhost:5173/account' })
-			}
+		const requestTokenRes = await fetch(url, options)
 
-			const requestTokenRes = await fetch(url, options)
+		if (requestTokenRes.ok) {
+			const requestTokenData: RequestTokenData = await requestTokenRes.json()
 
-			if (requestTokenRes.ok) {
-				const requestTokenData: RequestTokenData = await requestTokenRes.json()
-
+			if (!cookies.get('accountId')) {
 				cookies.set('requestToken', requestTokenData.request_token)
-
 				return requestTokenData
-			} else throw error(404, 'Error')
-		} else throw redirect(302, '/account')
+			} else throw redirect(301, '/account')
+		} else throw error(404, 'Error')
 	}
 
 	return {

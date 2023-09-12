@@ -32,7 +32,6 @@
 
 <svelte:head>
 	<title>{($page.data.meta && $page.data.meta.title) ?? 'Home'} — Filmguide</title>
-
 	<meta
 		name="description"
 		content={($page.data.meta && $page.data.meta.description) ??

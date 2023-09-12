@@ -14,3 +14,7 @@
 		<Card data={movie} />
 	{/each}
 </div>
+
+<form action="/account?/logout" method="POST">
+	<button>Logout</button>
+</form>

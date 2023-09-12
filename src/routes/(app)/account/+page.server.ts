@@ -13,9 +13,6 @@ type AccessTokenData = {
 export const load = async ({ fetch, cookies }) => {
 	const accessToken = async () => {
 		const url = 'https://api.themoviedb.org/4/auth/access_token'
-
-		const request_token = cookies.get('requestToken')
-
 		const options = {
 			method: 'POST',
 			headers: {
@@ -23,7 +20,7 @@ export const load = async ({ fetch, cookies }) => {
 				'content-type': 'application/json',
 				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
 			},
-			body: JSON.stringify({ request_token: request_token })
+			body: JSON.stringify({ request_token: cookies.get('requestToken') })
 		}
 
 		const accessTokenRes = await fetch(url, options)
@@ -58,8 +55,30 @@ export const load = async ({ fetch, cookies }) => {
 		} else throw error(404, 'Error getting watchlist')
 	}
 
+	/* Meta Information */
+	const getMetaInformation = async () => {
+		const title = 'Watchlist'
+
+		const description = 'Watchlists'
+
+		return {
+			title,
+			description
+		}
+	}
+
 	return {
 		accessToken: accessToken(),
-		watchlistMovies: getWatchlistMovies()
+		watchlistMovies: getWatchlistMovies(),
+		meta: getMetaInformation()
+	}
+}
+
+export const actions = {
+	logout: async ({ cookies }) => {
+		cookies.delete('requestToken')
+		cookies.delete('accountId')
+
+		throw redirect(301, '/')
 	}
 }
