@@ -8,9 +8,9 @@ type RequestTokenData = {
 	status_code: number
 }
 
-export const load = async ({ fetch, cookies }) => {
+export const load = async ({ fetch, cookies, url }) => {
 	const requestToken = async () => {
-		const url = 'https://api.themoviedb.org/4/auth/request_token'
+		const urlRequest = 'https://api.themoviedb.org/4/auth/request_token'
 		const options = {
 			method: 'POST',
 			headers: {
@@ -18,10 +18,10 @@ export const load = async ({ fetch, cookies }) => {
 				'content-type': 'application/json',
 				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
 			},
-			body: JSON.stringify({ redirect_to: 'http://localhost:5173/account' })
+			body: JSON.stringify({ redirect_to: `${url.origin}/account` })
 		}
 
-		const requestTokenRes = await fetch(url, options)
+		const requestTokenRes = await fetch(urlRequest, options)
 
 		if (requestTokenRes.ok) {
 			const requestTokenData: RequestTokenData = await requestTokenRes.json()
