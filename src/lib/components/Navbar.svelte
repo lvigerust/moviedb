@@ -12,10 +12,6 @@
 			label: 'TV Shows'
 		},
 		{
-			href: '/login',
-			label: 'Login'
-		},
-		{
 			href: '/account',
 			label: 'Watchlist'
 		}

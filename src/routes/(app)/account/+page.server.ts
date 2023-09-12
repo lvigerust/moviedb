@@ -1,4 +1,6 @@
 import { TMDB_ACCESS_TOKEN } from '$env/static/private'
+import type { ApiResponse, Movie } from '$types'
+import { error, redirect } from '@sveltejs/kit'
 
 type AccessTokenData = {
 	account_id: string
@@ -9,8 +11,11 @@ type AccessTokenData = {
 }
 
 export const load = async ({ fetch, cookies }) => {
-	const createAccessToken = async () => {
-		const accessUrl = 'https://api.themoviedb.org/4/auth/access_token'
+	const accessToken = async () => {
+		const url = 'https://api.themoviedb.org/4/auth/access_token'
+
+		const request_token = cookies.get('requestToken')
+
 		const options = {
 			method: 'POST',
 			headers: {
@@ -18,21 +23,43 @@ export const load = async ({ fetch, cookies }) => {
 				'content-type': 'application/json',
 				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
 			},
-			body: JSON.stringify({
-				request_token: cookies.get('request_token')
-			})
+			body: JSON.stringify({ request_token: request_token })
 		}
 
-		const accessTokenRes = await fetch(accessUrl, options)
+		const accessTokenRes = await fetch(url, options)
 
 		if (accessTokenRes.ok) {
-			const requestTokenData: AccessTokenData = await accessTokenRes.json()
+			const accessTokenData: AccessTokenData = await accessTokenRes.json()
 
-			return requestTokenData
+			cookies.set('accountId', accessTokenData.account_id)
+
+			return accessTokenData
+		} else throw redirect(301, '/login')
+	}
+
+	const getWatchlistMovies = async () => {
+		const accountId = await accessToken()
+
+		const url = `https://api.themoviedb.org/4/account/${accountId.account_id}/movie/watchlist?page=1&language=en-US`
+		const options = {
+			method: 'GET',
+			headers: {
+				accept: 'application/json',
+				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
+			}
 		}
+
+		const watchlistMoviesRes = await fetch(url, options)
+
+		if (watchlistMoviesRes.ok) {
+			const watchlistMoviesData: ApiResponse<Movie> = await watchlistMoviesRes.json()
+
+			return watchlistMoviesData
+		} else throw error(404, 'Error getting watchlist')
 	}
 
 	return {
-		access_token: createAccessToken()
+		accessToken: accessToken(),
+		watchlistMovies: getWatchlistMovies()
 	}
 }

@@ -5,8 +5,6 @@
 
 	import { page } from '$app/stores'
 
-	$: console.log($page)
-
 	// inject({ mode: dev ? 'development' : 'production' })
 </script>
 

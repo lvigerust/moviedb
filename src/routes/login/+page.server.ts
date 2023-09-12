@@ -1,4 +1,5 @@
 import { TMDB_ACCESS_TOKEN } from '$env/static/private'
+import { error, redirect } from '@sveltejs/kit'
 
 type RequestTokenData = {
 	status_message: string
@@ -7,31 +8,35 @@ type RequestTokenData = {
 	status_code: number
 }
 
-export const load = async ({ fetch, url, cookies }) => {
-	const createRequestToken = async () => {
-		const requestUrl = 'https://api.themoviedb.org/4/auth/request_token'
-		const options = {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'content-type': 'application/json',
-				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-			},
-			body: JSON.stringify({ redirect_to: `${url.origin}/account` })
-		}
+export const load = async ({ fetch, cookies }) => {
+	const requestToken = async () => {
+		const activeRequestToken = cookies.get('requestToken')
 
-		const requestTokenRes = await fetch(requestUrl, options)
+		if (!activeRequestToken) {
+			const url = 'https://api.themoviedb.org/4/auth/request_token'
+			const options = {
+				method: 'POST',
+				headers: {
+					accept: 'application/json',
+					'content-type': 'application/json',
+					Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
+				},
+				body: JSON.stringify({ redirect_to: 'http://localhost:5173/account' })
+			}
 
-		if (requestTokenRes.ok) {
-			const requestTokenData: RequestTokenData = await requestTokenRes.json()
+			const requestTokenRes = await fetch(url, options)
 
-			cookies.set('request_token', requestTokenData.request_token)
+			if (requestTokenRes.ok) {
+				const requestTokenData: RequestTokenData = await requestTokenRes.json()
 
-			return requestTokenData
-		}
+				cookies.set('requestToken', requestTokenData.request_token)
+
+				return requestTokenData
+			} else throw error(404, 'Error')
+		} else throw redirect(302, '/account')
 	}
 
 	return {
-		request_token: createRequestToken()
+		requestToken: requestToken()
 	}
 }
