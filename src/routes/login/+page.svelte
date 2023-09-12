@@ -2,6 +2,8 @@
 	export let data
 
 	$: ({ requestToken } = data)
+
+	import { page } from '$app/stores'
 </script>
 
 <main class="grid h-full grid-cols-2">
@@ -19,7 +21,8 @@
 
 		<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 			<a
-				href={`https://www.themoviedb.org/auth/access?request_token=${requestToken.request_token}`}
+				href={`https://www.themoviedb.org/authenticate/${requestToken.request_token}?redirect_to=${$page.url.origin}/account
+				`}
 				class="flex w-full cursor-pointer justify-center rounded-md bg-teal-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
 				>Take me there!</a
 			>

@@ -1,43 +1,52 @@
 import { TMDB_ACCESS_TOKEN } from '$env/static/private'
-import type { ApiResponse, Movie } from '$types'
-import { error, redirect } from '@sveltejs/kit'
+import { redirect } from '@sveltejs/kit'
 
-type AccessTokenData = {
-	account_id: string
-	access_token: string
+type SessionData = {
 	success: boolean
-	status_message: string
-	status_code: number
+	session_id: string
+}
+
+type Account = {
+	avatar: {
+		gravatar: { hash: string }
+		tmdb: { avatar_path: string | null }
+	}
+	id: number
+	iso_639_1: string
+	iso_3166_1: string
+	name: string
+	include_adult: boolean
+	username: string
 }
 
 export const load = async ({ fetch, cookies }) => {
-	const accessToken = async () => {
-		const url = 'https://api.themoviedb.org/4/auth/access_token'
-		const options = {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'content-type': 'application/json',
-				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-			},
-			body: JSON.stringify({ request_token: cookies.get('requestToken') })
+	const createSession = async () => {
+		if (!cookies.get('session')) {
+			const url = 'https://api.themoviedb.org/3/authentication/session/new'
+			const options = {
+				method: 'POST',
+				headers: {
+					accept: 'application/json',
+					'content-type': 'application/json',
+					Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
+				},
+				body: JSON.stringify({ request_token: cookies.get('requestToken') })
+			}
+
+			const sessionRes = await fetch(url, options)
+
+			if (sessionRes.ok) {
+				const sessionData: SessionData = await sessionRes.json()
+
+				cookies.set('session', sessionData.session_id, {
+					maxAge: 60 * 60 * 24 * 7
+				})
+			} else throw redirect(302, '/login')
 		}
-
-		const accessTokenRes = await fetch(url, options)
-
-		if (accessTokenRes.ok) {
-			const accessTokenData: AccessTokenData = await accessTokenRes.json()
-
-			cookies.set('accountId', accessTokenData.account_id)
-
-			return accessTokenData
-		} else throw redirect(301, '/login')
 	}
 
-	const getWatchlistMovies = async () => {
-		const accountId = await accessToken()
-
-		const url = `https://api.themoviedb.org/4/account/${accountId.account_id}/movie/watchlist?page=1&language=en-US`
+	const getAccountDetails = async () => {
+		const url = `https://api.themoviedb.org/3/account?session_id=${cookies.get('session')}`
 		const options = {
 			method: 'GET',
 			headers: {
@@ -46,13 +55,13 @@ export const load = async ({ fetch, cookies }) => {
 			}
 		}
 
-		const watchlistMoviesRes = await fetch(url, options)
+		const accountDetailsRes = await fetch(url, options)
 
-		if (watchlistMoviesRes.ok) {
-			const watchlistMoviesData: ApiResponse<Movie> = await watchlistMoviesRes.json()
+		if (accountDetailsRes.ok) {
+			const accountDetailsData: Account = await accountDetailsRes.json()
 
-			return watchlistMoviesData
-		} else throw error(404, 'Error getting watchlist')
+			return accountDetailsData
+		}
 	}
 
 	/* Meta Information */
@@ -67,17 +76,17 @@ export const load = async ({ fetch, cookies }) => {
 		}
 	}
 
+	// Streamed
+
 	return {
-		accessToken: accessToken(),
-		watchlistMovies: getWatchlistMovies(),
-		meta: getMetaInformation()
+		meta: getMetaInformation(),
+		session: createSession(),
+		account: getAccountDetails()
 	}
 }
-
 export const actions = {
 	logout: async ({ cookies }) => {
-		cookies.delete('requestToken')
-		cookies.delete('accountId')
+		cookies.delete('session')
 
 		throw redirect(301, '/')
 	}

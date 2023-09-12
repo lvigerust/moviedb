@@ -1,20 +1,17 @@
 <script lang="ts">
-	import { Card } from '$components'
-
 	export let data
 
-	const {
-		watchlistMovies: { results }
-	} = data
+	const { account } = data
 </script>
 
-<h2 class="mb-3 text-lg font-semibold tracking-tighter">Watchlist Movies</h2>
-<div class="grid grid-flow-row grid-cols-7 gap-x-4 gap-y-10">
-	{#each results as movie}
-		<Card data={movie} />
-	{/each}
-</div>
+<div class="flex w-full flex-col items-center gap-12">
+	<h1
+		class="mx-auto mt-20 max-w-4xl text-center font-Display text-5xl font-medium tracking-tight text-slate-200 sm:text-7xl"
+	>
+		Welcome {account?.name === '' ? account.username : account?.name}
+	</h1>
 
-<form action="/account?/logout" method="POST">
-	<button>Logout</button>
-</form>
+	<form class="w-fit" action="/account?/logout" method="POST">
+		<button class="btn btn-warning btn-wide">Logout</button>
+	</form>
+</div>
