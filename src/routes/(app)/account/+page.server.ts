@@ -59,7 +59,6 @@ export const load = async ({ fetch, cookies }) => {
 
 		if (accountDetailsRes.ok) {
 			const accountDetailsData: Account = await accountDetailsRes.json()
-
 			return accountDetailsData
 		}
 	}
@@ -75,8 +74,6 @@ export const load = async ({ fetch, cookies }) => {
 			description
 		}
 	}
-
-	// Streamed
 
 	return {
 		meta: getMetaInformation(),

@@ -14,4 +14,6 @@
 	<form class="w-fit" action="/account?/logout" method="POST">
 		<button class="btn btn-warning btn-wide">Logout</button>
 	</form>
+
+	<a href="/account/watchlist" class="btn">Watchlist</a>
 </div>
