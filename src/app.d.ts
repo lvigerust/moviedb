@@ -3,7 +3,14 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		// interface Locals {}
+		interface Locals {
+			request_token: {
+				status_message: string
+				request_token: string
+				success: boolean
+				status_code: number
+			}
+		}
 		// interface PageData {}
 		// interface Platform {}
 	}

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores'
 	import { Search } from '$components'
-	import { fly } from 'svelte/transition'
 
 	const menuItems: { href: string; label: string }[] = [
 		{
@@ -11,6 +10,14 @@
 		{
 			href: '/tv',
 			label: 'TV Shows'
+		},
+		{
+			href: '/login',
+			label: 'Login'
+		},
+		{
+			href: '/account',
+			label: 'Watchlist'
 		}
 	]
 
@@ -37,7 +44,7 @@
 	class:hidden={$page.error || $page.url.pathname.includes('/settings')}
 	bind:clientHeight
 >
-	<nav in:fly={{ y: -50, duration: 800 }} class="navbar mx-auto max-w-8xl px-4 text-sm font-medium">
+	<nav class="navbar mx-auto max-w-8xl px-4 text-sm font-medium">
 		<div class="navbar-start">
 			<a
 				class="font-Display {$page.error ? 'hover:slate-300' : 'hover:text-slate-300'}"
