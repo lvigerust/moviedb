@@ -1,5 +1,6 @@
 import { TMDB_ACCESS_TOKEN } from '$env/static/private'
 import type { ApiResponse, Movie } from '$types'
+import { error } from '@sveltejs/kit'
 
 export const load = async ({ fetch, cookies }) => {
 	const getWatchlistMovies = async () => {
@@ -19,7 +20,7 @@ export const load = async ({ fetch, cookies }) => {
 		if (watchlistMoviesRes.ok) {
 			const watchlistMoviesData: ApiResponse<Movie> = await watchlistMoviesRes.json()
 			return watchlistMoviesData
-		} else console.error("Couldn't get watchlist movies.")
+		} else throw error(404, "Couldn't get watchlist movies.")
 	}
 
 	/* Meta Information */

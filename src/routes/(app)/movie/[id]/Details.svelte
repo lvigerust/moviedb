@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Collapsible, WatchProvider } from '$components'
+	import { WatchProvider } from '$components'
 	import type { Credits, MovieDetails, OMDBData, ReleaseDate } from '$types'
 	import { findPersonByJob, formatDate, formatRuntime, slugify } from '$utils'
 	import type { ProviderOptions } from '../../tv/[id]/+page.server'
@@ -42,18 +42,14 @@
 
 			<div class="mt-2 flex items-center font-medium text-base-content/80">
 				{#await release_dates then release_dates}
-					{#if release_dates}
-						{#if release_dates.release_dates[0].certification}
-							<span
-								class="mr-3 inline-flex items-center rounded-md bg-slate-600/30 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-400/20"
-								>{release_dates?.release_dates[0].certification}</span
-							>
-						{/if}
-						<Collapsible {release_dates} {movieDetails} />
-					{:else}
-						<p class="">{formatDate(movieDetails.release_date)}</p>
+					{#if release_dates && release_dates.release_dates[0].certification}
+						<span
+							class="mr-3 inline-flex items-center rounded-md bg-slate-600/30 px-2 py-1 text-xs font-medium text-slate-400 ring-1 ring-inset ring-slate-400/20"
+							>{release_dates?.release_dates[0].certification}</span
+						>
 					{/if}
 				{/await}
+				<p>{formatDate(movieDetails.release_date)}</p>
 
 				<span class="mx-3 select-none font-bold">•</span>
 
