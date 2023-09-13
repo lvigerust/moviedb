@@ -6,19 +6,6 @@ type SessionData = {
 	session_id: string
 }
 
-type Account = {
-	avatar: {
-		gravatar: { hash: string }
-		tmdb: { avatar_path: string | null }
-	}
-	id: number
-	iso_639_1: string
-	iso_3166_1: string
-	name: string
-	include_adult: boolean
-	username: string
-}
-
 export const load = async ({ fetch, cookies }) => {
 	const createSession = async () => {
 		if (!cookies.get('session')) {
@@ -45,24 +32,6 @@ export const load = async ({ fetch, cookies }) => {
 		}
 	}
 
-	const getAccountDetails = async () => {
-		const url = `https://api.themoviedb.org/3/account?session_id=${cookies.get('session')}`
-		const options = {
-			method: 'GET',
-			headers: {
-				accept: 'application/json',
-				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-			}
-		}
-
-		const accountDetailsRes = await fetch(url, options)
-
-		if (accountDetailsRes.ok) {
-			const accountDetailsData: Account = await accountDetailsRes.json()
-			return accountDetailsData
-		}
-	}
-
 	/* Meta Information */
 	const getMetaInformation = async () => {
 		const title = 'Account'
@@ -77,8 +46,7 @@ export const load = async ({ fetch, cookies }) => {
 
 	return {
 		meta: getMetaInformation(),
-		session: createSession(),
-		account: getAccountDetails()
+		session: createSession()
 	}
 }
 export const actions = {

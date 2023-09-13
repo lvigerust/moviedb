@@ -3,14 +3,14 @@
 
 	export let data
 
-	const { account } = data
+	const { user } = data
 </script>
 
 <div class="flex w-full flex-col items-center gap-12">
 	<h1
 		class="mx-auto mt-20 max-w-4xl text-center font-Display text-5xl font-medium tracking-tight text-slate-200 sm:text-7xl"
 	>
-		Welcome {account?.name === '' ? account.username : account?.name}
+		Welcome {user?.name === '' ? user.username : user?.name}
 	</h1>
 	<a href="/account/watchlist" class="btn btn-primary btn-wide">Watchlist movies</a>
 
