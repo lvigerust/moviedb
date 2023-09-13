@@ -10,8 +10,8 @@
 
 	const {
 		movieDetails,
-
-		streamed: { movieCredits, watchProviders, recommendations, release_dates, omdb }
+		omdb,
+		streamed: { movieCredits, watchProviders, recommendations, release_dates }
 	} = data
 </script>
 

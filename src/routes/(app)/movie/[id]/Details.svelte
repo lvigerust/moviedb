@@ -8,7 +8,7 @@
 	export let watchProviders: Promise<ProviderOptions>
 	export let movieCredits: Promise<Credits>
 	export let release_dates: Promise<ReleaseDate | null>
-	export let omdb: Promise<OMDBData>
+	export let omdb: OMDBData
 </script>
 
 <section id="details">
@@ -68,19 +68,17 @@
 					<span class="mx-3 select-none font-bold">•</span>
 					<p>{formatRuntime(movieDetails.runtime)}</p>
 				{/if}
-				{#await omdb then omdb}
-					{#if omdb.imdbRating !== 'N/A'}
-						<span class="mx-3 select-none font-bold">•</span>
-						<a
-							href={`https://www.imdb.com/title/${omdb.imdbID}`}
-							rel="noreferrer"
-							target="_blank"
-							title={`${movieDetails.title} - IMDb`}
-							class="mr-3 inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-500/90 ring-1 ring-inset ring-yellow-500/25"
-							>IMDb: {omdb.imdbRating}</a
-						>
-					{/if}
-				{/await}
+				{#if omdb.imdbRating !== 'N/A'}
+					<span class="mx-3 select-none font-bold">•</span>
+					<a
+						href={`https://www.imdb.com/title/${omdb.imdbID}`}
+						rel="noreferrer"
+						target="_blank"
+						title={`${movieDetails.title} - IMDb`}
+						class="mr-3 inline-flex items-center rounded-md bg-yellow-400/10 px-2 py-1 text-xs font-medium text-yellow-500/90 ring-1 ring-inset ring-yellow-500/25"
+						>IMDb: {omdb.imdbRating}</a
+					>
+				{/if}
 			</div>
 		</div>
 

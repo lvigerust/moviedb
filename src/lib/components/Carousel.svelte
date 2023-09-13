@@ -57,9 +57,11 @@
 						{slideCTA(slide)}
 					</div>
 
-					<div class="mx-8 basis-1/3">
-						<img src={`https://image.tmdb.org/t/p/original/${slideLogo(slide)}`} alt="" />
-					</div>
+					{#if slideLogo(slide)}
+						<div class="mx-8 basis-1/3">
+							<img src={`https://image.tmdb.org/t/p/original/${slideLogo(slide)}`} alt="" />
+						</div>
+					{/if}
 				</div>
 			</a>
 		</SplideSlide>

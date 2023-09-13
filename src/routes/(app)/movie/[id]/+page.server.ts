@@ -111,13 +111,13 @@ export const load = async ({ fetch, params }) => {
 	return {
 		movieDetails: getMovieDetails(params.id),
 		meta: getMetaInformation(),
+		omdb: getOMDB(),
 		streamed: {
 			movieCredits: getMovieCredits(params.id),
 			release_dates: getReleaseDates(params.id),
 			watchProviders: getWatchProviders(params.id),
 			recommendations: getRecommendations(params.id),
-			external_ids: getExternalIDs(params.id),
-			omdb: getOMDB()
+			external_ids: getExternalIDs(params.id)
 		}
 	}
 }
