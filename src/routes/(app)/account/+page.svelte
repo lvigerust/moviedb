@@ -15,5 +15,5 @@
 		<button class="btn btn-warning btn-wide">Logout</button>
 	</form>
 
-	<a href="/account/watchlist" class="btn">Watchlist</a>
+	<a href="/account/watchlist" class="btn btn-primary normal-case">Watchlist movies</a>
 </div>

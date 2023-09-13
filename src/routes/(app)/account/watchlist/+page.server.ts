@@ -22,7 +22,20 @@ export const load = async ({ fetch, cookies }) => {
 		} else console.error("Couldn't get watchlist movies.")
 	}
 
+	/* Meta Information */
+	const getMetaInformation = async () => {
+		const title = 'Watchlist'
+
+		const description = 'Watchlists'
+
+		return {
+			title,
+			description
+		}
+	}
+
 	return {
-		watchlistMovies: getWatchlistMovies()
+		watchlistMovies: getWatchlistMovies(),
+		meta: getMetaInformation()
 	}
 }

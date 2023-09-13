@@ -65,9 +65,9 @@ export const load = async ({ fetch, cookies }) => {
 
 	/* Meta Information */
 	const getMetaInformation = async () => {
-		const title = 'Watchlist'
+		const title = 'Account'
 
-		const description = 'Watchlists'
+		const description = 'Account'
 
 		return {
 			title,
