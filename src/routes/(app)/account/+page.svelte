@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { enhance } from '$app/forms'
+
 	export let data
 
 	const { account } = data
@@ -10,10 +12,9 @@
 	>
 		Welcome {account?.name === '' ? account.username : account?.name}
 	</h1>
+	<a href="/account/watchlist" class="btn btn-primary btn-wide">Watchlist movies</a>
 
-	<form class="w-fit" action="/account?/logout" method="POST">
-		<button class="btn btn-warning btn-wide">Logout</button>
+	<form class="w-fit" action="/account?/logout" method="POST" use:enhance>
+		<button class="btn btn-warning">Logout</button>
 	</form>
-
-	<a href="/account/watchlist" class="btn btn-primary normal-case">Watchlist movies</a>
 </div>

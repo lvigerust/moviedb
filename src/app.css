@@ -36,6 +36,10 @@ body {
 		@apply min-h-[var(--navbar-height)] py-0;
 	}
 
+	.btn {
+		@apply normal-case;
+	}
+
 	.stat-title,
 	.stat-desc {
 		@apply text-slate-400;
