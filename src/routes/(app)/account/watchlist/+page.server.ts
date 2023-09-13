@@ -40,3 +40,31 @@ export const load = async ({ fetch, cookies }) => {
 		meta: getMetaInformation()
 	}
 }
+
+export const actions = {
+	removeFromWatchlist: async ({ request, fetch, cookies, locals }) => {
+		const formData = await request.formData()
+
+		const id = formData.get('id')
+
+		const url = `https://api.themoviedb.org/3/account/${
+			locals.user?.id
+		}/watchlist?session_id=${cookies.get('session')}`
+
+		const options = {
+			method: 'POST',
+			headers: {
+				accept: 'application/json',
+				'content-type': 'application/json',
+				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
+			},
+			body: JSON.stringify({ media_type: 'movie', media_id: id, watchlist: false })
+		}
+
+		const addToWatchlistRes = await fetch(url, options)
+
+		if (addToWatchlistRes.ok) {
+			return await addToWatchlistRes.json()
+		}
+	}
+}

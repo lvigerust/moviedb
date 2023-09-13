@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { WatchProvider } from '$components'
+	import { enhance } from '$app/forms'
+	import { WatchProvider, addToast } from '$components'
 	import type { Credits, MovieDetails, OMDBData, ReleaseDate } from '$types'
 	import { findPersonByJob, formatDate, formatRuntime, slugify } from '$utils'
 	import type { ProviderOptions } from '../../tv/[id]/+page.server'
@@ -9,6 +10,16 @@
 	export let movieCredits: Promise<Credits>
 	export let release_dates: Promise<ReleaseDate | null>
 	export let omdb: OMDBData
+	export let user: Account
+
+	function createToast(item: string) {
+		addToast({
+			data: {
+				description: `Added <b>${item}</b> to your watchlist`
+			},
+			closeDelay: 5000
+		})
+	}
 </script>
 
 <section id="details">
@@ -86,6 +97,28 @@
 			{/await}
 		</div>
 	</div>
+
+	{#if user}
+		<form
+			class="my-20"
+			method="post"
+			action="?/addToWatchlist"
+			use:enhance={() => {
+				// Before form submission to server
+
+				return async ({ result, update }) => {
+					// After form submission to server
+					if (result.type === 'success') {
+						createToast(movieDetails.title)
+					}
+				}
+			}}
+		>
+			<input name="id" value={movieDetails.id} type="number" hidden />
+			<input name="media_type" value={movieDetails.media_type} type="text" hidden />
+			<button class="btn">Add to watchlist</button>
+		</form>
+	{/if}
 
 	<h2 class="my-10 italic">{movieDetails.tagline}</h2>
 

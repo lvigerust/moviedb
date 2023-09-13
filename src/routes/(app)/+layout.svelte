@@ -6,24 +6,7 @@
 
 	export let data
 
-	$: ({ url, visited } = data)
-
-	function createToast() {
-		addToast({
-			data: {
-				title: 'Tip of the day',
-				description: 'Use ⌘ + . to open search',
-				color: ''
-			},
-			closeDelay: 10000
-		})
-	}
-
-	onMount(() => {
-		if (!visited) {
-			createToast()
-		}
-	})
+	$: ({ url } = data)
 </script>
 
 <Toaster />

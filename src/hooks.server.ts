@@ -2,7 +2,10 @@ import { TMDB_ACCESS_TOKEN } from '$env/static/private'
 import { getAccountDetails } from '$lib/server/auth'
 
 export const handle = async ({ event, resolve }) => {
-	event.locals.user = await getAccountDetails(event.cookies.get('session'), TMDB_ACCESS_TOKEN)
+	const session = event.cookies.get('session')
+	if (session) {
+		event.locals.user = await getAccountDetails(session, TMDB_ACCESS_TOKEN)
+	}
 
 	let theme: string | null = 'night'
 	const newTheme = event.url.searchParams.get('theme')

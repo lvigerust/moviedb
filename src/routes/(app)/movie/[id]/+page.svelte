@@ -11,13 +11,14 @@
 	const {
 		movieDetails,
 		omdb,
+		user,
 		streamed: { movieCredits, watchProviders, recommendations, release_dates }
 	} = data
 </script>
 
 <Meta />
 
-<Details {movieDetails} {watchProviders} {movieCredits} {release_dates} {omdb} />
+<Details {movieDetails} {watchProviders} {movieCredits} {release_dates} {omdb} {user} />
 
 <div class="divider" />
 

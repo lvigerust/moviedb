@@ -1,4 +1,4 @@
-import { OMDB_API_KEY, TMDB_API_KEY } from '$env/static/private'
+import { OMDB_API_KEY, TMDB_ACCESS_TOKEN, TMDB_API_KEY } from '$env/static/private'
 import {
 	MediaType,
 	type Credits,
@@ -118,6 +118,35 @@ export const load = async ({ fetch, params }) => {
 			watchProviders: getWatchProviders(params.id),
 			recommendations: getRecommendations(params.id),
 			external_ids: getExternalIDs(params.id)
+		}
+	}
+}
+
+export const actions = {
+	addToWatchlist: async ({ request, fetch, cookies, locals }) => {
+		const formData = await request.formData()
+
+		const id = formData.get('id')
+		const media_type = formData.get('media_type')
+
+		const url = `https://api.themoviedb.org/3/account/${
+			locals.user?.id
+		}/watchlist?session_id=${cookies.get('session')}`
+
+		const options = {
+			method: 'POST',
+			headers: {
+				accept: 'application/json',
+				'content-type': 'application/json',
+				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
+			},
+			body: JSON.stringify({ media_type: media_type, media_id: id, watchlist: true })
+		}
+
+		const addToWatchlistRes = await fetch(url, options)
+
+		if (addToWatchlistRes.ok) {
+			return await addToWatchlistRes.json()
 		}
 	}
 }
