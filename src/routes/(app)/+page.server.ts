@@ -1,7 +1,6 @@
-import { TMDB_ACCESS_TOKEN, TMDB_API_KEY, TMDB_BASE_URL } from '$env/static/private'
+import { TMDB_API_KEY } from '$env/static/private'
 import { movies } from '$lib/watchlist.js'
-import type { ApiResponse, Movie, MovieDetails } from '$types'
-import { error } from '@sveltejs/kit'
+import type { MovieDetails } from '$types'
 
 export const load = async ({ fetch }) => {
 	const getWatchlist = async () => {
@@ -19,30 +18,8 @@ export const load = async ({ fetch }) => {
 		return { watchlist }
 	}
 
-	const getUpcomingMovies = async () => {
-		const url = `${TMDB_BASE_URL}/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2023&primary_release_date.gte=2023-08-28&primary_release_date.lte=2023-10-01&release_date.gte=2023-08-28&release_date.lte=2023-10-01&sort_by=popularity.desc&year=2023`
-		const options = {
-			method: 'GET',
-			headers: {
-				accept: 'application/json',
-				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-			}
-		}
-
-		const upcomingMoviesRes = await fetch(url, options)
-
-		if (upcomingMoviesRes.ok) {
-			const upcomingMoviesData: ApiResponse<Movie> = await upcomingMoviesRes.json()
-
-			return upcomingMoviesData
-		} else throw error(404, "Couldn't get upcming movies, please try again.")
-	}
-
 	return {
 		watchlist: getWatchlist(),
-		meta: { title: 'Home' },
-		streamed: {
-			upcomingMovies: getUpcomingMovies()
-		}
+		meta: { title: 'Home' }
 	}
 }

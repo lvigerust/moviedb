@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition'
-	import { Breadcrumbs, Navbar, Toaster, addToast } from '$components'
-	import { onMount } from 'svelte'
+	import { Breadcrumbs, Navbar, Toaster } from '$components'
 	import { page } from '$app/stores'
 
 	export let data

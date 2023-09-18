@@ -12,10 +12,11 @@
 	export let omdb: OMDBData
 	export let user: Account
 
-	function createToast(item: string) {
+	function createToast(title: string, description: string) {
 		addToast({
 			data: {
-				description: `Added <b>${item}</b> to your watchlist`
+				title: title,
+				description: `Added <b>${description}</b> to your watchlist`
 			},
 			closeDelay: 5000
 		})
@@ -100,7 +101,6 @@
 
 	{#if user}
 		<form
-			class="my-20"
 			method="post"
 			action="?/addToWatchlist"
 			use:enhance={() => {
@@ -109,14 +109,14 @@
 				return async ({ result, update }) => {
 					// After form submission to server
 					if (result.type === 'success') {
-						createToast(movieDetails.title)
+						createToast(result.type, movieDetails.title)
 					}
 				}
 			}}
 		>
 			<input name="id" value={movieDetails.id} type="number" hidden />
 			<input name="media_type" value={movieDetails.media_type} type="text" hidden />
-			<button class="btn">Add to watchlist</button>
+			<button class="btn btn-sm mt-8 px-6">Add to watchlist</button>
 		</form>
 	{/if}
 
