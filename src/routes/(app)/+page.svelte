@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { Carousel } from '$components'
-	import { formatDate } from '$utils'
 
 	export let data
 	const {
-		watchlist: { watchlist },
-		streamed: { upcomingMovies }
+		watchlist: { watchlist }
 	} = data
 </script>
 
@@ -28,31 +26,3 @@
 		<span class="italic">now</span>.
 	</h2>
 </div>
-
-<!-- {#await upcomingMovies}
-	<p>Loading upcoming movies...</p>
-{:then upcomingMovies}
-	<section class="mt-16 w-full pb-12">
-		<h2 class="mb-4 text-lg font-semibold text-slate-300">Upcoming Movies</h2>
-		<div class="flex h-full gap-8">
-			{#each upcomingMovies.results.slice(0, 3) as movie}
-				<div class="flex h-48 w-full gap-4 rounded-lg bg-base-200/20 p-5 ring-1 ring-slate-950/25">
-					<div class="w-3/4">
-						<img
-							class="aspect-square h-full w-full rounded-md object-cover"
-							src={'https://image.tmdb.org/t/p/w1280/' + movie.backdrop_path}
-							alt=""
-						/>
-					</div>
-
-					<div class="w-full">
-						<hgroup class="flex h-full w-full flex-col space-y-2">
-							<p class="text-xs font-medium text-slate-400/75">{formatDate(movie.release_date)}</p>
-							<h4 class=" font-semibold text-slate-300/75">{movie.title}</h4>
-						</hgroup>
-					</div>
-				</div>
-			{/each}
-		</div>
-	</section>
-{/await} -->

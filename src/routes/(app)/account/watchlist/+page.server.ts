@@ -23,21 +23,9 @@ export const load = async ({ fetch, cookies }) => {
 		} else throw error(404, "Couldn't get watchlist movies.")
 	}
 
-	/* Meta Information */
-	const getMetaInformation = async () => {
-		const title = 'Watchlist'
-
-		const description = 'Watchlists'
-
-		return {
-			title,
-			description
-		}
-	}
-
 	return {
 		watchlistMovies: getWatchlistMovies(),
-		meta: getMetaInformation()
+		meta: { title: 'My watchlist' }
 	}
 }
 
@@ -61,10 +49,10 @@ export const actions = {
 			body: JSON.stringify({ media_type: 'movie', media_id: id, watchlist: false })
 		}
 
-		const addToWatchlistRes = await fetch(url, options)
+		const removeFromWatchlistRes = await fetch(url, options)
 
-		if (addToWatchlistRes.ok) {
-			return await addToWatchlistRes.json()
+		if (removeFromWatchlistRes.ok) {
+			return await removeFromWatchlistRes.json()
 		}
 	}
 }

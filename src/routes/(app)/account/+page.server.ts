@@ -6,7 +6,7 @@ type SessionData = {
 	session_id: string
 }
 
-export const load = async ({ fetch, cookies }) => {
+export const load = async ({ fetch, cookies, locals }) => {
 	const createSession = async () => {
 		if (!cookies.get('session')) {
 			const url = 'https://api.themoviedb.org/3/authentication/session/new'
@@ -32,23 +32,12 @@ export const load = async ({ fetch, cookies }) => {
 		}
 	}
 
-	/* Meta Information */
-	const getMetaInformation = async () => {
-		const title = 'Account'
-
-		const description = 'Account'
-
-		return {
-			title,
-			description
-		}
-	}
-
 	return {
-		meta: getMetaInformation(),
+		meta: { title: locals.user?.name ?? locals.user?.username ?? 'Account' },
 		session: createSession()
 	}
 }
+
 export const actions = {
 	logout: async ({ cookies, fetch }) => {
 		const url = 'https://api.themoviedb.org/3/authentication/session'
