@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
 	import { WatchProvider, addToast } from '$components'
+	import { Bookmark } from '$icons'
 	import type { Credits, MovieDetails, OMDBData, ReleaseDate } from '$types'
 	import { findPersonByJob, formatDate, formatRuntime, slugify } from '$utils'
 	import type { ProviderOptions } from '../../tv/[id]/+page.server'
@@ -21,6 +22,8 @@
 			closeDelay: 5000
 		})
 	}
+
+	let bookmarked = false
 </script>
 
 <section id="details">
@@ -116,7 +119,12 @@
 		>
 			<input name="id" value={movieDetails.id} type="number" hidden />
 			<input name="media_type" value={movieDetails.media_type} type="text" hidden />
-			<button class="btn btn-sm mt-8 px-6">Add to watchlist</button>
+			<button
+				class="group btn btn-circle btn-outline mt-8 border-slate-800 p-3.5 transition-all hover:border-slate-700 hover:bg-slate-900"
+				on:click={() => (bookmarked = !bookmarked)}
+			>
+				<Bookmark {bookmarked} />
+			</button>
 		</form>
 	{/if}
 
