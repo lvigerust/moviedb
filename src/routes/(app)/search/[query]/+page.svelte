@@ -20,12 +20,12 @@
 
 <div class="flex {moviesFirst ? 'flex-col' : 'flex-col-reverse'}">
 	<div class="section">
-		<h2 in:fly={{ y: 100, delay: moviesDelay }} class="my-4 text-3xl font-semibold tracking-tight">
+		<h2 in:fly={{ y: 50, delay: moviesDelay }} class="my-4 text-3xl font-semibold tracking-tight">
 			Movies
 		</h2>
-		<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12">
+		<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12 pb-4">
 			{#each movies as movie, index}
-				<div in:fly|global={{ y: 100, delay: moviesDelay + 50 + index * staggerSpeed }}>
+				<div in:fly|global={{ y: 50, delay: moviesDelay + 50 + index * staggerSpeed }}>
 					<Card data={movie} />
 				</div>
 			{/each}
@@ -42,12 +42,12 @@
 	{/if}
 
 	<div class="section">
-		<h2 in:fly={{ y: 100, delay: showsDelay }} class="my-4 text-3xl font-semibold tracking-tight">
+		<h2 in:fly={{ y: 50, delay: showsDelay }} class="my-4 text-3xl font-semibold tracking-tight">
 			TV Shows
 		</h2>
-		<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12">
+		<div class="grid grid-flow-row grid-cols-7 gap-x-6 gap-y-12 pb-4">
 			{#each shows as show, index}
-				<div in:fly|global={{ y: 100, delay: showsDelay + 50 + index * staggerSpeed }}>
+				<div in:fly|global={{ y: 50, delay: showsDelay + 50 + index * staggerSpeed }}>
 					<Card data={show} />
 				</div>
 			{/each}

@@ -4,7 +4,7 @@
 	import { createWatchlistStore } from '$lib/watchlist-store.js'
 	import { flip } from 'svelte/animate'
 	import { quintOut } from 'svelte/easing'
-	import { scale } from 'svelte/transition'
+	import { fly, scale } from 'svelte/transition'
 
 	export let data
 
@@ -18,8 +18,12 @@
 <main class="py-8">
 	<h2 class="mb-3 text-lg font-semibold tracking-tighter">Watchlist movies</h2>
 	<div class="grid grid-flow-row grid-cols-7 gap-x-4 gap-y-16">
-		{#each $myWatchlist as movie (movie.id)}
-			<div animate:flip={{ duration: 500, easing: quintOut }} out:scale={{ duration: 500 }}>
+		{#each $myWatchlist as movie, index (movie.id)}
+			<div
+				animate:flip={{ duration: 500, easing: quintOut }}
+				in:fly|global={{ y: 50, delay: 300 + index * 50 }}
+				out:scale={{ duration: 500 }}
+			>
 				<Card data={movie} />
 
 				<form
