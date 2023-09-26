@@ -45,7 +45,10 @@ export const load = async ({ fetch, cookies, locals, url }) => {
 	}
 
 	return {
-		meta: { title: locals.user?.name ?? locals.user?.username ?? 'Account' }
+		meta: {
+			title: 'Account',
+			image1: `https://image.tmdb.org/t/p/original/${locals.user?.avatar.tmdb.avatar_path}`
+		}
 	}
 }
 
