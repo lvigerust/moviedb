@@ -1,8 +1,14 @@
 import { TMDB_ACCESS_TOKEN } from '$env/static/private'
 import type { ApiResponse, Movie } from '$types'
-import { error } from '@sveltejs/kit'
+import { error, redirect } from '@sveltejs/kit'
 
 export const load = async ({ fetch, cookies }) => {
+	if (!cookies.get('session')) {
+		console.log('No session found, redirecting to login page.')
+		throw redirect(301, '/login')
+	}
+	console.log('Session found, getting watchlist movies...')
+
 	const getWatchlistMovies = async () => {
 		const url = `https://api.themoviedb.org/3/account/8629851/watchlist/movies?language=en-US&page=1&session_id=${cookies.get(
 			'session'
