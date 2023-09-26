@@ -5,6 +5,7 @@ export const handle = async ({ event, resolve }) => {
 
 	if (session) {
 		event.locals.user = await authenticateUser(session)
+		event.locals.user ?? event.cookies.delete('session')
 	}
 
 	let theme: string | null = 'night'
