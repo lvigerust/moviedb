@@ -3,6 +3,7 @@
 
 	export let data
 	const {
+		user,
 		watchlist: { watchlist }
 	} = data
 </script>
@@ -25,4 +26,12 @@
 		and people to discover. Explore
 		<span class="italic">now</span>.
 	</h2>
+
+	<div class="mt-8">
+		{#if !user}
+			<a href="/login" class="btn w-44">Login</a>
+		{:else}
+			<a href="/account" class="btn w-44">Account</a>
+		{/if}
+	</div>
 </div>
