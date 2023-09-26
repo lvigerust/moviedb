@@ -1,10 +1,16 @@
 <script lang="ts">
 	import { enhance } from '$app/forms'
+	import { page } from '$app/stores'
 
 	export let data
 
 	const { user } = data
 </script>
+
+<svelte:head>
+	<meta property="og:url" content={$page.url.href} />
+	<meta property="og:image" content={$page.data.meta.image1} />
+</svelte:head>
 
 <div class="flex w-full flex-col items-center gap-12 pt-20">
 	{#if user && user.avatar.tmdb.avatar_path}
