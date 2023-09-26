@@ -6,35 +6,46 @@ type SessionData = {
 	session_id: string
 }
 
-export const load = async ({ fetch, cookies, locals }) => {
-	const createSession = async () => {
-		if (!cookies.get('session')) {
-			const url = 'https://api.themoviedb.org/3/authentication/session/new'
-			const options = {
-				method: 'POST',
-				headers: {
-					accept: 'application/json',
-					'content-type': 'application/json',
-					Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
-				},
-				body: JSON.stringify({ request_token: cookies.get('requestToken') })
-			}
+export const load = async ({ fetch, cookies, locals, url }) => {
+	if (url.searchParams.get('request_token') && url.searchParams.get('approved') === 'true') {
+		console.log('Request token approved. Creating session...')
 
-			const sessionRes = await fetch(url, options)
+		const url = 'https://api.themoviedb.org/3/authentication/session/new'
+		const options = {
+			method: 'POST',
+			headers: {
+				accept: 'application/json',
+				'content-type': 'application/json',
+				Authorization: `Bearer ${TMDB_ACCESS_TOKEN}`
+			},
+			body: JSON.stringify({ request_token: cookies.get('requestToken') })
+		}
 
-			if (sessionRes.ok) {
-				const sessionData: SessionData = await sessionRes.json()
+		const sessionRes = await fetch(url, options)
 
-				cookies.set('session', sessionData.session_id, {
-					maxAge: 60 * 60 * 24 * 7
-				})
-			} else throw redirect(302, '/login')
+		if (sessionRes.ok) {
+			const sessionData: SessionData = await sessionRes.json()
+
+			cookies.set('session', sessionData.session_id, {
+				maxAge: 60 * 60 * 24 * 7
+			})
+			console.log(
+				'Session ',
+				sessionData.session_id,
+				' created. Removing params (redirecting to /account).'
+			)
+			throw redirect(301, '/account')
 		}
 	}
 
+	if (!cookies.get('session')) {
+		console.log('No session found, redirecting to login page.')
+
+		throw redirect(301, '/login')
+	}
+
 	return {
-		meta: { title: locals.user?.name ?? locals.user?.username ?? 'Account' },
-		session: createSession()
+		meta: { title: locals.user?.name ?? locals.user?.username ?? 'Account' }
 	}
 }
 
@@ -56,6 +67,6 @@ export const actions = {
 		if (logoutRes.ok) {
 			cookies.delete('session')
 			throw redirect(301, '/')
-		}
+		} else throw redirect(301, '/')
 	}
 }

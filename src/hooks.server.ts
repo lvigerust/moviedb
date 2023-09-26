@@ -1,10 +1,10 @@
-import { TMDB_ACCESS_TOKEN } from '$env/static/private'
-import { getAccountDetails } from '$lib/server/auth'
+import { authenticateUser } from '$lib/server/auth'
 
 export const handle = async ({ event, resolve }) => {
 	const session = event.cookies.get('session')
+
 	if (session) {
-		event.locals.user = await getAccountDetails(session, TMDB_ACCESS_TOKEN)
+		event.locals.user = await authenticateUser(session)
 	}
 
 	let theme: string | null = 'night'
