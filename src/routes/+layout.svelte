@@ -1,8 +1,8 @@
 <script lang="ts">
+	import '../app.css'
 	import { fly } from 'svelte/transition'
 	import { Breadcrumbs, Navbar, Toaster } from '$components'
 	import { page } from '$app/stores'
-	import '../app.css'
 	import { dev } from '$app/environment'
 	import { inject } from '@vercel/analytics'
 

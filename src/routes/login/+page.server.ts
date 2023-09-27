@@ -37,7 +37,12 @@ export const load = async ({ fetch, cookies, locals }) => {
 
 				console.log('Setting request token cookie and returning it to +page.svelte for approval.')
 
-				cookies.set('requestToken', requestTokenData.request_token, { maxAge: 60 * 60 })
+				cookies.set('requestToken', requestTokenData.request_token, {
+					path: '/',
+					httpOnly: true,
+					secure: process.env.NODE_ENV === 'production',
+					maxAge: 60 * 60 // 1 hour
+				})
 
 				return requestTokenData
 			} else throw error(404, 'Error getting request token.')

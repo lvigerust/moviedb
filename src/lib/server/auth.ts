@@ -46,7 +46,10 @@ export const createSession = async (event: RequestEvent) => {
 		const sessionData: SessionData = await sessionRes.json()
 
 		event.cookies.set('session', sessionData.session_id, {
-			maxAge: 60 * 60 * 24 * 7
+			path: '/',
+			httpOnly: true,
+			secure: process.env.NODE_ENV === 'production',
+			maxAge: 60 * 60 * 24 * 7 // 1 week
 		})
 
 		console.log('Session ', sessionData.session_id, ' created. Redirecting to user page.')
