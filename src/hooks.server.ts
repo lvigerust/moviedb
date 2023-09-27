@@ -1,28 +1,24 @@
-import { authenticateUser } from '$lib/server/auth'
+import { authenticateUser, createSession } from '$lib/server/auth'
+import { redirect } from '@sveltejs/kit'
 
 export const handle = async ({ event, resolve }) => {
-	const session = event.cookies.get('session')
+	event.locals.user = await authenticateUser(event)
 
-	if (session) {
-		event.locals.user = await authenticateUser(session)
-		event.locals.user ?? event.cookies.delete('session')
+	if (event.url.pathname.startsWith('/user')) {
+		if (
+			event.url.searchParams.get('request_token') &&
+			event.url.searchParams.get('approved') === 'true'
+		) {
+			await createSession(event)
+		}
+
+		if (!event.locals.user) {
+			console.log('Could not authenticate user. Redirecting to login page...')
+			throw redirect(303, '/login')
+		}
 	}
 
-	let theme: string | null = 'night'
-	const newTheme = event.url.searchParams.get('theme')
-	const cookieTheme = event.cookies.get('colortheme')
+	const response = await resolve(event)
 
-	if (newTheme) {
-		theme = newTheme
-	} else if (cookieTheme) {
-		theme = cookieTheme
-	}
-
-	if (theme) {
-		return await resolve(event, {
-			transformPageChunk: ({ html }) => html.replace('data-theme=""', `data-theme="${theme}"`)
-		})
-	}
-
-	return await resolve(event)
+	return response
 }

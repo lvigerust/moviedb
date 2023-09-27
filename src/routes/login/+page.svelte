@@ -1,43 +1,21 @@
 <script lang="ts">
-	export let data
-
-	$: ({ requestToken } = data)
-
 	import { page } from '$app/stores'
+
+	export let data
+	$: ({ requestToken } = data)
 </script>
 
-<main class="grid h-full grid-cols-2">
-	<div class="grid h-full w-full content-center">
-		<div class="text-center sm:mx-auto sm:w-full sm:max-w-sm">
-			<hgroup>
-				<h2 class="mt-10 text-2xl font-bold leading-9 tracking-tight text-slate-300">
-					Sign in to your account
-				</h2>
-				<p class="mt-2 text-sm leading-6">
-					Click the button below to login or signup to The Movie Database.
-				</p>
-			</hgroup>
-		</div>
-
-		<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-			<a
-				href={`https://www.themoviedb.org/authenticate/${requestToken.request_token}?redirect_to=${$page.url.origin}/account
+<div
+	class="mx-auto mb-4 mt-44 flex w-full max-w-md rounded-2xl bg-slate-600/10 p-8 ring-1 ring-white/10 backdrop-blur-lg"
+>
+	<div class="mx-auto max-w-sm text-center">
+		<h1 class="font-Display text-2xl font-medium">Sign in to your account</h1>
+		<p class="mt-2 text-sm text-slate-400">Welcome back! Please login or sign up.</p>
+		<a
+			href={`https://www.themoviedb.org/authenticate/${requestToken.request_token}?redirect_to=${$page.url.origin}/user
 				`}
-				class="flex w-full cursor-pointer justify-center rounded-md bg-teal-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
-				>Take me there!</a
-			>
-
-			<a href="/" class="mt-10 block text-center text-sm font-semibold leading-6 text-slate-400"
-				>Go back</a
-			>
-		</div>
+			class="mt-8 flex w-full cursor-pointer justify-center rounded-full bg-blue-700 px-3 py-1.5 text-xs font-semibold leading-6 text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+			>Sign in with The Movie Database</a
+		>
 	</div>
-
-	<div class="z-10 mt-2 grid w-full place-content-center rounded-tl-lg bg-neutral">
-		<ul class="steps steps-vertical">
-			<li class="step step-success">Press the button</li>
-			<li class="step">Login or sign up</li>
-			<li class="step">Start exploring!</li>
-		</ul>
-	</div>
-</main>
+</div>

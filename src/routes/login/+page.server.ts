@@ -7,15 +7,19 @@ type RequestTokenData = {
 	request_token: string
 }
 
-export const load = async ({ fetch, cookies }) => {
+export const load = async ({ fetch, cookies, locals }) => {
 	const session = cookies.get('session')
 
 	const checkSession = async () => {
-		if (session) {
-			console.log('Session found, redirecting to account page.')
-			throw redirect(301, '/account')
+		if (session && locals.user) {
+			console.log('Active session found, redirecting to user page.')
+			throw redirect(301, '/user')
 		} else {
-			console.log('No session found. Getting request token...')
+			if (session) {
+				console.log('Session expired or revoked. Deleting session.')
+				cookies.delete('session')
+			}
+			console.log('Getting new request token...')
 
 			const urlRequest = 'https://api.themoviedb.org/3/authentication/token/new'
 			const options = {
@@ -30,8 +34,8 @@ export const load = async ({ fetch, cookies }) => {
 
 			if (requestTokenRes.ok) {
 				const requestTokenData: RequestTokenData = await requestTokenRes.json()
-				console.log('Setting request token cookie.')
-				console.log('Returning request token to +page.svelte for approval.')
+
+				console.log('Setting request token cookie and returning it to +page.svelte for approval.')
 
 				cookies.set('requestToken', requestTokenData.request_token, { maxAge: 60 * 60 })
 

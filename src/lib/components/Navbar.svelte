@@ -12,7 +12,7 @@
 			label: 'TV Shows'
 		},
 		{
-			href: '/account/watchlist',
+			href: '/user/watchlist',
 			label: 'Watchlist'
 		}
 	]

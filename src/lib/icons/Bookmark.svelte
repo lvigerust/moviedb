@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { fade, scale } from 'svelte/transition'
+	import { fade } from 'svelte/transition'
 
-	export let bookmarked: boolean
+	export let bookmarked: boolean = false
 </script>
 
 {#if bookmarked}

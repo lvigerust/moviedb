@@ -31,7 +31,7 @@
 		{#if !user}
 			<a href="/login" class="btn w-44">Login</a>
 		{:else}
-			<a href="/account" class="btn w-44">Account</a>
+			<a href="/user" class="btn w-44">Account</a>
 		{/if}
 	</div>
 </div>

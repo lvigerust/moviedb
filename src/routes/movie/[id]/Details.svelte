@@ -11,7 +11,7 @@
 	export let movieCredits: Promise<Credits>
 	export let release_dates: Promise<ReleaseDate | null>
 	export let omdb: OMDBData
-	export let user: Account
+	export let user: User | null
 
 	function createToast(title: string, description: string) {
 		addToast({
